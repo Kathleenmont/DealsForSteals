@@ -15,6 +15,16 @@
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
+        <h1>Photo file</h1>
+    <!-- <input type="file" accept="image/*"> -->
+    <!-- <input type="file" onchange="previewFile()" accept="image/*"><br>
+    <img src="" height="200" alt="Image preview..."> -->
+
+    {{!-- <input type='file' accept="image/*" id="file-input"/> --}}
+    {{!-- <input type="file" accept="image/*" capture> --}}
+<input type="file" accept="image/*" capture="user">
+{{!-- <input type="file" accept="image/*" capture="environment"> --}}
+    <br><img id="myImg" src="#" alt="your image"  width=200>
         <h3>Examples:</h3>
         <ul id="example-list" class="list-group">
           {{#each examples}}
