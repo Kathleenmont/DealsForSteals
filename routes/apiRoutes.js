@@ -31,17 +31,24 @@ module.exports = function (app) {
 
   // Get all examples
   app.get("/api/examples", function (req, res) {
-    console.log(req.file);
     db.Example.findAll({}).then(function (dbExamples) {
       res.json(dbExamples);
     });
   });
 
   // Create a new example
-  app.post("/api/examples", function (req, res) {
+  app.post("/api/examples", upload.single("userPhoto"), function (req, res) {
     console.log(req.body);
     console.log(req.file);
-    db.Example.create(req.body).then(function (dbExample) {
+    var newPost  = {
+      text: req.body.text,
+      description: req.body.description,
+      img: req.file.path
+    }
+
+    console.log("This is the new post---------");
+    console.log(newPost);
+    db.Example.create(newPost).then(function (dbExample) {
       res.json(dbExample);
     });
   });

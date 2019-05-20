@@ -1,8 +1,10 @@
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
+var $exampleImage = $("#example-img");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+var postForm = $("#postForm");
 
 // test code
 window.addEventListener("load", function() {
@@ -80,13 +82,28 @@ $.ajax({
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
+    var formData = new FormData(postForm[0]);
+
+    console.log("This is  form data:  " + JSON.stringify( postForm[0]));
+
     return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
+      // headers: {
+      //   "Content-Type": "application/json"
+      // },
       type: "POST",
+      enctype: "multipart/form-data",
       url: "api/examples",
-      data: JSON.stringify(example)
+      data: formData,
+      processData: false, // Important!
+      contentType: false,
+      cache: false,
+      data: JSON.stringify(example),
+      success: function(returnData) {
+        console.log(returnData);
+      },
+      error: function(err) {
+        console.log("error", err);
+      }
     });
   },
   getExamples: function() {
@@ -140,9 +157,11 @@ var handleFormSubmit = function(event) {
 
   var example = {
     text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+    description: $exampleDescription.val().trim(),
+    img: ""
   };
 
+  console.log("Submitted" + example);
   if (!(example.text && example.description)) {
     alert("You must enter an example text and description!");
     return;
