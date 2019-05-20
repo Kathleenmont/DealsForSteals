@@ -17,8 +17,10 @@ window.addEventListener("load", function() {
 
         console.log(img);
         console.log(img.src);
+
         var Photo = {
-          img: img
+          img: img,
+          source: img.src
         };
 
         $.ajax({
@@ -29,12 +31,21 @@ window.addEventListener("load", function() {
           url: "api/examples",
           data: JSON.stringify(Photo)
         });
+
+        // send photo Object to apiExamples
+        // sendPhoto(Photo);
       }
     });
 });
 
 function imageIsLoaded(e) {
   alert(e);
+}
+// TODO: Needs to get right api post
+function sendPhoto(photo) {
+  $.post("api/users", photo, function(result) {
+    console.log(result);
+  });
 }
 
 // TEST API CALL YELP_____________________________
@@ -56,7 +67,7 @@ $.ajax({
   dataType: "json",
   success: function(response) {
     console.log("success: " + response);
-    console.log(JSON.stringify(response));
+    // console.log(JSON.stringify(response));
     console.log("name: " + response.businesses[0].name);
     console.log("phone: " + response.businesses[0].display_phone);
     console.log("address: " + response.businesses[0].location.display_address);
@@ -116,6 +127,7 @@ var refreshExamples = function() {
       return $li;
     });
 
+    console.log($examples);
     $exampleList.empty();
     $exampleList.append($examples);
   });

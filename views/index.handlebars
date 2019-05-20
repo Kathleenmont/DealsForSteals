@@ -7,24 +7,43 @@
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+            <input type="text" id="example-text" class="form-control" aria-describedby="example-text"
+              placeholder="Enter Example Text">
           </div>
           <div class="form-group">
             <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+            <textarea class="form-control" id="example-description" aria-describedby="example-description"
+              placeholder="Enter Example Description"></textarea>
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
         <h1>Photo file</h1>
-    <!-- <input type="file" accept="image/*"> -->
-    <!-- <input type="file" onchange="previewFile()" accept="image/*"><br>
+
+        <br>
+
+        {{!-- TODO: Work out the process here how to send the file correctly through front end --}}
+        <form id="frmUploader" enctype="multipart/form-data" action="/api/users" method="POST">
+          <!-- <button type="submit" name="submit" id="btnSubmit" value="Upload" /> -->
+          <input type="file" accept="image/*" capture="user" name="userPhoto">
+          <button type="submit"id="btnSubmit">Upload</button>
+        </form>
+        <br><img id="myImg" src="#" alt="your image" width="200">
+
+        <!-- <input type="file" accept="image/*"> -->
+        <!-- <input type="file" onchange="previewFile()" accept="image/*"><br>
     <img src="" height="200" alt="Image preview..."> -->
 
-    {{!-- <input type='file' accept="image/*" id="file-input"/> --}}
-    {{!-- <input type="file" accept="image/*" capture> --}}
-<input type="file" accept="image/*" capture="user">
-{{!-- <input type="file" accept="image/*" capture="environment"> --}}
-    <br><img id="myImg" src="#" alt="your image"  width=200>
+        {{!-- <input type='file' accept="image/*" id="file-input"/> --}}
+        {{!-- <input type="file" accept="image/*" capture> --}}
+
+        {{!-- <input type="file" accept="image/*" capture="environment"> --}}
+
+<h3>Image Upload</h3>
+<ul class="post" >
+  {{#each post}}
+    <li><img src="{{img}}" alt=""></li>
+  {{/each}}
+</ul>
         <h3>Examples:</h3>
         <ul id="example-list" class="list-group">
           {{#each examples}}
