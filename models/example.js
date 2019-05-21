@@ -1,8 +1,10 @@
 // TEST MODLE
 module.exports = function(sequelize, DataTypes) {
-  var Photo = sequelize.define("Example", {
-    img: DataTypes.BLOB
+  var Post = sequelize.define("Example", {
+    text: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    img: DataTypes.STRING
     // description: DataTypes.TEXT
   });
-  return Photo;
+  return Post;
 };
