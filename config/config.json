@@ -4,6 +4,7 @@
     "password": "",
     "database": "dealsdb",
     "host": "localhost",
+    "port": 8889,
     "dialect": "mysql"
   },
   "test": {

@@ -4,6 +4,68 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
+// test code
+window.addEventListener("load", function() {
+  document
+    .querySelector('input[type="file"]')
+    .addEventListener("change", function() {
+      if (this.files && this.files[0]) {
+        var img = document.querySelector("img"); // $('img')[0]
+        img.src = URL.createObjectURL(this.files[0]); // set src to file url
+
+        img.onload = imageIsLoaded; // optional onload event listener
+
+        console.log(img);
+        console.log(img.src);
+        var Photo = {
+          img: img
+        };
+
+        $.ajax({
+          headers: {
+            "Content-Type": "application/json"
+          },
+          type: "POST",
+          url: "api/examples",
+          data: JSON.stringify(Photo)
+        });
+      }
+    });
+});
+
+function imageIsLoaded(e) {
+  alert(e);
+}
+
+// TEST API CALL YELP_____________________________
+
+var buisnessName = "cosmi's Deli";
+
+var myurl =
+  "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" +
+  buisnessName +
+  "&location=philadelphia";
+
+$.ajax({
+  url: myurl,
+  headers: {
+    Authorization:
+      "Bearer Vg_tGwpB5bMsOR-xCjAGY2NUvCf7CUy_6QVbCD-5pV_6zMJxrrAjOgUZUtkUUvgdBr_8g_7Cva_67x-k8kxWw8vu9gKt-GTphwj6CZenIjAggvyMAqUxFXTSfsjeXHYx"
+  },
+  method: "GET",
+  dataType: "json",
+  success: function(response) {
+    console.log("success: " + response);
+    console.log(JSON.stringify(response));
+    console.log("name: " + response.businesses[0].name);
+    console.log("phone: " + response.businesses[0].display_phone);
+    console.log("address: " + response.businesses[0].location.display_address);
+    console.log("latitude: " + response.businesses[0].coordinates.latitude);
+    console.log("longitude: " + response.businesses[0].coordinates.longitude);
+  }
+});
+
+// ______________________________________________
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
