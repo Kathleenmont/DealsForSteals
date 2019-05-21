@@ -1,8 +1,10 @@
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
+var $exampleImage = $("#example-img");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+var postForm = $("#postForm");
 
 // test code
 window.addEventListener("load", function() {
@@ -17,24 +19,23 @@ window.addEventListener("load", function() {
 
         console.log(img);
         console.log(img.src);
-        var Photo = {
-          img: img
-        };
 
-        $.ajax({
-          headers: {
-            "Content-Type": "application/json"
-          },
-          type: "POST",
-          url: "api/examples",
-          data: JSON.stringify(Photo)
-        });
+        var Photo = {
+          img: img,
+          source: img.src
+        };
       }
     });
 });
 
 function imageIsLoaded(e) {
   alert(e);
+}
+// TODO: Needs to get right api post
+function sendPhoto(photo) {
+  $.post("api/users", photo, function(result) {
+    console.log(result);
+  });
 }
 
 // TEST API CALL YELP_____________________________
@@ -56,7 +57,7 @@ $.ajax({
   dataType: "json",
   success: function(response) {
     console.log("success: " + response);
-    console.log(JSON.stringify(response));
+    // console.log(JSON.stringify(response));
     console.log("name: " + response.businesses[0].name);
     console.log("phone: " + response.businesses[0].display_phone);
     console.log("address: " + response.businesses[0].location.display_address);
@@ -72,24 +73,40 @@ $.ajax({
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
+    var formData = new FormData(postForm[0]);
+
+    // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
+    console.log(formData);
+
     return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
+      // headers: {
+      //   "Content-Type": "application/json"
+      // },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      enctype: "multipart/form-data",
+      url: "api/posts",
+      data: formData,
+      processData: false, // Important!
+      contentType: false,
+      cache: false,
+      // data: JSON.stringify(example),
+      success: function(returnData) {
+        console.log(returnData);
+      },
+      error: function(err) {
+        console.log("error", err);
+      }
     });
   },
   getExamples: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/posts",
       type: "GET"
     });
   },
   deleteExample: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/posts/" + id,
       type: "DELETE"
     });
   }
@@ -101,7 +118,7 @@ var refreshExamples = function() {
     var $examples = data.map(function(example) {
       var $a = $("<a>")
         .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .attr("href", "/posts/" + example.id);
 
       var $li = $("<li>")
         .attr({
@@ -110,15 +127,19 @@ var refreshExamples = function() {
         })
         .append($a);
 
+      var $img = $("<img>").attr("src", example.img);
+
       var $button = $("<button>")
         .addClass("btn btn-danger float-right delete")
         .text("ｘ");
 
+      $li.append($img);
       $li.append($button);
 
       return $li;
     });
 
+    console.log($examples);
     $exampleList.empty();
     $exampleList.append($examples);
   });
@@ -131,14 +152,17 @@ var handleFormSubmit = function(event) {
 
   var example = {
     text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+    description: $exampleDescription.val().trim(),
+    img: $exampleImage.val()
   };
 
+  console.log("Submitted" + example);
   if (!(example.text && example.description)) {
     alert("You must enter an example text and description!");
     return;
   }
 
+  //saveUser photo
   API.saveExample(example).then(function() {
     refreshExamples();
   });
