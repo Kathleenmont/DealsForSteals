@@ -63,6 +63,9 @@ $.ajax({
     console.log("address: " + response.businesses[0].location.display_address);
     console.log("latitude: " + response.businesses[0].coordinates.latitude);
     console.log("longitude: " + response.businesses[0].coordinates.longitude);
+    console.log("Yelp url: " + response.businesses[0].url);
+    console.log("type of place: " + response.businesses[0].categories[0].alias);
+    console.log("type of place: " + response.businesses[0].categories[0].title);
   }
 });
 
