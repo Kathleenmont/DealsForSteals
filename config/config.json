@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "yourRootPassword",
     "database": "dealsdb",
     "host": "localhost",
     "port": 8889,
