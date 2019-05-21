@@ -38,8 +38,7 @@ module.exports = function (app) {
 
   // Create a new example
   app.post("/api/posts", upload.single("userPhoto"), function (req, res) {
-    console.log(req.body.text);
-    // console.log(req.file);
+    console.log(req.file);
     var newPost  = {
       title: req.body.title,
       description: req.body.description,

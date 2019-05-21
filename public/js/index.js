@@ -1,16 +1,54 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $exampleImage = $("#example-img");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
-var postForm = $("#postForm");
+const $exampleText = $("#example-text");
+const $exampleDescription = $("#example-description");
+const $exampleImage = $("#example-img");
+const $submitBtn = $("#submitForm");
+const $exampleList = $("#example-list");
+const postForm = $("#postForm");
+const imgEl = $("#myImg");
+
+const cameraView = document.querySelector("#camera--view"),
+  cameraSensor = document.querySelector("#camera--sensor"),
+  cameraTrigger = $("#camera--trigger")
+
+//video constraints
+var constraints = {
+  video: {
+    facingMode: "environment"
+  },
+  audio: false
+};
+
+//start camera function
+function cameraStart() {
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(function (stream) {
+      track = stream.getTracks()[0];
+      cameraView.srcObject = stream;
+    })
+    .catch(function (error) {
+      console.error("Oops. Something is broken.", error);
+    });
+}
+
+function capturePhoto(event) {
+  event.preventDefault();
+  console.log("Click");
+  var capPhoto = $exampleImage.files[0];
+  cameraSensor.width = cameraView.videoWidth;
+  cameraSensor.height = cameraView.videoHeight;
+  cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+  imgEl.attr("src",  cameraSensor.toDataURL("image/png"));
+
+  // imgEl.classList.add("taken");
+}
 
 // test code
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
   document
     .querySelector('input[type="file"]')
-    .addEventListener("change", function() {
+    .addEventListener("change", function () {
       if (this.files && this.files[0]) {
         var img = document.querySelector("img"); // $('img')[0]
         img.src = URL.createObjectURL(this.files[0]); // set src to file url
@@ -33,7 +71,7 @@ function imageIsLoaded(e) {
 }
 // TODO: Needs to get right api post
 function sendPhoto(photo) {
-  $.post("api/users", photo, function(result) {
+  $.post("api/users", photo, function (result) {
     console.log(result);
   });
 }
@@ -50,12 +88,11 @@ var myurl =
 $.ajax({
   url: myurl,
   headers: {
-    Authorization:
-      "Bearer Vg_tGwpB5bMsOR-xCjAGY2NUvCf7CUy_6QVbCD-5pV_6zMJxrrAjOgUZUtkUUvgdBr_8g_7Cva_67x-k8kxWw8vu9gKt-GTphwj6CZenIjAggvyMAqUxFXTSfsjeXHYx"
+    Authorization: "Bearer Vg_tGwpB5bMsOR-xCjAGY2NUvCf7CUy_6QVbCD-5pV_6zMJxrrAjOgUZUtkUUvgdBr_8g_7Cva_67x-k8kxWw8vu9gKt-GTphwj6CZenIjAggvyMAqUxFXTSfsjeXHYx"
   },
   method: "GET",
   dataType: "json",
-  success: function(response) {
+  success: function (response) {
     console.log("success: " + response);
     // console.log(JSON.stringify(response));
     console.log("name: " + response.businesses[0].name);
@@ -72,16 +109,14 @@ $.ajax({
 // ______________________________________________
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveExample: function (example) {
     var formData = new FormData(postForm[0]);
 
+    console.log(postForm[0]);
     // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
     console.log(formData);
-
+console.log(formData.entries());
     return $.ajax({
-      // headers: {
-      //   "Content-Type": "application/json"
-      // },
       type: "POST",
       enctype: "multipart/form-data",
       url: "api/posts",
@@ -90,21 +125,22 @@ var API = {
       contentType: false,
       cache: false,
       // data: JSON.stringify(example),
-      success: function(returnData) {
+      success: function (returnData) {
         console.log(returnData);
+        console.log(data);
       },
-      error: function(err) {
+      error: function (err) {
         console.log("error", err);
       }
     });
   },
-  getExamples: function() {
+  getExamples: function () {
     return $.ajax({
       url: "api/posts",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteExample: function (id) {
     return $.ajax({
       url: "api/posts/" + id,
       type: "DELETE"
@@ -113,9 +149,9 @@ var API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+var refreshExamples = function () {
+  API.getExamples().then(function (data) {
+    var $examples = data.map(function (example) {
       var $a = $("<a>")
         .text(example.text)
         .attr("href", "/posts/" + example.id);
@@ -147,7 +183,7 @@ var refreshExamples = function() {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+var handleFormSubmit = function (event) {
   event.preventDefault();
 
   var example = {
@@ -163,7 +199,7 @@ var handleFormSubmit = function(event) {
   }
 
   //saveUser photo
-  API.saveExample(example).then(function() {
+  API.saveExample(example).then(function () {
     refreshExamples();
   });
 
@@ -173,12 +209,12 @@ var handleFormSubmit = function(event) {
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
+  API.deleteExample(idToDelete).then(function () {
     refreshExamples();
   });
 };
@@ -186,3 +222,9 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+// Start the video stream when the window loads
+
+window.addEventListener("load", cameraStart, false);
+
+cameraTrigger.on("click", capturePhoto)

@@ -18,21 +18,29 @@
           {{!-- adding our own img input to be read by multer --}}
           <div class="form-group">
             <label for="example-img">Example Image</label>
-            <input type="file" accept="image/*" id="example-img" name="userPhoto" class="form-control"
+            <input type="file" accept="image/*;capture=camera" id="example-img" name="userPhoto" class="form-control"
               placeholder="Enter Example img">
-            <img id="myImg" src="#" alt="your image" width="200">
+            <section id="camera">
+              <!-- Camera sensor -->
+              <canvas id="camera--sensor"></canvas>
+              <!-- Camera view -->
+              <video id="camera--view" autoplay playsinline></video>
+              <!-- Camera output -->
+              {{!-- <img src="//:0" alt="" id="camera--output"> --}}
+              <!-- Camera trigger -->
+              <button id="camera--trigger" class="btn btn-primary">Take a picture</button>
+            </section>
+            <img id="myImg" src="//:0" alt="your image" width="200">
           </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
+          <button id="submitForm" class="btn btn-primary float-right">Submit</button>
         </form>
-        <h1>Photo file</h1>
-        <br>
         {{!-- TODO: Work out the process here how to send the file correctly through front end --}}
-        <form id="frmUploader" enctype="multipart/form-data" action="/api/users" method="POST">
+        {{!-- <form id="frmUploader" enctype="multipart/form-data" action="/api/users" method="POST">
           <!-- <button type="submit" name="submit" id="btnSubmit" value="Upload" /> -->
           <input type="file" accept="image/*" capture="user" name="userPhoto">
           <button type="submit" id="btnSubmit">Upload</button>
         </form>
-        <br><img id="myImg" src="#" alt="your image" width="200">
+        <br><img id="myImg" src="#" alt="your image" width="200"> --}}
         <!-- <input type="file" accept="image/*"> -->
         <!-- <input type="file" onchange="previewFile()" accept="image/*"><br>
     <img src="" height="200" alt="Image preview..."> -->
