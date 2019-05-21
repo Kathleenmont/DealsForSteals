@@ -38,14 +38,14 @@ module.exports = function (app) {
 
   // Create a new example
   app.post("/api/examples", upload.single("userPhoto"), function (req, res) {
-    console.log(req.body);
-    console.log(req.file);
+    console.log(req.body.text);
+    // console.log(req.file);
     var newPost  = {
       text: req.body.text,
       description: req.body.description,
       img: req.file.path
     }
-
+    
     console.log("This is the new post---------");
     console.log(newPost);
     db.Example.create(newPost).then(function (dbExample) {

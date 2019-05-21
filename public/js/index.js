@@ -25,14 +25,14 @@ window.addEventListener("load", function() {
           source: img.src
         };
 
-        $.ajax({
-          headers: {
-            "Content-Type": "application/json"
-          },
-          type: "POST",
-          url: "api/examples",
-          data: JSON.stringify(Photo)
-        });
+        // $.ajax({
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   },
+        //   type: "POST",
+        //   url: "api/examples",
+        //   data: JSON.stringify(Photo)
+        // });
 
         // send photo Object to apiExamples
         // sendPhoto(Photo);
@@ -84,7 +84,8 @@ var API = {
   saveExample: function(example) {
     var formData = new FormData(postForm[0]);
 
-    console.log("This is  form data:  " + JSON.stringify( postForm[0]));
+    // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
+    console.log(formData);
 
     return $.ajax({
       // headers: {
@@ -97,7 +98,7 @@ var API = {
       processData: false, // Important!
       contentType: false,
       cache: false,
-      data: JSON.stringify(example),
+      // data: JSON.stringify(example),
       success: function(returnData) {
         console.log(returnData);
       },
@@ -158,7 +159,7 @@ var handleFormSubmit = function(event) {
   var example = {
     text: $exampleText.val().trim(),
     description: $exampleDescription.val().trim(),
-    img: ""
+    img: $exampleImage.val()
   };
 
   console.log("Submitted" + example);
@@ -167,6 +168,7 @@ var handleFormSubmit = function(event) {
     return;
   }
 
+  //saveUser photo
   API.saveExample(example).then(function() {
     refreshExamples();
   });
