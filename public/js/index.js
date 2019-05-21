@@ -24,18 +24,6 @@ window.addEventListener("load", function() {
           img: img,
           source: img.src
         };
-
-        // $.ajax({
-        //   headers: {
-        //     "Content-Type": "application/json"
-        //   },
-        //   type: "POST",
-        //   url: "api/examples",
-        //   data: JSON.stringify(Photo)
-        // });
-
-        // send photo Object to apiExamples
-        // sendPhoto(Photo);
       }
     });
 });
@@ -93,7 +81,7 @@ var API = {
       // },
       type: "POST",
       enctype: "multipart/form-data",
-      url: "api/examples",
+      url: "api/posts",
       data: formData,
       processData: false, // Important!
       contentType: false,
@@ -109,13 +97,13 @@ var API = {
   },
   getExamples: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/posts",
       type: "GET"
     });
   },
   deleteExample: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/posts/" + id,
       type: "DELETE"
     });
   }
@@ -127,7 +115,7 @@ var refreshExamples = function() {
     var $examples = data.map(function(example) {
       var $a = $("<a>")
         .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .attr("href", "/posts/" + example.id);
 
       var $li = $("<li>")
         .attr({
@@ -136,10 +124,13 @@ var refreshExamples = function() {
         })
         .append($a);
 
+      var $img = $("<img>").attr("src", example.img);
+
       var $button = $("<button>")
         .addClass("btn btn-danger float-right delete")
         .text("ｘ");
 
+      $li.append($img);
       $li.append($button);
 
       return $li;

@@ -23,46 +23,46 @@ module.exports = function (app) {
   }
 
   //Multer can take an object with a key that holds a directory stores some sort of hex or use the diskstorage method to 
-  // const upload = multer({dest: "uploads/"});
+  // const upl`oad = multer({dest: "uploads/"});
   const upload = multer({
     storage: Storage,
     fileFilter
   });
 
   // Get all examples
-  app.get("/api/examples", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.json(dbExamples);
+  app.get("/api/posts", function (req, res) {
+    db.Post.findAll({}).then(function (dbPost) {
+      res.json(dbPost);
     });
   });
 
   // Create a new example
-  app.post("/api/examples", upload.single("userPhoto"), function (req, res) {
+  app.post("/api/posts", upload.single("userPhoto"), function (req, res) {
     console.log(req.body.text);
     // console.log(req.file);
     var newPost  = {
-      text: req.body.text,
+      title: req.body.title,
       description: req.body.description,
       img: req.file.path
     }
     
     console.log("This is the new post---------");
     console.log(newPost);
-    db.Example.create(newPost).then(function (dbExample) {
-      res.json(dbExample);
+    db.Post.create(newPost).then(function (dbPost) {
+      res.json(dbPost);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({
+  app.delete("/api/posts/:id", function (req, res) {
+    db.Post.destroy({
       where: {
         id: req.params.id
       }
     }).then(function (
-      dbExample
+      dbPost
     ) {
-      res.json(dbExample);
+      res.json(dbPost);
     });
 
   });
