@@ -41,10 +41,14 @@ module.exports = function (app) {
     console.log(req.file);
     var newPost  = {
       title: req.body.title,
-      description: req.body.description,
+      item: req.body.item,
+      price: req.body.price,
+      restaurant: req.body.restaurant,
+      comments: req.body.comments,
+      // restLat: req.body.restLat,
+      // restLong: req.body.restLong,
       img: req.file.path
     }
-    
     console.log("This is the new post---------");
     console.log(newPost);
     db.Post.create(newPost).then(function (dbPost) {

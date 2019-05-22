@@ -1,11 +1,13 @@
 // Get references to page elements
-const $exampleText = $("#example-text");
-const $exampleDescription = $("#example-description");
-const $exampleImage = $("#example-img");
+let inputTitle = $("#title");
+let inputComments = $("#comments");
+// const $exampleDescription = $("#example-description");
+const inputImg = $("#input-img");
 const $submitBtn = $("#submitForm");
 const $exampleList = $("#example-list");
+const submittedImage = $("#myImg");
 const postForm = $("#postForm");
-const imgEl = $("#myImg");
+var input = document.querySelector('input[type=file]');
 
 const cameraView = document.querySelector("#camera--view"),
   cameraSensor = document.querySelector("#camera--sensor"),
@@ -35,11 +37,12 @@ function cameraStart() {
 function capturePhoto(event) {
   event.preventDefault();
   console.log("Click");
-  var capPhoto = $exampleImage.files[0];
+  var capPhoto = input.files[0];
+  console.log("This is in the Capture Photo method" + capPhoto);
   cameraSensor.width = cameraView.videoWidth;
   cameraSensor.height = cameraView.videoHeight;
   cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
-  imgEl.attr("src",  cameraSensor.toDataURL("image/png"));
+  submittedImage.attr("src", cameraSensor.toDataURL("image/png"));
 
   // imgEl.classList.add("taken");
 }
@@ -55,6 +58,7 @@ window.addEventListener("load", function () {
 
         img.onload = imageIsLoaded; // optional onload event listener
 
+        console.log("This is the event listener image loader");
         console.log(img);
         console.log(img.src);
 
@@ -113,9 +117,11 @@ var API = {
     var formData = new FormData(postForm[0]);
 
     console.log(postForm[0]);
+    formData.append("capturedImage", submittedImage.val());
+
     // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
     console.log(formData);
-console.log(formData.entries());
+    console.log(formData.entries());
     return $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
@@ -186,25 +192,26 @@ var refreshExamples = function () {
 var handleFormSubmit = function (event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim(),
-    img: $exampleImage.val()
+  var userPost = {
+    text: inputTitle.val().trim(),
+    description: inputComments.val().trim(),
+    img: submittedImage.val()
   };
 
-  console.log("Submitted" + example);
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(userPost.text && userPost.description)) {
+    alert("You must enter an userPost text and description!");
     return;
   }
 
   //saveUser photo
-  API.saveExample(example).then(function () {
+  API.saveExample(userPost).then(function () {
     refreshExamples();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  // clear the inputs
+
+  // $exampleText.val("");
+  // $exampleDescription.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked

@@ -6,21 +6,43 @@
         <h2>This is our Home Page!</h2>
         <form class="clearfix mb-4" action="POST" enctype="multipart/form-data" id="postForm" method="POST">
           <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text"
-              placeholder="Enter Example Text" name="title">
+            <label for="title">Title</label>
+            <input type="text" id="title" class="form-control" aria-describedby="title" placeholder="Create A Title"
+              name="title">
           </div>
           <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description"
-              placeholder="Enter Example Description" name="description"></textarea>
+            <label for="item">Item</label>
+            <textarea class="form-control" id="item" aria-describedby="item" placeholder="Enter the Item"
+              name="item"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Price</label>
+            <textarea class="form-control" id="price" aria-describedby="price" placeholder="Enter the Price"
+              name="price"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="restaurant">Restaurant</label>
+            <textarea class="form-control" id="restaurant" aria-describedby="restaurant" placeholder="Enter the Restaurant"
+              name="restaurant"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="restAdd">Restaurant Address</label>
+            <textarea class="form-control" id="restAdd" aria-describedby="restAdd" placeholder="Enter the Restaurant Address"
+              name="restAdd"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea class="form-control" id="comments" aria-describedby="comments" placeholder=""
+              name="comments"></textarea>
           </div>
           {{!-- adding our own img input to be read by multer --}}
           <div class="form-group">
             <label for="example-img">Example Image</label>
-            <input type="file" accept="image/*;capture=camera" id="example-img" name="userPhoto" class="form-control"
+            <input type="file" accept="image/*" id="input-img" name="userPhoto" class="form-control"
               placeholder="Enter Example img">
-            <section id="camera">
+            <img id="myImg" src="#" alt="your image" width="200">
+          </div>
+           <section id="camera">
               <!-- Camera sensor -->
               <canvas id="camera--sensor"></canvas>
               <!-- Camera view -->
@@ -30,17 +52,17 @@
               <!-- Camera trigger -->
               <button id="camera--trigger" class="btn btn-primary">Take a picture</button>
             </section>
-            <img id="myImg" src="//:0" alt="your image" width="200">
-          </div>
           <button id="submitForm" class="btn btn-primary float-right">Submit</button>
         </form>
+        <h1>Photo file</h1>
+        <br>
         {{!-- TODO: Work out the process here how to send the file correctly through front end --}}
-        {{!-- <form id="frmUploader" enctype="multipart/form-data" action="/api/users" method="POST">
+        <form id="frmUploader" enctype="multipart/form-data" action="/api/users" method="POST">
           <!-- <button type="submit" name="submit" id="btnSubmit" value="Upload" /> -->
           <input type="file" accept="image/*" capture="user" name="userPhoto">
           <button type="submit" id="btnSubmit">Upload</button>
         </form>
-        <br><img id="myImg" src="#" alt="your image" width="200"> --}}
+        <br><img id="myImg" src="#" alt="your image" width="200">
         <!-- <input type="file" accept="image/*"> -->
         <!-- <input type="file" onchange="previewFile()" accept="image/*"><br>
     <img src="" height="200" alt="Image preview..."> -->
