@@ -38,7 +38,7 @@ var $photo = $("#myImg2");
 // function imageIsLoaded(e) {
 //   alert(e);
 // }
-// test code to mess with
+// CODE ADDED/MODIFIED FOR UPLOADING PHOTO FROM UPLOADS.HANDLEBARS
 window.addEventListener("load", function() {
   document
     .querySelector("div.form-group.img2 input[type='file']")
