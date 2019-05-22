@@ -10,19 +10,19 @@
     </label>
     <div class="form-group">
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="meal" name="typeOf" value="meal">
+            <input type="radio" class="custom-control-input typeOf" id="meal" name="typeOf" value="meal">
             <label class="custom-control-label" for="meal">Meal Under $10</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="snack" name="typeOf" value="snack">
+            <input type="radio" class="custom-control-input typeOf" id="snack" name="typeOf" value="snack">
             <label class="custom-control-label" for="snack">Snack under $5</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="treat" name="typeOf" value="treat">
+            <input type="radio" class="custom-control-input typeOf" id="treat" name="typeOf" value="treat">
             <label class="custom-control-label" for="treat">Treat Under $5</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="drink" name="typeOf" value="drink">
+            <input type="radio" class="custom-control-input typeOf" id="drink" name="typeOf" value="drink">
             <label class="custom-control-label" for="drink">Drink under $5</label>
         </div><br><br>
 
@@ -35,40 +35,40 @@
             <input type="text" class="form-control" id="item" name="item-name">
         </div>
         <div class="form-group">
-            <label for="price"><h3>Name of Deal Item:</h3></label>
+            <label for="price"><h3>Item Price:</h3></label>
             <input type="text" class="form-control" id="price" name="price">
         </div>
         <h3>Why Is This a Great Deal?</h3>
         <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input why" value="delicious">So Delicious!
+                <input type="checkbox" name="why" class="form-check-input why" value="delicious">So Delicious!
             </label>
         </div>
         <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input why" value="so-much">So Much for the Price!
+                <input type="checkbox" name="why" class="form-check-input why" value="so-much">So Much for the Price!
             </label>
         </div>
         <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input why" value="healthy">Healthy Deal!
+                <input type="checkbox" name="why" class="form-check-input why" value="healthy">Healthy Deal!
             </label>
         </div>
         <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input why" value="cool" >Cool Place!
+                <input type="checkbox" name="why" class="form-check-input why" value="cool" >Cool Place!
             </label>
         </div><br><br>
         <div class="form-group">
             <label for="tell-more"><h3>Tell us a little more about why this is good deal (optional):</h3></label>
-            <input type="text" class="form-control" id="tell-mote" name="tell-more">
+            <input type="text" class="form-control" id="tell-more" name="tell-more">
         </div>
         <div class="form-group img2">
             <label for="example-img"><h3>Upload Photo</h3></label><br>
             <input type="file" accept="image/*" id="example-img" name="userPhoto2">
             <img class="myImg2" src="#" alt="your image" width="200">
           </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" id="uploads-submit">Submit</button>
     </div>
 </form>
 
