@@ -70,6 +70,7 @@ function sendPhoto(photo) {
     console.log(result);
   });
 }
+sendPhoto(Photo);
 
 // GETTING DATA FROM THE UPLOADS FORM----------------------------------
 
@@ -108,7 +109,7 @@ $.ajax({
 // The API object contains methods for each kind of request we'll make
 var API = {
   // eslint-disable-next-line no-unused-vars
-  saveExample: function(example) {
+  saveExample: function() {
     var formData = new FormData(postForm[0]);
 
     // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
