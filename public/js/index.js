@@ -75,7 +75,7 @@ window.addEventListener("load", function () {
 });
 
 $(document).on("change", submittedImage, function (event){
-  console.log(submittedImage.attr("src"));
+ 
   console.log(event);
   console.log(event.target.files);
 })
