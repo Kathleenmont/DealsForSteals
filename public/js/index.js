@@ -8,6 +8,8 @@ const $exampleList = $("#example-list");
 const submittedImage = $("#myImg");
 const postForm = $("#postForm");
 var input = document.querySelector('input[type=file]');
+let tookPicture = false;
+let blob;
 
 const cameraView = document.querySelector("#camera--view"),
   cameraSensor = document.querySelector("#camera--sensor"),
@@ -36,14 +38,44 @@ function cameraStart() {
 
 function capturePhoto(event) {
   event.preventDefault();
-  console.log("Click");
+  tookPicture = true;
   var capPhoto = input.files[0];
-  console.log("This is in the Capture Photo method" + capPhoto);
+
   cameraSensor.width = cameraView.videoWidth;
   cameraSensor.height = cameraView.videoHeight;
   cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
 
   submittedImage.attr("src", cameraSensor.toDataURL("image/png"));
+  let dataURI = cameraSensor.toDataURL("image/png");
+
+  // let file = new File (cameraSensor.toDataURL("image/png"), "tempImage", "image/png");
+
+
+
+  function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
+    else
+      byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {
+      type: mimeString
+    });
+  }
+
+  blob = dataURItoBlob(dataURI);
+  console.log(blob);
 
   input.files[0] = cameraSensor.toDataURL("image/png");
 
@@ -74,8 +106,8 @@ window.addEventListener("load", function () {
     });
 });
 
-$(document).on("change", submittedImage, function (event){
- 
+$(document).on("change", submittedImage, function (event) {
+
   console.log(event);
   console.log(event.target.files);
 })
@@ -130,15 +162,20 @@ var API = {
     var formData = new FormData(postForm[0]);
 
     console.log(postForm[0]);
-    formData.append("capturedImage", submittedImage.val());
+    if (tookPicture) {
+      //get image from canvas
+      formData.append("userPhoto", blob);
 
+    } else {
+      formData.append("capturedImage", submittedImage.val());
+    }
     // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
     console.log(formData);
     console.log(formData.entries());
     for (var value of formData.values()) {
-      console.log(value); 
-   }
-   
+      console.log(value);
+    }
+
     return $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
