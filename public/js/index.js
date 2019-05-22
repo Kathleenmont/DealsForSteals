@@ -7,12 +7,36 @@ var $exampleList = $("#example-list");
 var postForm = $("#postForm");
 
 // test code
+// window.addEventListener("load", function() {
+//   document
+//     .querySelector('input[type="file"]')
+//     .addEventListener("change", function() {
+//       if (this.files && this.files[0]) {
+//         var img = document.querySelector("img"); // $('img')[0]
+//         img.src = URL.createObjectURL(this.files[0]); // set src to file url
+
+//         img.onload = imageIsLoaded; // optional onload event listener
+
+//         console.log(img);
+//         console.log(img.src);
+
+//         var Photo = {
+//           img: img,
+//           source: img.src
+//         };
+//       }
+//     });
+// });
+// function imageIsLoaded(e) {
+//   alert(e);
+// }
+// test code to mess with
 window.addEventListener("load", function() {
   document
-    .querySelector('input[type="file"]')
+    .querySelector("div.form-group.img2 input[type='file']")
     .addEventListener("change", function() {
       if (this.files && this.files[0]) {
-        var img = document.querySelector("img"); // $('img')[0]
+        var img = document.querySelector("img.myImg2"); // $('img')[0]
         img.src = URL.createObjectURL(this.files[0]); // set src to file url
 
         img.onload = imageIsLoaded; // optional onload event listener
@@ -32,8 +56,9 @@ function imageIsLoaded(e) {
   alert(e);
 }
 // TODO: Needs to get right api post
-function sendPhoto(photo) {
-  $.post("api/users", photo, function(result) {
+// eslint-disable-next-line no-unused-vars
+function sendPhoto(Photo) {
+  $.post("api/users", Photo, function(result) {
     console.log(result);
   });
 }
@@ -72,6 +97,7 @@ $.ajax({
 // ______________________________________________
 // The API object contains methods for each kind of request we'll make
 var API = {
+  // eslint-disable-next-line no-unused-vars
   saveExample: function(example) {
     var formData = new FormData(postForm[0]);
 

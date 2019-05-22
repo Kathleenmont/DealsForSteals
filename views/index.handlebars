@@ -7,7 +7,7 @@
         <form class="clearfix mb-4" action="POST" enctype="multipart/form-data" id="postForm" method="POST">
           <div class="form-group">
             <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text"
+            <input type="text" id="example-text" class="form-control img2" aria-describedby="example-text"
               placeholder="Enter Example Text" name="title">
           </div>
           <div class="form-group">
@@ -16,7 +16,7 @@
               placeholder="Enter Example Description" name="description"></textarea>
           </div>
           {{!-- adding our own img input to be read by multer --}}
-          <div class="form-group">
+          {{!-- <div class="form-group">
             <label for="example-img">Example Image</label>
             <input type="file" accept="image/*" id="example-img" name="userPhoto" class="form-control"
               placeholder="Enter Example img">
@@ -25,7 +25,7 @@
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
         <h1>Photo file</h1>
-        <br>
+        <br> --}}
         {{!-- TODO: Work out the process here how to send the file correctly through front end --}}
         <form id="frmUploader" enctype="multipart/form-data" action="/api/users" method="POST">
           <!-- <button type="submit" name="submit" id="btnSubmit" value="Upload" /> -->
