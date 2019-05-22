@@ -1,0 +1,36 @@
+body {
+    background-color: #ffffff; 
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+
+}
+h1 ,h2  {
+    font-display: center;
+}
+.jumbo-container    {
+    background-color: aqua;
+}
+.container  {
+    position: relative;
+    width: 1200px;
+    height: 300px;
+    margin: 240 px auto;
+    background: #ffffff;
+}
+.container .box {
+    position: relative;
+    width: calc(400px - 30px);
+    height: calc(400px - 30px);
+    background: lightseagreen;
+    float: left;
+    margin:25px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.container .box .icon   {
+    position: absolute;
+}
+
+
