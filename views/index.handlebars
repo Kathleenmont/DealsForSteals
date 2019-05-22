@@ -39,12 +39,14 @@
           <div class="form-group">
             <label for="example-img">Example Image</label>
             <input type="file" accept="image/*" id="input-img" name="userPhoto" class="form-control"
-              placeholder="Enter Example img">
+              placeholder="Upload an img" >
             <img id="myImg" src="#" alt="your image" width="200">
           </div>
            <section id="camera">
               <!-- Camera sensor -->
+              <h3>Capture image from Cam</h3>
               <canvas id="camera--sensor"></canvas>
+               <input type="file" accept="image/*"  capture="environment" placeholder="Take a Photo">
               <!-- Camera view -->
               <video id="camera--view" autoplay playsinline></video>
               <!-- Camera output -->

@@ -2,7 +2,7 @@
 let inputTitle = $("#title");
 let inputComments = $("#comments");
 // const $exampleDescription = $("#example-description");
-const inputImg = $("#input-img");
+const inputImg = document.querySelector("#input-img")
 const $submitBtn = $("#submitForm");
 const $exampleList = $("#example-list");
 const submittedImage = $("#myImg");
@@ -42,22 +42,26 @@ function capturePhoto(event) {
   cameraSensor.width = cameraView.videoWidth;
   cameraSensor.height = cameraView.videoHeight;
   cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+
   submittedImage.attr("src", cameraSensor.toDataURL("image/png"));
+
+  input.files[0] = cameraSensor.toDataURL("image/png");
 
   // imgEl.classList.add("taken");
 }
 
-// test code
+// Load image selected image on to webpage
 window.addEventListener("load", function () {
   document
     .querySelector('input[type="file"]')
-    .addEventListener("change", function () {
+    .addEventListener("change", function (event) {
       if (this.files && this.files[0]) {
         var img = document.querySelector("img"); // $('img')[0]
         img.src = URL.createObjectURL(this.files[0]); // set src to file url
 
-        img.onload = imageIsLoaded; // optional onload event listener
+        img.onload = imageIsLoaded(event); // optional onload event listener
 
+        console.log(this.files[0]);
         console.log("This is the event listener image loader");
         console.log(img);
         console.log(img.src);
@@ -70,9 +74,18 @@ window.addEventListener("load", function () {
     });
 });
 
+$(document).on("change", submittedImage, function (event){
+  console.log(submittedImage.attr("src"));
+  console.log(event);
+  console.log(event.target.files);
+})
+
 function imageIsLoaded(e) {
-  alert(e);
+  console.log("Event of ImageIsLOADED: " + JSON.stringify(e));
+  console.log(inputImg.files);
+  // inputImg.files = e.dataTransfer.files;
 }
+
 // TODO: Needs to get right api post
 function sendPhoto(photo) {
   $.post("api/users", photo, function (result) {
@@ -122,6 +135,10 @@ var API = {
     // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
     console.log(formData);
     console.log(formData.entries());
+    for (var value of formData.values()) {
+      console.log(value); 
+   }
+   
     return $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
