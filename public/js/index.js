@@ -8,6 +8,7 @@ var $exampleList = $("#example-list");
 var postForm = $("#postForm");
 var $typeOf;
 var $placeName = $("#place");
+var $placeNameVal
 var $itemName = $("#item");
 var $price = $("#price");
 var $why = [];
@@ -66,10 +67,6 @@ function capturePhoto(event) {
 
 
   console.log(webBlobString);
-
-  // input.files[0] = cameraSensor.toDataURL("image/png");
-
-  // imgEl.classList.add("taken");
 }
 
 function dataURItoBlob(dataURI) {
@@ -105,17 +102,12 @@ window.addEventListener("load", function () {
 
         console.log(img.src);
         img.onload = imageIsLoaded(event); // optional onload event listener
-
-        console.log(this.files[0]);
-        console.log("This is the event listener image loader");
-        console.log(img);
-        console.log(img.src);
       }
     });
 });
 
 function imageIsLoaded(e) {
-  
+
 }
 
 $(document).on("change", $photo, function (event) {
@@ -126,66 +118,90 @@ $(document).on("change", $photo, function (event) {
 
 // eslint-disable-next-line no-unused-vars
 function sendPhoto(photo) {
-  $.post("api/users", photo, function(result) {
+  $.post("api/users", photo, function (result) {
     console.log(result);
   });
 }
 
 // GETTING DATA FROM THE UPLOADS FORM----------------------------------
+// ----------------------------------------------
+function yelpApiSearch(placeName) {
+  var buisnessName = placeName;
 
-// TEST API CALL YELP_____________________________
+  var myurl =
+    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" +
+    buisnessName +
+    "&location=philadelphia";
 
-var buisnessName = "Burger King";
+  $.ajax({
+    url: myurl,
+    headers: {
+      Authorization: "Bearer Vg_tGwpB5bMsOR-xCjAGY2NUvCf7CUy_6QVbCD-5pV_6zMJxrrAjOgUZUtkUUvgdBr_8g_7Cva_67x-k8kxWw8vu9gKt-GTphwj6CZenIjAggvyMAqUxFXTSfsjeXHYx"
+    },
+    method: "GET",
+    dataType: "json",
+    success: function (response) {
+      console.log("success: " + response);
+      // console.log(JSON.stringify(response));
+      console.log("name: " + response.businesses[0].name);
+      console.log("phone: " + response.businesses[0].display_phone);
+      console.log(
+        "address: " + response.businesses[0].location.display_address
+      );
+      console.log("latitude: " + response.businesses[0].coordinates.latitude);
+      console.log("longitude: " + response.businesses[0].coordinates.longitude);
+      console.log("Yelp url: " + response.businesses[0].url);
+      console.log(
+        "type of place: " + response.businesses[0].categories[0].alias
+      );
+      console.log(
+        "type of place: " + response.businesses[0].categories[0].title
+      );
 
-var myurl =
-  "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" +
-  buisnessName +
-  "&location=philadelphia";
+      yelpObj = {
+        bName: response.businesses[0].name,
+        restAdd: response.businesses[0].location.display_address,
+        restLat: response.businesses[0].coordinates.latitude,
+        restLong: response.businesses[0].coordinates.longitude,
+        yelpUrl: response.businesses[0].url,
+        typeOfPlace: response.businesses[0].categories[0].title
+      };
 
-$.ajax({
-  url: myurl,
-  headers: {
-    Authorization:
-      "Bearer Vg_tGwpB5bMsOR-xCjAGY2NUvCf7CUy_6QVbCD-5pV_6zMJxrrAjOgUZUtkUUvgdBr_8g_7Cva_67x-k8kxWw8vu9gKt-GTphwj6CZenIjAggvyMAqUxFXTSfsjeXHYx"
-  },
-  method: "GET",
-  dataType: "json",
-  success: function(response) {
-    console.log("success: " + response);
-    // console.log(JSON.stringify(response));
-    console.log("name: " + response.businesses[0].name);
-    console.log("phone: " + response.businesses[0].display_phone);
-    console.log("address: " + response.businesses[0].location.display_address);
-    console.log("latitude: " + response.businesses[0].coordinates.latitude);
-    console.log("longitude: " + response.businesses[0].coordinates.longitude);
-    console.log("Yelp url: " + response.businesses[0].url);
-    console.log("type of place: " + response.businesses[0].categories[0].alias);
-    console.log("type of place: " + response.businesses[0].categories[0].title);
-
-    yelpObj = {
-          bName : response.businesses[0].name,
-          
+      //saveUser photo
+      API.saveExample().then(function () {
+        refreshExamples();
+      });
     }
-  }
-});
-
+  });
+}
 // ______________________________________________
 // The API object contains methods for each kind of request we'll make
 var API = {
   // eslint-disable-next-line no-unused-vars
-  saveExample: function() {
+  saveExample: function () {
     var formData = new FormData(postForm[0]);
 
     console.log(postForm[0]);
     if (tookPicture) {
-      //get image from canvas
-      formData.append("userPhoto", blob);
-      // formData.append("photoBlob", blob);
-      formData.append("yelp", JSON.stringify(yelpObj));
+      //iterate through the objectand create a key/value pair to append to formData
+      for (const key in yelpObj) {
+        // console.log(yelpObj[key]);
+        formData.append(key, yelpObj[key]);
+      }
+        //get image from canvas
+        formData.append("userPhoto", blob);
+
       tookPicture = false;
     } else {
+
+      //iterate through the objectand create a key/value pair to append to formData
+      for (const key in yelpObj) {
+        // console.log(yelpObj[key]);
+        formData.append(key, yelpObj[key]);
+      }
+
       formData.append("photoBlob", $photo.attr("src"));
-      formData.append("yelp", JSON.stringify(yelpObj));
+      // formData.append("yelp", JSON.stringify(yelpObj));
     }
 
     // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
@@ -203,21 +219,21 @@ var API = {
       contentType: false,
       cache: false,
       // data: JSON.stringify(example),
-      success: function(returnData) {
+      success: function (returnData) {
         console.log(returnData);
       },
-      error: function(err) {
+      error: function (err) {
         console.log("error", err);
       }
     });
   },
-  getExamples: function() {
+  getExamples: function () {
     return $.ajax({
       url: "api/posts",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteExample: function (id) {
     return $.ajax({
       url: "api/posts/" + id,
       type: "DELETE"
@@ -226,9 +242,9 @@ var API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+var refreshExamples = function () {
+  API.getExamples().then(function (data) {
+    var $examples = data.map(function (example) {
       var $a = $("<a>")
         .text(example.text)
         .attr("href", "/posts/" + example.id);
@@ -260,32 +276,7 @@ var refreshExamples = function() {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
-
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim(),
-    img: $exampleImage.val()
-  };
-
-  console.log("Submitted" + example);
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
-
-  //saveUser photo
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
-
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
-
-// ADDED FOR UPLOADS SUBMIT FORM
-var handleFormSubmitUploads = function(event) {
+var handleFormSubmitUploads = function (event) {
   event.preventDefault();
 
   // var newPost = {
@@ -295,20 +286,21 @@ var handleFormSubmitUploads = function(event) {
   // };
   // $typeOf = $typeOf.val();
   // $typeOf = $('input[name="typeOf"]:checked').val();
-  // $placeName = $placeName.val().trim();
+  // $placeNameVal = $placeName.val().trim();
   // $itemName = $itemName.val().trim();
   // $price = $price.val().trim();
-  $.each($("input[name='why']:checked"), function() {
+
+  $.each($("input[name='why']:checked"), function () {
     $why.push($(this).val());
   });
   // $tellMore = $tellMore.val().trim();
-  
-  console.log("catagory: " +  $('input[name="typeOf"]:checked').val());
-  console.log("place name: " +  $placeName.val().trim());
-  console.log("name of item: " +  $itemName.val().trim());
-  console.log("price: " + $price.val().trim());
+
+  console.log("catagory: " + $typeOf);
+  console.log("place name: " + $placeNameVal);
+  console.log("name of item: " + $itemName);
+  console.log("price: " + $price);
   console.log("why its a good deal: " + $why);
-  console.log("additiona comments: " +  $tellMore.val().trim());
+  console.log("additiona comments: " + $tellMore);
 
   // console.log("Submitted" + example);
   // if (!(example.text && example.description)) {
@@ -316,10 +308,9 @@ var handleFormSubmitUploads = function(event) {
   //   return;
   // }
 
-  //saveUser photo
-  API.saveExample($photo).then(function() {
-    refreshExamples();
-  });
+  //make yelp call
+  yelpApiSearch($placeNameVal);
+
   console.log($photo);
 
   $exampleText.val("");
@@ -328,12 +319,12 @@ var handleFormSubmitUploads = function(event) {
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
+  API.deleteExample(idToDelete).then(function () {
     refreshExamples();
   });
 };
