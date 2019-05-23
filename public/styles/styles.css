@@ -1,3 +1,12 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+li {
+  border:1px solid black;
+  width: 450px;
+  padding: 5px;
+  margin: 5px;
+  background: #f3dec6;
+}
+
