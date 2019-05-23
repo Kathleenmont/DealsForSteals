@@ -4,11 +4,14 @@ CREATE DATABASE dealsdb;
 use dealsdb;
 CREATE TABLE post(
 	id INT(255) NOT NULL AUTO_INCREMENT,
-    author VARCHAR(20) NOT NULL,
+    title VARCHAR(20) NOT NULL,
     item VARCHAR(20) NOT NULL,
     price DECIMAL(10,4) NOT NULL,
-	restaurant VARCHAR(20) NOT NULL,
-    restAdd VARCHAR(30),
-    restLocation VARCHAR(30),
+	restaurant VARCHAR(150) NOT NULL,
+    comments VARCHAR(150) NULL,
+    restLat VARCHAR(30),
+    restLong VARCHAR(30),
+    img VARCHAR(300),
     PRIMARY KEY(id)
 );
+

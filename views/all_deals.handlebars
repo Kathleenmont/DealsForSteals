@@ -1,0 +1,23 @@
+{{!-- <h1>Test page</h1> --}}
+<ul>
+  {{#each test}}
+  	<li>
+     
+  		<p><span class="label">ID:</span> {{this.id}}</p>
+      {{!-- <p><span class="label">author:</span> {{this.Author}}</p> --}}
+      <p><span class="label"><b>Item:</b></span> {{this.item}}</p>
+      <p><span class="label"><b>Price:</b></span> {{this.price}}</p>
+      <p><span class="label"><b>Restaurant:</b></span> {{this.restaurant}}</p>
+      <p><span class="label"><b>Address:</b></span> {{this.restAdd}}</p>
+      
+      {{!-- <p><span class="label">Location:</span> {{this.restLocation}}</p> --}}
+
+      {{!-- (author, item, price, restaurant, restAdd, restLocation) --}}
+      
+
+      {{!-- <button data-id="{{this.id}}" class="delquote">Delete</button> --}}
+
+      {{!-- <a href="/{{this.id}}">Update this quote</a> --}}
+  	</li>
+  {{/each}}
+</ul>
