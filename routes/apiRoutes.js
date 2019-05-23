@@ -5,7 +5,7 @@ module.exports = function (app) {
 
   //storage of the file 
   const Storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+     destination: function (req, file, cb) {
       cb(null, "./uploads/");
     },
     filename: function (req, file, cb) {
@@ -40,6 +40,7 @@ module.exports = function (app) {
   app.post("/api/posts", upload.single("userPhoto"), function (req, res) {
     console.log(req.file);
     console.log(req.body);
+    
     var newPost  = {
       title: req.body.title,
       item: req.body.item,
@@ -50,8 +51,8 @@ module.exports = function (app) {
       // restLong: req.body.restLong,
       img: req.file.path
     }
-    console.log("This is the new post---------");
-    console.log(newPost);
+
+  
     db.Post.create(newPost).then(function (dbPost) {
       res.json(dbPost);
     });
@@ -90,11 +91,11 @@ module.exports = function (app) {
     }
   
     console.log("This is the response from the image");
-    console.log(req.file);
-    res.send("test");
     // console.log(req.file);
-    console.log(req.body);
-    console.log(b64Image);
+    // res.send("test");
+    // // console.log(req.file);
+    // console.log(req.body);
+    // // console.log(b64Image);
 
     // res.json(post);
     // res.render("index", post);
