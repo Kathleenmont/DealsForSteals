@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Post = sequelize.define("Post", {
-    title: {
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -28,6 +28,11 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
+    why: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      len: [1]
+    },
     restAdd: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -46,6 +51,21 @@ module.exports = function(sequelize, DataTypes) {
     comments: {
       type: DataTypes.TEXT,
       allowNull: true,
+      len: [0]
+    },
+    yelpUrl: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      len: [0]
+    },
+    TypeOfPlace: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      len: [0]
+    },
+    photo: {
+      type: DataTypes.BLOB("long"),
+      allowNull: false,
       len: [0]
     }
   });
