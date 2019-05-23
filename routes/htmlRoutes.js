@@ -11,6 +11,11 @@ module.exports = function(app) {
     });
   });
 
+  // load uploads page
+  app.get("/uploads", function(req, res) {
+    res.render("uploads");
+  });
+
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
     db.Post.findOne({ where: { id: req.params.id } }).then(function(dbPost) {
