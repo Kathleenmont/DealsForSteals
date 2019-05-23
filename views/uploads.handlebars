@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<form>
+<form  enctype="multipart/form-data" id="postForm" method="POST">
     <label class="label" for="typeOf">
         <h3>Type of Deal</h3>
     </label>
@@ -27,15 +27,21 @@
         </div><br><br>
 
         <div class="form-group">
-            <label for="place-name"><h3>Name of Place:</h3></label>
-            <input type="text" class="form-control" id="place" name="place-name">
+            <label for="place-name">
+                <h3>Name of Place:</h3>
+            </label>
+            <input type="text" class="form-control" id="place" name="restaurant">
         </div>
         <div class="form-group">
-            <label for="item-name"><h3>Name of Deal Item:</h3></label>
-            <input type="text" class="form-control" id="item" name="item-name">
+            <label for="item-name">
+                <h3>Name of Deal Item:</h3>
+            </label>
+            <input type="text" class="form-control" id="item" name="item">
         </div>
         <div class="form-group">
-            <label for="price"><h3>Item Price:</h3></label>
+            <label for="price">
+                <h3>Item Price:</h3>
+            </label>
             <input type="text" class="form-control" id="price" name="price">
         </div>
         <h3>Why Is This a Great Deal?</h3>
@@ -56,18 +62,32 @@
         </div>
         <div class="form-check-inline">
             <label class="form-check-label">
-                <input type="checkbox" name="why" class="form-check-input why" value="cool" >Cool Place!
+                <input type="checkbox" name="why" class="form-check-input why" value="cool">Cool Place!
             </label>
         </div><br><br>
         <div class="form-group">
-            <label for="tell-more"><h3>Tell us a little more about why this is good deal (optional):</h3></label>
-            <input type="text" class="form-control" id="tell-more" name="tell-more">
+            <label for="tell-more">
+                <h3>Tell us a little more about why this is good deal (optional):</h3>
+            </label>
+            <input type="text" class="form-control" id="tell-more" name="comments">
         </div>
-        <div class="form-group img2">
-            <label for="example-img"><h3>Upload Photo</h3></label><br>
-            <input type="file" accept="image/*" id="example-img" name="userPhoto2">
-            <img class="myImg2" src="#" alt="your image" width="200">
-          </div>
+        <div class="form-group img">
+            <label for="example-img">
+                <h3>Upload Photo</h3>
+            </label><br>
+            <input type="file" accept="image/*" id="example-img" name="userPhoto" capture="environment">
+            <img id="uploadMyImg" src="//:0" alt="your image" width="200">
+        </div>
+        <section id="camera">
+            <!-- Camera sensor -->
+            <h3>Capture image from Cam</h3>
+            <canvas id="camera--sensor"></canvas>
+            {{!-- <input type="file" accept="image/*" capture="environment" placeholder="Take a Photo"> --}}
+            <!-- Camera view -->
+            <video id="camera--view" autoplay playsinline></video>
+            <!-- Camera trigger -->
+            <button id="camera--trigger" class="btn btn-primary">Take a picture</button>
+        </section>
         <button type="submit" class="btn btn-primary" id="uploads-submit">Submit</button>
     </div>
 </form>

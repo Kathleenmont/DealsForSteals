@@ -12,71 +12,130 @@ var $itemName = $("#item");
 var $price = $("#price");
 var $why = [];
 var $tellMore = $("#tell-more");
-var $photo = $("#myImg2");
 
-// test code
-// window.addEventListener("load", function() {
-//   document
-//     .querySelector('input[type="file"]')
-//     .addEventListener("change", function() {
-//       if (this.files && this.files[0]) {
-//         var img = document.querySelector("img"); // $('img')[0]
-//         img.src = URL.createObjectURL(this.files[0]); // set src to file url
 
-//         img.onload = imageIsLoaded; // optional onload event listener
+var input = document.querySelector('input[type=file]');
+let tookPicture = false;
+let blob;
+let webBlobString = [];
+const $photo = $("#uploadMyImg");
+let yelpObj
 
-//         console.log(img);
-//         console.log(img.src);
+const cameraView = document.querySelector("#camera--view"),
+  cameraSensor = document.querySelector("#camera--sensor"),
+  cameraTrigger = $("#camera--trigger")
 
-//         var Photo = {
-//           img: img,
-//           source: img.src
-//         };
-//       }
-//     });
-// });
-// function imageIsLoaded(e) {
-//   alert(e);
-// }
+//video constraints
+var constraints = {
+  video: {
+    facingMode: "environment"
+  },
+  audio: false
+};
+
+//start camera function
+function cameraStart() {
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(function (stream) {
+      track = stream.getTracks()[0];
+      cameraView.srcObject = stream;
+    })
+    .catch(function (error) {
+      console.error("Oops. Something is broken.", error);
+    });
+}
+
+function capturePhoto(event) {
+  event.preventDefault();
+  tookPicture = true;
+  var capPhoto = input.files[0];
+
+  cameraSensor.width = cameraView.videoWidth;
+  cameraSensor.height = cameraView.videoHeight;
+  cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+
+  $photo.attr("src", cameraSensor.toDataURL("image/png"));
+  let dataURI = cameraSensor.toDataURL("image/png");
+
+  // let file = new File (cameraSensor.toDataURL("image/png"), "tempImage", "image/png");
+
+  blob = dataURItoBlob(dataURI);
+  webBlobString.pop();
+  webBlobString.push(blob);
+
+
+  console.log(webBlobString);
+
+  // input.files[0] = cameraSensor.toDataURL("image/png");
+
+  // imgEl.classList.add("taken");
+}
+
+function dataURItoBlob(dataURI) {
+  // convert base64/URLEncoded data component to raw binary data held in a string
+  var byteString;
+  if (dataURI.split(',')[0].indexOf('base64') >= 0)
+    byteString = atob(dataURI.split(',')[1]);
+  else
+    byteString = unescape(dataURI.split(',')[1]);
+
+  // separate out the mime component
+  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+  // write the bytes of the string to a typed array
+  var ia = new Uint8Array(byteString.length);
+  for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+  }
+
+  return new Blob([ia], {
+    type: mimeString
+  });
+}
+
 // CODE ADDED/MODIFIED FOR UPLOADING PHOTO FROM UPLOADS.HANDLEBARS
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
   document
-    .querySelector("div.form-group.img2 input[type='file']")
-    .addEventListener("change", function() {
+    .querySelector('input[type="file"]')
+    .addEventListener("change", function (event) {
       if (this.files && this.files[0]) {
-        var img = document.querySelector("img.myImg2"); // $('img')[0]
+        var img = document.querySelector("#uploadMyImg "); // $('img')[0]
         img.src = URL.createObjectURL(this.files[0]); // set src to file url
 
-        img.onload = imageIsLoaded; // optional onload event listener
+        console.log(img.src);
+        img.onload = imageIsLoaded(event); // optional onload event listener
 
+        console.log(this.files[0]);
+        console.log("This is the event listener image loader");
         console.log(img);
         console.log(img.src);
-
-        // var Photo = {
-        //   img: img,
-        //   source: img.src
-        // };
       }
     });
 });
 
 function imageIsLoaded(e) {
-  alert(e);
+  
 }
-// TODO: Needs to get right api post
+
+$(document).on("change", $photo, function (event) {
+
+  console.log(event);
+  console.log(event.target.files);
+});
+
 // eslint-disable-next-line no-unused-vars
 function sendPhoto(photo) {
   $.post("api/users", photo, function(result) {
     console.log(result);
   });
 }
-sendPhoto(Photo);
 
 // GETTING DATA FROM THE UPLOADS FORM----------------------------------
 
 // TEST API CALL YELP_____________________________
 
-var buisnessName = "cosmi's Deli";
+var buisnessName = "Burger King";
 
 var myurl =
   "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" +
@@ -102,6 +161,11 @@ $.ajax({
     console.log("Yelp url: " + response.businesses[0].url);
     console.log("type of place: " + response.businesses[0].categories[0].alias);
     console.log("type of place: " + response.businesses[0].categories[0].title);
+
+    yelpObj = {
+          bName : response.businesses[0].name,
+          
+    }
   }
 });
 
@@ -112,6 +176,18 @@ var API = {
   saveExample: function() {
     var formData = new FormData(postForm[0]);
 
+    console.log(postForm[0]);
+    if (tookPicture) {
+      //get image from canvas
+      formData.append("userPhoto", blob);
+      // formData.append("photoBlob", blob);
+      formData.append("yelp", JSON.stringify(yelpObj));
+      tookPicture = false;
+    } else {
+      formData.append("photoBlob", $photo.attr("src"));
+      formData.append("yelp", JSON.stringify(yelpObj));
+    }
+
     // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
     console.log(formData);
 
@@ -121,7 +197,7 @@ var API = {
       // },
       type: "POST",
       enctype: "multipart/form-data",
-      url: "api/posts",
+      url: "/api/posts",
       data: formData,
       processData: false, // Important!
       contentType: false,
@@ -218,22 +294,21 @@ var handleFormSubmitUploads = function(event) {
   //   img: $exampleImage.val()
   // };
   // $typeOf = $typeOf.val();
-  $typeOf = $('input[name="typeOf"]:checked').val();
-  $placeName = $placeName.val().trim();
-  $itemName = $itemName.val().trim();
-  $price = $price.val().trim();
+  // $typeOf = $('input[name="typeOf"]:checked').val();
+  // $placeName = $placeName.val().trim();
+  // $itemName = $itemName.val().trim();
+  // $price = $price.val().trim();
   $.each($("input[name='why']:checked"), function() {
     $why.push($(this).val());
   });
-  $tellMore = $tellMore.val().trim();
-  $photo = $photo.val();
-  console.log("catagory: " + $typeOf);
-  console.log("place name: " + $placeName);
-  console.log("name of item: " + $itemName);
-  console.log("price: " + $price);
-  console.log("why its a good deal: " + whys);
-  console.log("additiona comments: " + $tellMore);
-  console.log("Photo: " + $photo);
+  // $tellMore = $tellMore.val().trim();
+  
+  console.log("catagory: " +  $('input[name="typeOf"]:checked').val());
+  console.log("place name: " +  $placeName.val().trim());
+  console.log("name of item: " +  $itemName.val().trim());
+  console.log("price: " + $price.val().trim());
+  console.log("why its a good deal: " + $why);
+  console.log("additiona comments: " +  $tellMore.val().trim());
 
   // console.log("Submitted" + example);
   // if (!(example.text && example.description)) {
@@ -264,6 +339,8 @@ var handleDeleteBtnClick = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+// $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
+window.addEventListener("load", cameraStart, false);
+cameraTrigger.on("click", capturePhoto);
