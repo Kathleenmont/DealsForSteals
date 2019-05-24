@@ -2,6 +2,17 @@
   line-height: 2.5;
 }
 
-#camera--sensor{
-  /* visibility: hidden; */
+li {
+  border:1px solid black;
+  width: 450px;
+  padding: 5px;
+  margin: 5px;
+  background: #f3dec6;
+}
+
+/* #camera--sensor{
+   visibility: hidden;
+} */
+#uploadDiv, #camera {
+  display:none;
 }

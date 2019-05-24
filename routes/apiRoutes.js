@@ -47,13 +47,8 @@ module.exports = function (app) {
       price: req.body.price,
       restaurant: req.body.restaurant,
       comments: req.body.comments,
-<<<<<<< HEAD
-      restLat: req.body.restLat,
-      restLong: req.body.restLong,
-=======
       // restLat: req.body.restLat,
       // restLong: req.body.restLong,
->>>>>>> b779ec0401c91f51f1caa2fe0b95e5436e396cb9
       img: req.file.path
     }
 

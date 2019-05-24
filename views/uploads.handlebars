@@ -71,9 +71,14 @@
             </label>
             <input type="text" class="form-control" id="tell-more" name="comments">
         </div>
-        <div class="form-group img">
+        <div id="imgChoice">
+            <div>Would you like to upload or take a picture?</div>
+            <button id="uploadIMG">Upload</button>
+            <button id="takeIMG">Take Picture</button>
+        </div>
+        <div class="form-group img" id="uploadDiv">
             <label for="example-img">
-                <h3>Upload Photo</h3>
+                <h3>Choose Photo</h3>
             </label><br>
             <input type="file" accept="image/*" id="example-img" name="userPhoto" capture="environment">
             <img id="uploadMyImg" src="//:0" alt="your image" width="200">

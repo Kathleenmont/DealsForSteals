@@ -8,6 +8,7 @@ module.exports = function(app) {
         msg: "Welcome!",
         examples: dbPost
       });
+      console.log(dbPost);
     });
   });
 
@@ -22,6 +23,16 @@ module.exports = function(app) {
       res.render("example", {
         example: dbPost
       });
+    });
+  });
+  // test search page
+  app.get("/search", function(req, res) {
+    db.Post.findAll({}).then(function(dbPost) {
+      // console.log(dbPost);
+      res.render("all_deals", {
+        test: dbPost
+      });
+      console.log(dbPost);
     });
   });
 
