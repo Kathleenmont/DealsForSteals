@@ -58,7 +58,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       len: [0]
     },
-    TypeOfPlace: {
+    typeOfPlace: {
       type: DataTypes.STRING,
       allowNull: true,
       len: [0]

@@ -30,7 +30,7 @@ module.exports = function(app) {
     db.Post.findAll({}).then(function(dbPost) {
       // console.log(dbPost);
       res.render("all_deals", {
-        test: dbPost
+        posts: dbPost
       });
       console.log(dbPost);
     });
