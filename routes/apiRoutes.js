@@ -2,10 +2,25 @@ module.exports = function (app) {
   const db = require("../models");
   const multer = require("multer");
   const fs = require("fs");
+  const cloudinary = require("cloudinary");
+  const cloudinaryStorage = require("multer-storage-cloudinary");
+
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+    });
+
+    const cloudStorage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: "deals",
+    allowedFormats: ["jpg", "png"],
+    transformation: [{ width: 500, height: 500, crop: "limit" }]
+    });
 
   //storage of the file 
   const Storage = multer.diskStorage({
-     destination: function (req, file, cb) {
+    destination: function (req, file, cb) {
       cb(null, "./uploads/");
     },
     filename: function (req, file, cb) {
@@ -41,11 +56,15 @@ module.exports = function (app) {
     console.log(req.file);
     console.log(req.body);
 
+    const cloudImage = {};
+    cloudImage.url = req.file.url;
+    cloudImage.id = req.file.public_id;
+
     let whyString = req.body.why.toString()
 
     console.log(whyString);
-    
-    var newPost  = {
+
+    var newPost = {
       category: req.body.typeOf,
       item: req.body.item,
       price: req.body.price,
@@ -61,7 +80,7 @@ module.exports = function (app) {
     }
 
     console.log(newPost);
-  
+
     db.Post.create(newPost).then(function (dbPost) {
       res.json(dbPost);
     });
@@ -81,16 +100,16 @@ module.exports = function (app) {
 
   });
 
-   //show image
-   app.post("/api/users", upload.single("userPhoto"),function (req, res) {
+  //show image
+  app.post("/api/users", upload.single("userPhoto"), function (req, res) {
     var img = fs.readFileSync(req.file.path);
     var encode_image = img.toString('base64');
     // Define a JSONobject for the image attributes for saving to database
-     
+
     var b64Image = {
       contentType: req.file.mimetype,
-      image:  new Buffer(encode_image, 'base64')
-   };
+      image: new Buffer(encode_image, 'base64')
+    };
 
     var post = {
       id: "1",
@@ -98,7 +117,7 @@ module.exports = function (app) {
       img: req.file.path,
       b64: b64Image
     }
-  
+
     console.log("This is the response from the image");
     // console.log(req.file);
     // res.send("test");
