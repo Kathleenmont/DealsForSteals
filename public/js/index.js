@@ -66,6 +66,9 @@ function capturePhoto(event) {
   webBlobString.push(blob);
 
 
+  // Stop all video streams.
+  player.srcObject.getVideoTracks().forEach(track => track.stop());
+
   console.log(webBlobString);
 }
 
