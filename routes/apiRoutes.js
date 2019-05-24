@@ -41,7 +41,7 @@ module.exports = function (app) {
     console.log(req.file);
     console.log(req.body);
 
-    let whyString = req.body.why.join(",", ", ").toString()
+    let whyString = req.body.why.toString()
 
     console.log(whyString);
     

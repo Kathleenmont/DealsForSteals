@@ -16,6 +16,7 @@ var $tellMore = $("#tell-more");
 
 
 var input = document.querySelector('input[type=file]');
+const inputNumber = $('input[type=number]');
 let tookPicture = false;
 let blob;
 let webBlobString = [];
@@ -67,7 +68,7 @@ function capturePhoto(event) {
 
 
   // Stop all video streams.
-  player.srcObject.getVideoTracks().forEach(track => track.stop());
+  cameraView.srcObject.getVideoTracks().forEach(track => track.stop());
 
   console.log(webBlobString);
 }
@@ -332,9 +333,28 @@ var handleDeleteBtnClick = function () {
   });
 };
 
+
+function currencyEval () {
+  let value = $(this).val();
+
+  
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  })
+
+  //still workout how to dynamically stick currency
+  console.log($(this).val());
+  let evaluated = formatter.format(value);
+    value = evaluated.replace(",", ".");
+
+    console.log(value);
+}
 // Add event listeners to the submit and delete buttons
 // $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
 window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
+inputNumber.on("keyup", currencyEval)
