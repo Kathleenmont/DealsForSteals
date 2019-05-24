@@ -75,7 +75,7 @@ module.exports = function (app) {
       restLong: req.body.restLong,
       comments: req.body.comments,
       yelpUrl: req.body.yelpUrl,
-      TypeOfPlace: req.body.TypeOfPlace,
+      typeOfPlace: req.body.typeOfPlace,
       photo: req.file.path
     }
 

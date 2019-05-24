@@ -335,7 +335,7 @@ var handleDeleteBtnClick = function () {
 
 
 function currencyEval () {
-  let value = $(this).val();
+  let value =  $(this).val();
 
   
   const formatter = new Intl.NumberFormat('en-US', {
@@ -347,8 +347,7 @@ function currencyEval () {
   //still workout how to dynamically stick currency
   console.log($(this).val());
   let evaluated = formatter.format(value);
-    value = evaluated.replace(",", ".");
-
+    value = evaluated;
     console.log(value);
 }
 // Add event listeners to the submit and delete buttons
