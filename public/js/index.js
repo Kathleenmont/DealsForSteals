@@ -286,7 +286,7 @@ var handleFormSubmitUploads = function (event) {
   // };
   // $typeOf = $typeOf.val();
   // $typeOf = $('input[name="typeOf"]:checked').val();
-  // $placeNameVal = $placeName.val().trim();
+  $placeNameVal = $placeName.val().trim();
   // $itemName = $itemName.val().trim();
   // $price = $price.val().trim();
 
@@ -295,13 +295,13 @@ var handleFormSubmitUploads = function (event) {
   });
   // $tellMore = $tellMore.val().trim();
 
-  console.log("catagory: " + $typeOf);
-  console.log("place name: " + $placeNameVal);
-  console.log("name of item: " + $itemName);
-  console.log("price: " + $price);
-  console.log("why its a good deal: " + $why);
-  console.log("additiona comments: " + $tellMore);
-
+  // console.log("catagory: " + $typeOf);
+  // console.log("place name: " + $placeNameVal);
+  // console.log("name of item: " + $itemName);
+  // console.log("price: " + $price);
+  // console.log("why its a good deal: " + $why);
+  // console.log("additiona comments: " + $tellMore);
+ 
   // console.log("Submitted" + example);
   // if (!(example.text && example.description)) {
   //   alert("You must enter an example text and description!");

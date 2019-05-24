@@ -40,18 +40,27 @@ module.exports = function (app) {
   app.post("/api/posts", upload.single("userPhoto"), function (req, res) {
     console.log(req.file);
     console.log(req.body);
+
+    let whyString = req.body.why.join(",", ", ").toString()
+
+    console.log(whyString);
     
     var newPost  = {
-      title: req.body.title,
+      category: req.body.typeOf,
       item: req.body.item,
       price: req.body.price,
+      why: whyString,
       restaurant: req.body.restaurant,
+      restAdd: req.body.restAdd,
+      restLat: req.body.restLat,
+      restLong: req.body.restLong,
       comments: req.body.comments,
-      // restLat: req.body.restLat,
-      // restLong: req.body.restLong,
-      img: req.file.path
+      yelpUrl: req.body.yelpUrl,
+      TypeOfPlace: req.body.TypeOfPlace,
+      photo: req.file.path
     }
 
+    console.log(newPost);
   
     db.Post.create(newPost).then(function (dbPost) {
       res.json(dbPost);
