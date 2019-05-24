@@ -356,7 +356,7 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
 window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
-<<<<<<< HEAD
+inputNumber.on("keyup", currencyEval)
 
 // Show/hide image section on uploads.handlebars based on whether user wants to upload or take a picture
 $("#uploadIMG").click(function(event) {
@@ -387,6 +387,3 @@ cameraTrigger.click(function(event) {
   // }
 });
 //^^^Need to implement reset fxn for above^^^
-=======
-inputNumber.on("keyup", currencyEval)
->>>>>>> 22f1a5a12f032990126ad5f1b15c8bc0cf45e76b
