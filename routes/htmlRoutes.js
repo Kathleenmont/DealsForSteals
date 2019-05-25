@@ -11,17 +11,15 @@ module.exports = function (app) {
     });
   });
 
+  //loads home page
+  app.get("/homepage", function (req, res) {
+    res.render("homepage");
+  });
+
   // load uploads page
   app.get("/uploads", function (req, res) {
     res.render("uploads");
   });
-
-  //loads home page
-  app.get("/home", function (req, res) {
-    res.render("homepage");
-  });
-
-
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function (req, res) {

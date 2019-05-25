@@ -1,3 +1,91 @@
 .list-group-item {
   line-height: 2.5;
 }
+body{
+  color: purple;
+}
+
+/* Audrey's homepage CSS */
+body {
+  /* background-color: #ffffff;  */
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
+}
+h1 ,h2  {
+  font-display: center;
+}
+.jumbo-container    {
+  background-color: aqua;
+}
+.container  {
+  position: relative;
+  width: 1200px;
+  height: 300px;
+  margin: 240 px auto;
+  /* background: #ffffff; */
+}
+.container .box {
+  position: relative;
+  width: calc(350px - 30px);
+  height: calc(350px - 30px);
+  background: lightseagreen;
+  float: left;
+  margin:100px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.container .box .icon   {
+  position: absolute;
+}
+
+/* background animation*/
+
+body {
+	width: 100wh;
+	height: 90vh;
+	/* color: #fff; */
+	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
