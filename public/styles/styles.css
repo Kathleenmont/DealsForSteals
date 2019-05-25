@@ -13,3 +13,13 @@ li {
 #camera--sensor{
   /* visibility: hidden; */
 }
+
+#camera--view {
+  border-radius: 30px;
+}
+
+.form-check-input {
+  width:23px;
+  height:23px;
+}
+
