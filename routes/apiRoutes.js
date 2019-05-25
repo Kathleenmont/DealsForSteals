@@ -14,7 +14,7 @@ module.exports = function (app) {
     const cloudStorage = cloudinaryStorage({
     cloudinary: cloudinary,
     folder: "deals",
-    allowedFormats: ["jpg", "png"],
+    allowedFormats: ["jpg", "png", "jpeg"],
     transformation: [{ width: 500, height: 500, crop: "limit" }]
     });
 
@@ -30,7 +30,7 @@ module.exports = function (app) {
   });
 
   const fileFilter = (req, file, cb) => {
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png"  || file.mimetype === "image/jpg") {
       cb(null, true);
     } else {
       cb(null, false);
@@ -40,7 +40,8 @@ module.exports = function (app) {
   //Multer can take an object with a key that holds a directory stores some sort of hex or use the diskstorage method to 
   // const upl`oad = multer({dest: "uploads/"});
   const upload = multer({
-    storage: Storage,
+    // storage: Storage,
+    storage: cloudStorage,
     fileFilter
   });
 
@@ -60,14 +61,14 @@ module.exports = function (app) {
     cloudImage.url = req.file.url;
     cloudImage.id = req.file.public_id;
 
-    let whyString = req.body.why.toString()
-
-    console.log(whyString);
+    //string conversion
+    let whyString = req.body.why.toString();
+    let priceString = parseFloat(req.body.price.replace("$", "")).toFixed(2);
 
     var newPost = {
       category: req.body.typeOf,
       item: req.body.item,
-      price: req.body.price,
+      price:  priceString,
       why: whyString,
       restaurant: req.body.restaurant,
       restAdd: req.body.restAdd,
@@ -76,7 +77,9 @@ module.exports = function (app) {
       comments: req.body.comments,
       yelpUrl: req.body.yelpUrl,
       typeOfPlace: req.body.typeOfPlace,
-      photo: req.file.path
+      // photo: req.file.path,
+      photo: cloudImage.url,
+      // photoID: cloudImage.id,
     }
 
     console.log(newPost);
@@ -111,7 +114,7 @@ module.exports = function (app) {
       image: new Buffer(encode_image, 'base64')
     };
 
-    var post = {
+    var img64 = {
       id: "1",
       name: "Jorge",
       img: req.file.path,
@@ -119,13 +122,5 @@ module.exports = function (app) {
     }
 
     console.log("This is the response from the image");
-    // console.log(req.file);
-    // res.send("test");
-    // // console.log(req.file);
-    // console.log(req.body);
-    // // console.log(b64Image);
-
-    // res.json(post);
-    // res.render("index", post);
   });
 };

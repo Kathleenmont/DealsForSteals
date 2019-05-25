@@ -13,8 +13,7 @@ var $itemName = $("#item");
 var $price = $("#price");
 var $why = [];
 var $tellMore = $("#tell-more");
-
-
+//added
 var input = document.querySelector('input[type=file]');
 const inputNumber = $('input[type=number]');
 let tookPicture = false;
@@ -25,7 +24,8 @@ let yelpObj
 
 const cameraView = document.querySelector("#camera--view"),
   cameraSensor = document.querySelector("#camera--sensor"),
-  cameraTrigger = $("#camera--trigger")
+  cameraTrigger = $("#camera--trigger"),
+  camera = $("#camera")
 
 //video constraints
 var constraints = {
@@ -40,6 +40,8 @@ function cameraStart() {
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then(function (stream) {
+      camera.append(`<canvas id="camera--sensor"></canvas>`);
+
       track = stream.getTracks()[0];
       cameraView.srcObject = stream;
     })
@@ -187,13 +189,13 @@ var API = {
 
     console.log(postForm[0]);
     if (tookPicture) {
-      //iterate through the objectand create a key/value pair to append to formData
+      //iterate through the object and create a key/value pair to append to formData
       for (const key in yelpObj) {
         // console.log(yelpObj[key]);
         formData.append(key, yelpObj[key]);
       }
-        //get image from canvas
-        formData.append("userPhoto", blob);
+      //get image from canvas
+      formData.append("userPhoto", blob);
 
       tookPicture = false;
     } else {
@@ -275,7 +277,13 @@ var refreshExamples = function () {
     console.log($examples);
     $exampleList.empty();
     $exampleList.append($examples);
+  
+    // to call, use:
   });
+
+  //Reset form
+  resetForm($('#postForm'));
+
 };
 
 // handleFormSubmit is called whenever we submit a new example
@@ -305,7 +313,7 @@ var handleFormSubmitUploads = function (event) {
   // console.log("price: " + $price);
   // console.log("why its a good deal: " + $why);
   // console.log("additiona comments: " + $tellMore);
- 
+
   // console.log("Submitted" + example);
   // if (!(example.text && example.description)) {
   //   alert("You must enter an example text and description!");
@@ -334,10 +342,9 @@ var handleDeleteBtnClick = function () {
 };
 
 
-function currencyEval () {
-  let value =  $(this).val();
+function currencyEval() {
+  let value = $(this).val();
 
-  
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -347,13 +354,113 @@ function currencyEval () {
   //still workout how to dynamically stick currency
   console.log($(this).val());
   let evaluated = formatter.format(value);
-    value = evaluated;
-    console.log(value);
+  value = evaluated;
+  console.log(value);
 }
+
+function formatNumber(n) {
+  // format number 1000000 to 1,234,567
+  return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
+
+function formatCurrency(input, blur) {
+  // appends $ to value, validates decimal side
+  // and puts cursor back in right position.
+
+  // get input value
+  var input_val = input.val();
+
+  // don't validate empty input
+  if (input_val === "") {
+    return;
+  }
+
+  // original length
+  var original_len = input_val.length;
+
+  // initial caret position 
+  var caret_pos = input.prop("selectionStart");
+
+  // check for decimal
+  if (input_val.indexOf(".") >= 0) {
+
+    // get position of first decimal
+    // this prevents multiple decimals from
+    // being entered
+    var decimal_pos = input_val.indexOf(".");
+
+    // split number by decimal point
+    var left_side = input_val.substring(0, decimal_pos);
+    var right_side = input_val.substring(decimal_pos);
+
+    // add commas to left side of number
+    left_side = formatNumber(left_side);
+
+    // validate right side
+    right_side = formatNumber(right_side);
+
+    // On blur make sure 2 numbers after decimal
+    if (blur === "blur") {
+      right_side += "00";
+    }
+
+    // Limit decimal to only 2 digits
+    right_side = right_side.substring(0, 2);
+
+    // join number by .
+    input_val = "$" + left_side + "." + right_side;
+
+  } else {
+    // no decimal entered
+    // add commas to number
+    // remove all non-digits
+    input_val = formatNumber(input_val);
+    input_val = "$" + input_val;
+
+    // final formatting
+    if (blur === "blur") {
+      input_val += ".00";
+    }
+  }
+
+  // send updated string to input
+  input.val(input_val);
+
+  // put caret back in the right position
+  var updated_len = input_val.length;
+  caret_pos = updated_len - original_len + caret_pos;
+  input[0].setSelectionRange(caret_pos, caret_pos);
+}
+
+function resetForm($form) {
+  $form.find('input:text, input:password, input:file, select, textarea').val('');
+
+  $(".form-check-input input:radio, .form-check-input input:checkbox").each(function () {
+    $(this).removeAttr("checked").removeAttr("selected");
+  })
+
+  $photo.attr("src", "");
+  // $form.find('input:radio, input:checkbox')
+  //   .removeAttr('checked').removeAttr('selected');
+
+  document.removeChild(cameraView);
+}
+
 // Add event listeners to the submit and delete buttons
 // $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
 window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
-inputNumber.on("keyup", currencyEval)
+inputNumber.on("keyup", currencyEval);
+
+//grab the input currency field
+$("input[data-type='currency']").on({
+  keyup: function () {
+    formatCurrency($(this));
+  },
+  blur: function () {
+    formatCurrency($(this), "blur");
+  }
+});
