@@ -1,9 +1,9 @@
 <div class="container">
-    <div class="jumbotron">
+    <div class="jumbotron d-flex justify-content-center">
         <h1>Share Your Deal!</h1>
     </div>
 </div>
-
+<div class="container">
 <form  enctype="multipart/form-data" id="postForm" method="POST">
     <label class="label" for="typeOf">
         <h3>Type of Deal</h3>
@@ -76,21 +76,28 @@
                 <h3>Upload Photo</h3>
             </label><br>
             <input type="file" accept="image/*" id="example-img" name="userPhoto" capture="environment">
-            <img id="uploadMyImg" src="//:0" alt="your image" width="200">
+            <img id="uploadMyImg" src="//:0" alt="your image" width="300">
         </div>
-        <section id="camera">
+        
+        <section  id="camera">
             <!-- Camera sensor -->
+            <div class="container d-flex justify-content-center">
             <h3>Capture image from Cam</h3>
-            <canvas id="camera--sensor"></canvas>
+            </div>
+            <canvas  id="camera--sensor"></canvas>
             {{!-- <input type="file" accept="image/*" capture="environment" placeholder="Take a Photo"> --}}
             <!-- Camera view -->
-            <video id="camera--view" autoplay playsinline></video>
+            <video id="camera--view" width="500" height="400" autoplay playsinline></video>
             <!-- Camera trigger -->
-            <button id="camera--trigger" class="btn btn-primary">Take a picture</button>
-        </section>
-        <button type="submit" class="btn btn-primary" id="uploads-submit">Submit</button>
+            <br>
+            <div class="mx-auto" style="width: 150px;">
+            <button id="camera--trigger" class="btn btn-primary btn-lg">Take a picture</button>
+            </div>
+        </section><br>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="uploads-submit">Submit</button>
+       
     </div>
 </form>
-
+</div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
