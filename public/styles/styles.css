@@ -20,11 +20,7 @@
   height: 20vw;
   object-fit: cover;
 }
-/* .card {
-  position: relative;
-  float: left;
-  
-} */
+
 a {
   text-decoration: none;
   color: black;
@@ -37,9 +33,7 @@ a:hover {
 #camera--sensor{
   /* visibility: hidden; */
 }
-body {
-  background-color: black;
-}
+
 
 #container-cards {
   margin-left: 30px;
