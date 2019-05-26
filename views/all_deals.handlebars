@@ -1,27 +1,34 @@
 {{!-- <h1>Test page</h1> --}}
-<ul>
+<div id="container-cards">
   {{#each posts}}
-  	<li>
-     
-  		<p><span class="label">ID:</span> {{this.id}}</p>
+  {{!-- <li> --}}
+  <a href="{{this.yelpUrl}}" target="_blank">
+  <div class="card">
+    <img class="card-img-top" src="{{this.photo}}" alt="" height="200">
+    {{!-- <a href="{{this.yelpUrl}}" target="_blank"> --}}
+    <div class="card-body">
+      {{!-- <p><span class="label">ID:</span> {{this.id}}</p> --}}
       {{!-- <p><span class="label">author:</span> {{this.Author}}</p> --}}
-      <p><span class="label"><b>Item:</b></span> {{this.item}}</p>
-      <p><span class="label"><b>Price:</b></span> {{this.price}}</p>
-      <p><span class="label"><b>Restaurant:</b></span> {{this.restaurant}}</p>
-      <p><span class="label"><b>Address:</b></span> {{this.restAdd}}</p>
-      <img src="{{this.photo}}" alt="">
-      
-      {{!-- <p><span class="label">Location:</span> {{this.restLocation}}</p> --}}
+      <p><span class="label card-text"><b>Item:</b></span> {{this.item}}</p>
+      <p><span class="label card-text"><b>Price: $</b></span> {{this.price}}</p>
+      <p><span class="label card-text"><b>Restaurant:</b></span> {{this.restaurant}}</p>
+      <p><span class="label card-text"><b>Address:</b></span> {{this.restAdd}}</p>
+      <p><span class="label card-text"><b></b></span> {{this.comments}}</p>
+      {{!-- </a> --}}
+    </div>
+    </a>
+  </div>
+  {{!-- <p><span class="label">Location:</span> {{this.restLocation}}</p> --}}
 
-      {{!-- (author, item, price, restaurant, restAdd, restLocation) --}}
-      
+  {{!-- (author, item, price, restaurant, restAdd, restLocation) --}}
 
-      {{!-- <button data-id="{{this.id}}" class="delquote">Delete</button> --}}
 
-      {{!-- <a href="/{{this.id}}">Update this quote</a> --}}
-  	</li>
+  {{!-- <button data-id="{{this.id}}" class="delquote">Delete</button> --}}
+
+  {{!-- <a href="/{{this.id}}">Update this quote</a> --}}
+  {{!-- </li> --}}
   {{/each}}
-</ul>
+</div>
 
 <script>
 
