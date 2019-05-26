@@ -10,9 +10,9 @@ li {
   background: #f3dec6;
 }
 
-#camera--sensor{
+/* #camera--sensor{ */
   /* visibility: hidden; */
-}
+/* } */
 
 #camera--view {
   border-radius: 30px;
