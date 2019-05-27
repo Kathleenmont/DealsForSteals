@@ -13,6 +13,10 @@ module.exports = function(app) {
   });
 
   // load uploads page
+  app.get("/homepage", function(req, res) {
+    res.render("homepage");
+  });
+
   app.get("/uploads", function(req, res) {
     res.render("uploads");
   });
