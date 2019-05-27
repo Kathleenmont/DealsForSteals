@@ -40,8 +40,8 @@ module.exports = function (app) {
   //Multer can take an object with a key that holds a directory stores some sort of hex or use the diskstorage method to 
   // const upl`oad = multer({dest: "uploads/"});
   const upload = multer({
-    // storage: Storage,
-    storage: cloudStorage,
+    storage: Storage,
+    // storage: cloudStorage,
     fileFilter
   });
 
@@ -77,8 +77,8 @@ module.exports = function (app) {
       comments: req.body.comments,
       yelpUrl: req.body.yelpUrl,
       typeOfPlace: req.body.typeOfPlace,
-      // photo: req.file.path,
-      photo: cloudImage.url,
+      photo: req.file.path,
+      // photo: cloudImage.url,
       // photoID: cloudImage.id,
     }
 
