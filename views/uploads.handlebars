@@ -72,10 +72,10 @@
             <input type="text" class="form-control" id="tell-more" name="comments">
         </div>
         <div class="form-group img">
-            <label for="example-img">
+            <label for="input-img">
                 <h3>Upload Photo</h3>
             </label><br>
-            <input type="file" accept="image/*" id="example-img" name="userPhoto" capture="environment">
+            <input type="file" accept="image/*" id="input-img" name="userPhoto" capture="environment">
             <img id="uploadMyImg" src="//:0" alt="your image" width="300">
         </div>
         
@@ -95,9 +95,13 @@
             </div>
         </section><br>
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="uploads-submit">Submit</button>
-       
     </div>
 </form>
 </div>
+
+<section class="error">
+    <h5>Please Fill in in:</h5>
+    <p>There was something wrong at .....</p>
+</section>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

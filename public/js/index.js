@@ -1,27 +1,34 @@
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
-var $exampleImage = $("#example-img");
+var $exampleImage = $("#input-img");
 var $submitBtn = $("#submit");
 var $submitBtnUploads = $("#uploads-submit");
 var $exampleList = $("#example-list");
-var postForm = $("#postForm");
+
 var $typeOf;
-var $placeName = $("#place");
 var $placeNameVal
-var $itemName = $("#item");
 var $price = $("#price");
 var $why = [];
 var $tellMore = $("#tell-more");
 //added
+const errorPop = $(".error");
 var input = document.querySelector('input[type=file]');
+const inputCheck = document.querySelector("input");
 const inputNumber = $('input[type=number]');
 let tookPicture = false;
 let blob;
 let webBlobString = [];
 const $photo = $("#uploadMyImg");
-let yelpObj
+let yelpObj ;
 
+// input variables
+var postForm = $("#postForm");
+var $placeName = $("#place");
+var $itemName = $("#item");
+const $meal = $("#meal"), $snack = $("#snack"), $inputImage = $("#input-img")
+
+//camera vairables
 const cameraView = document.querySelector("#camera--view"),
   cameraSensor = document.querySelector("#camera--sensor"),
   cameraTrigger = $("#camera--trigger"),
@@ -456,13 +463,18 @@ function titleCase(str) {
   return str.join(' ');
 }
 
+
+
 // Add event listeners to the submit and delete buttons
 // $submitBtn.on("click", handleFormSubmit);
+// Hide ERROR POPUP
+errorPop.hide();
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
 window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
 inputNumber.on("keyup", currencyEval);
+
 
 //grab the input currency field
 $("input[data-type='currency']").on({
@@ -473,3 +485,20 @@ $("input[data-type='currency']").on({
     formatCurrency($(this), "blur");
   }
 });
+
+inputCheck.addEventListener('input', evt => {
+  const value = input.value
+
+  if (!value) {
+    input.dataset.state = ''
+    return
+  }
+
+  const trimmed = value.trim()
+
+  if (trimmed) {
+    input.dataset.state = 'valid'
+  } else {
+    input.dataset.state = 'invalid'
+  }
+})
