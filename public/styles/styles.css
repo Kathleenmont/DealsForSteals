@@ -194,7 +194,7 @@ body {
     margin-top: 34px;
     font-weight: 300;
     font-family: 'Josefin Sans',sans-serif;
-    background: linear-gradient(to right,#697dff 10%,#fff 50%,#5bdaff 60%);
+    background: linear-gradient(to right,#697dff 10%,rgb(60, 115, 146) 50%,#5bdaff 60%);
     background-size: auto auto;
     background-clip: border-box;
     background-size: 200% auto;
