@@ -238,7 +238,13 @@ var API = {
       error: function (err) {
         console.log("error", err);
       }
-    });
+    }).then(
+      function() {
+        console.log("added new deal");
+        // redirect to the final page,
+        location.assign("/final/");
+      }
+    );
   },
   getExamples: function () {
     return $.ajax({
@@ -290,7 +296,6 @@ var refreshExamples = function () {
 
   //Reset form
   resetForm($('#postForm'));
-
 };
 
 // handleFormSubmit is called whenever we submit a new example
