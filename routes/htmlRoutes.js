@@ -26,12 +26,12 @@ module.exports = function(app) {
     res.render("homepage");
   });
 
-  app.get("/newpost", function(req, res) {
+  app.get("/newpost", isAuthenticated, function(req, res) {
     // PASPORT If STATEMENT - if the user already has an account send them to the search page
-    if (req.user) {
-      res.render("newpost");
-    }
-    res.render("signup");
+    // if (req.user) {
+    res.render("newpost");
+    // }
+    // res.render("signup");
   });
 
   app.get("/final", function(req, res) {
