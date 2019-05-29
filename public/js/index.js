@@ -20,13 +20,15 @@ let tookPicture = false;
 let blob;
 let webBlobString = [];
 const $photo = $("#uploadMyImg");
-let yelpObj ;
+let yelpObj;
 
 // input variables
 var postForm = $("#postForm");
 var $placeName = $("#place");
 var $itemName = $("#item");
-const $meal = $("#meal"), $snack = $("#snack"), $inputImage = $("#input-img")
+const $meal = $("#meal"),
+  $snack = $("#snack"),
+  $inputImage = $("#input-img")
 
 //camera vairables
 const cameraView = document.querySelector("#camera--view"),
@@ -239,7 +241,7 @@ var API = {
         console.log("error", err);
       }
     }).then(
-      function() {
+      function () {
         console.log("added new deal");
         // redirect to the final page,
         location.assign("/final/");
@@ -290,7 +292,7 @@ var refreshExamples = function () {
     console.log($examples);
     $exampleList.empty();
     $exampleList.append($examples);
-  
+
     // to call, use:
   });
 
@@ -308,11 +310,11 @@ var handleFormSubmitUploads = function (event) {
   //   description: $exampleDescription.val().trim(),
   //   img: $exampleImage.val()
   // };
-  // $typeOf = $typeOf.val();
-  // $typeOf = $('input[name="typeOf"]:checked').val();
-  $placeNameVal = $placeName.val().trim();
-  // $itemName = $itemName.val().trim();
-  // $price = $price.val().trim();
+
+  let $typeOf = $('input[name="typeOf"]:checked').val();
+  let $placeNameVal = $placeName.val().trim();
+  let $itemNameVal = $itemName.val().trim();
+  let $priceVal = $price.val().trim();
 
   $.each($("input[name='why']:checked"), function () {
     $why.push($(this).val());
@@ -332,10 +334,12 @@ var handleFormSubmitUploads = function (event) {
   //   alert("You must enter an example text and description!");
   //   return;
   // }
-
-  //make yelp call
-  yelpApiSearch($placeNameVal);
-
+  if ($typeOf && $placeNameVal && $itemNameVal && $priceVal) {
+    //make yelp call
+    yelpApiSearch($placeNameVal);
+  } else {
+    alert("Make suer you fill all values!")
+  }
   console.log($photo);
 
   $exampleText.val("");
@@ -374,7 +378,6 @@ function formatNumber(n) {
   // format number 1000000 to 1,234,567
   return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
-
 
 function formatCurrency(input, blur) {
   // appends $ to value, validates decimal side
@@ -463,12 +466,10 @@ function resetForm($form) {
 function titleCase(str) {
   str = str.toLowerCase().split(' ');
   for (var i = 0; i < str.length; i++) {
-    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
   }
   return str.join(' ');
 }
-
-
 
 // Add event listeners to the submit and delete buttons
 // $submitBtn.on("click", handleFormSubmit);
@@ -492,18 +493,20 @@ $("input[data-type='currency']").on({
 });
 
 inputCheck.addEventListener('input', evt => {
-  const value = input.value
+  const value = inputCheck.value;
+
+  console.log(value);
 
   if (!value) {
-    input.dataset.state = ''
-    return
+    inputCheck.dataset.state = ''
+    return;
   }
 
   const trimmed = value.trim()
 
   if (trimmed) {
-    input.dataset.state = 'valid'
+    inputCheck.dataset.state = 'valid';
   } else {
-    input.dataset.state = 'invalid'
+    inputCheck.dataset.state = 'invalid';
   }
 })
