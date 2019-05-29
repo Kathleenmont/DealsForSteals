@@ -70,8 +70,16 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
+  // Post.associate = function(models) {
+  //   Post.belongsTo(models.Author, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
+
   Post.associate = function(models) {
-    Post.belongsTo(models.Author, {
+    Post.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
       }

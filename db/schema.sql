@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS dealsdb;
 CREATE DATABASE dealsdb;
 
 use dealsdb;
-CREATE TABLE post(
+CREATE TABLE Post(
 	id INT(255) NOT NULL AUTO_INCREMENT,
     title VARCHAR(20) NOT NULL,
     item VARCHAR(20) NOT NULL,
@@ -14,4 +14,6 @@ CREATE TABLE post(
     img VARCHAR(300),
     PRIMARY KEY(id)
 );
+
+
 
