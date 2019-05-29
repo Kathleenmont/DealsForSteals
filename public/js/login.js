@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   // Getting references to our form and inputs
   var loginForm = $("form.login");
   var emailInput = $("input#email-input");
@@ -31,10 +30,12 @@ $(document).ready(function() {
     })
       .then(function(data) {
         window.location.replace(data);
+        // location.reload();
         // If there's an error, log the error
       })
       .catch(function(err) {
         console.log(err);
+        return;
       });
   }
 });
