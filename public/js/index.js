@@ -233,7 +233,7 @@ var API = {
       function() {
         console.log("added new deal");
         // redirect to the final page,
-        location.assign("/final/");
+        location.assign("/final");
       }
     );
   },

@@ -2,26 +2,26 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
-  app.get("/", function(req, res) {
-    db.Post.findAll({}).then(function(dbPost) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbPost
-      });
-      console.log(dbPost);
-    });
-  });
+  // app.get("/", function(req, res) {
+  //   db.Post.findAll({}).then(function(dbPost) {
+  //     res.render("index", {
+  //       msg: "Welcome!",
+  //       examples: dbPost
+  //     });
+  //     console.log(dbPost);
+  //   });
+  // });
 
   // load uploads page
-  app.get("/homepage", function(req, res) {
+  app.get("/", function(req, res) {
     res.render("homepage");
   });
 
-  app.get("/uploads", function(req, res) {
-    res.render("uploads");
+  app.get("/newpost", function(req, res) {
+    res.render("newpost");
   });
 
-  app.get("/final/", function(req, res) {
+  app.get("/final", function(req, res) {
     res.render("thank_you_page");
   });
 
@@ -34,7 +34,7 @@ module.exports = function(app) {
     });
   });
   // test search page
-  app.get("/search/", function(req, res) {
+  app.get("/search", function(req, res) {
     db.Post.findAll({}).then(function(dbPost) {
       // console.log(dbPost);
       res.render("all_deals", {
