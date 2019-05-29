@@ -114,11 +114,12 @@ module.exports = function (app) {
   app.post("/api/posts", upload.single("userPhoto"), function (req, res) {
     console.log(req.file);
     console.log(req.body);
-
+console.log(JSON.stringify(req.file));
     const cloudImage = {};
     cloudImage.url = req.file.url;
     cloudImage.id = req.file.public_id;
 
+    console.log(cloudImage.url);
     //string conversion
     let whyString = req.body.why.toString();
     let priceString = parseFloat(req.body.price.replace("$", "")).toFixed(2);
@@ -137,7 +138,7 @@ module.exports = function (app) {
       typeOfPlace: req.body.typeOfPlace,
       photo: req.file.path,
       // photo: cloudImage.url,
-      // photoID: cloudImage.id,
+      // photoID: cloudImage.id
     }
 
     console.log(newPost);
