@@ -229,7 +229,13 @@ var API = {
       error: function (err) {
         console.log("error", err);
       }
-    });
+    }).then(
+      function() {
+        console.log("added new deal");
+        // redirect to the final page,
+        location.assign("/final/");
+      }
+    );
   },
   getExamples: function () {
     return $.ajax({
@@ -358,32 +364,3 @@ window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
 inputNumber.on("keyup", currencyEval)
 
-// Show/hide image section on uploads.handlebars based on whether user wants to upload or take a picture
-$("#uploadIMG").click(function(event) {
-  event.preventDefault();
-  $("#imgChoice").css("display","none");
-  $("#uploadDiv").css("display","block");
-});
-$("#takeIMG").click(function(event) {
-  event.preventDefault();
-  $("#imgChoice").css("display","none");
-  $("#camera").css("display","block");
-});
-cameraTrigger.click(function(event) {
-  event.preventDefault();
-  // if (cameraTrigger.attr("data-static") !== true) {
-  //   cameraTrigger.attr("data-static",true);
-    $("#camera--view").css("display","none");
-    $("#camera--sensor").css("display","block");
-    cameraTrigger.css("display","none");
-  //   cameraTrigger.text("Take Another Picture");
-  // } else if (cameraTrigger.attr("data-static") === true) {
-  //   console.log("retake image");
-    // cameraTrigger.attr("data-static",false);
-    // $("#camera--sensor").css("display","none");
-    // $("#camera--view").css("display","block");
-    // cameraTrigger.text("Take A Picture");
-    // cameraTrigger.click(capturePhoto);
-  // }
-});
-//^^^Need to implement reset fxn for above^^^
