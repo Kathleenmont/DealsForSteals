@@ -23,6 +23,7 @@ const $photo = $("#uploadMyImg");
 let yelpObj;
 
 // input variables
+let photoStatus = false;
 var postForm = $("#postForm");
 var $placeName = $("#place");
 var $itemName = $("#item");
@@ -196,7 +197,8 @@ var API = {
   saveExample: function () {
     var formData = new FormData(postForm[0]);
 
-    console.log(postForm[0]);
+    // console.log(postForm[0]);
+    console.log(formData);
     if (tookPicture) {
       //iterate through the object and create a key/value pair to append to formData
       for (const key in yelpObj) {
@@ -214,7 +216,7 @@ var API = {
         // console.log(yelpObj[key]);
         formData.append(key, yelpObj[key]);
       }
-
+     
       formData.append("photoBlob", $photo.attr("src"));
       // formData.append("yelp", JSON.stringify(yelpObj));
     }
@@ -236,15 +238,17 @@ var API = {
       // data: JSON.stringify(example),
       success: function (returnData) {
         console.log(returnData);
+        photoStatus = true;
       },
       error: function (err) {
         console.log("error", err);
+        
       }
     }).then(
       function () {
         console.log("added new deal");
         // redirect to the final page,
-        location.assign("/final/");
+        // location.assign("/final/");
       }
     );
   },
@@ -334,7 +338,14 @@ var handleFormSubmitUploads = function (event) {
   //   alert("You must enter an example text and description!");
   //   return;
   // }
-  if ($typeOf && $placeNameVal && $itemNameVal && $priceVal) {
+
+console.log("src: ", $photo.attr("src") )
+if ($photo.attr("src") !== "//:0"){
+  photoStatus = true;
+}
+
+  if ($typeOf && $placeNameVal && $itemNameVal && $priceVal && photoStatus) {
+
     //make yelp call
     yelpApiSearch($placeNameVal);
   } else {
@@ -492,21 +503,40 @@ $("input[data-type='currency']").on({
   }
 });
 
-inputCheck.addEventListener('input', evt => {
-  const value = inputCheck.value;
 
-  console.log(value);
+$("input").change(function(){
+  console.log("input change")
+  console.log(this)
 
-  if (!value) {
-    inputCheck.dataset.state = ''
-    return;
-  }
-
-  const trimmed = value.trim()
+  const trimmed = $(this).val().trim()
 
   if (trimmed) {
-    inputCheck.dataset.state = 'valid';
-  } else {
-    inputCheck.dataset.state = 'invalid';
-  }
+        $(this).attr("data-state", "valid") 
+      } else {
+        $(this).attr("data-state", "invalid") 
+      }
+      console.log(this)
+
 })
+
+// inputCheck.addEventListener('input', evt => {
+//   console.log("triger listener")
+//   console.log(this)
+//   const value = inputCheck.value;
+
+//   console.log(value);
+//   const trimmed = value.trim()
+
+//   // if (!value) {
+//   //   inputCheck.dataset.state = ''
+//   //   return;
+//   // }
+
+
+//   if (trimmed) {
+//     inputCheck.dataset.state = 'valid';
+//   } else {
+//     inputCheck.dataset.state = 'invalid';
+//   }
+//   console.log(inpu.dataset.state)
+// })

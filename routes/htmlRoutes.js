@@ -34,7 +34,7 @@ module.exports = function(app) {
     });
   });
   // test search page
-  app.get("/search/", function(req, res) {
+  app.get("/search", function(req, res) {
     db.Post.findAll({}).then(function(dbPost) {
       // console.log(dbPost);
       res.render("all_deals", {
