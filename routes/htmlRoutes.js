@@ -17,11 +17,11 @@ module.exports = function(app) {
     res.render("homepage");
   });
 
-  app.get("/uploads", function(req, res) {
-    res.render("uploads");
+  app.get("/newpost", function(req, res) {
+    res.render("newpost");
   });
 
-  app.get("/final/", function(req, res) {
+  app.get("/final", function(req, res) {
     res.render("thank_you_page");
   });
 
@@ -34,7 +34,7 @@ module.exports = function(app) {
     });
   });
   // test search page
-  app.get("/search/", function(req, res) {
+  app.get("/search", function(req, res) {
     db.Post.findAll({}).then(function(dbPost) {
       // console.log(dbPost);
       res.render("all_deals", {
