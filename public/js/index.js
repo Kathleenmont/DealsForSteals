@@ -363,3 +363,4 @@ $submitBtnUploads.on("click", handleFormSubmitUploads);
 window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
 inputNumber.on("keyup", currencyEval)
+

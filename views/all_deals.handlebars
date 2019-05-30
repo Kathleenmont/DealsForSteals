@@ -1,35 +1,64 @@
 {{!-- <h1>Test page</h1> --}}
+<button id="filterBtn">Filter Results</button>
+<div id="filterOptions">
+  <input type="radio" id="mealRadio" name="filter" onClick="getMeals()">Meal
+  <input type="radio" id="snackRadio" name="filter" onClick="getSnacks()">Snack
+  <input type="radio" id="treatRadio" name="filter" onClick="getTreats()">Treat
+  <input type="radio" id="drinkRadio" name="filter" onClick="getDrinks()">Drink
+    <input type="radio" id="allRadio" name="filter" onClick="getAll()">All
+</div>
 <div id="container-cards">
   {{#each posts}}
   {{!-- <li> --}}
   <a href="{{this.yelpUrl}}" target="_blank">
-  <div class="card">
-    <img class="card-img-top" src="{{this.photo}}" alt="" height="200">
-    {{!-- <a href="{{this.yelpUrl}}" target="_blank"> --}}
-    <div class="card-body">
-      {{!-- <p><span class="label">ID:</span> {{this.id}}</p> --}}
-      {{!-- <p><span class="label">author:</span> {{this.Author}}</p> --}}
-      <p><span class="label card-text"><b>Item:</b></span> {{this.item}}</p>
-      <p><span class="label card-text"><b>Price: $</b></span> {{this.price}}</p>
-      <p><span class="label card-text"><b>Restaurant:</b></span> {{this.restaurant}}</p>
-      <p><span class="label card-text"><b>Address:</b></span> {{this.restAdd}}</p>
-      <p><span class="label card-text"><b></b></span> {{this.comments}}</p>
-      {{!-- </a> --}}
-    </div>
-    </a>
-  </div>
-  {{!-- <p><span class="label">Location:</span> {{this.restLocation}}</p> --}}
+    <div class="card">
+      <img class="card-img-top" src="/{{this.photo}}" alt="" height="200">
+      {{!-- <a href="{{this.yelpUrl}}" target="_blank"> --}}
+      <div class="card-body">
+        {{!-- <p><span class="label">ID:</span> {{this.id}}</p> --}}
+        {{!-- <p><span class="label">author:</span> {{this.Author}}</p> --}}
+        <p><span class="label card-text"><b>Item:</b></span> {{this.item}}</p>
+        <p><span class="label card-text"><b>Price: $</b></span> {{this.price}}</p>
+        <p><span class="label card-text"><b>Restaurant:</b></span> {{this.restaurant}}</p>
+        <p><span class="label card-text"><b>Address:</b></span> {{this.restAdd}}</p>
+        <p><span class="label card-text"><b></b></span> {{this.comments}}</p>
+        {{!-- </a> --}}
+      </div>
+  </a>
+</div>
+{{!-- <p><span class="label">Location:</span> {{this.restLocation}}</p> --}}
 
-  {{!-- (author, item, price, restaurant, restAdd, restLocation) --}}
+{{!-- (author, item, price, restaurant, restAdd, restLocation) --}}
 
 
-  {{!-- <button data-id="{{this.id}}" class="delquote">Delete</button> --}}
+{{!-- <button data-id="{{this.id}}" class="delquote">Delete</button> --}}
 
-  {{!-- <a href="/{{this.id}}">Update this quote</a> --}}
-  {{!-- </li> --}}
-  {{/each}}
+{{!-- <a href="/{{this.id}}">Update this quote</a> --}}
+{{!-- </li> --}}
+{{/each}}
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
-
+  //display/hide filter buttons
+  $("#filterOptions").css("display", "none");
+  $("#filterBtn").click(function () {
+    $("#filterBtn").css("display", "none");
+    $("#filterOptions").css("display", "inline-block");
+  });
+function getMeals() {
+  location.assign("/search/meals");
+}
+function getSnacks() {
+  location.assign("/search/snacks");
+}
+function getTreats() {
+  location.assign("/search/treats");
+}
+function getDrinks() {
+  location.assign("/search/drinks");
+}
+function getAll() {
+  location.assign("/search");
+}
 </script>
