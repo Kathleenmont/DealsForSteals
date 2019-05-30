@@ -350,7 +350,8 @@ if ($photo.attr("src") !== "//:0"){
   } else {
     swal("uh oh!", "Make sure you fill in all the values!", "error")
   }
-
+  console.log($photo);
+  
   $exampleText.val("");
   $exampleDescription.val("");
 };
