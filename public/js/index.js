@@ -82,6 +82,13 @@ function capturePhoto(event) {
   cameraView.srcObject.getVideoTracks().forEach(track => track.stop());
 
   console.log(webBlobString);
+
+  // function hideIt(){
+  // var hideBlackBox = document.getElementById("camera--view");
+  // hideBlackBox.hide();
+  // }
+  // hideIt();
+  // $("#camera--view").hide();
 }
 
 function dataURItoBlob(dataURI) {
