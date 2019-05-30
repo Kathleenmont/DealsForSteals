@@ -1,5 +1,20 @@
 {{!-- <h1>Test page</h1> --}}
+{{!-- <div><a href="/"> <button style="margin-left: 50px;">HOMEPAGE</button></a>
+<a href="/newpost"><button style="margin-left: 50px;">UPLOAD</button></a>
+</div> --}}
+
+<ul class="nav justify-content-center" style="background-color: #e3f2fd;">
+  <li class="nav-item">
+    <a class="nav-link active text-info" href="/"><button>HOMEPAGE</button></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/newpost"><button>UPLOAD</button></a>
+  </li>
+</ul>
+{{!-- <div class="jumbotron"></div> --}}
+
 <div id="container-cards">
+  
   {{#each posts}}
   {{!-- <li> --}}
   <a href="{{this.yelpUrl}}" target="_blank">
@@ -35,5 +50,5 @@
 console.log();
 </script> --}}
 {{!-- background-color: green --}}
-<div style="position: absolute; bottom: 5px; margin-left: 50px;"><a href="/"> <button>HOMEPAGE</button></a>
-<a href="/newpost"><button style="margin-left: 50px;">UPLOAD</button></a></div>
+{{!-- <div style="position: absolute; top: 5px; margin-left: 50px;"><a href="/"> <button>HOMEPAGE</button></a>
+<a href="/newpost"><button style="margin-left: 50px;">UPLOAD</button></a></div> --}}
