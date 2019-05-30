@@ -157,22 +157,22 @@ function yelpApiSearch(placeName) {
     method: "GET",
     dataType: "json",
     success: function (response) {
-      console.log("success: " + response);
-      // console.log(JSON.stringify(response));
-      console.log("name: " + response.businesses[0].name);
-      console.log("phone: " + response.businesses[0].display_phone);
-      console.log(
-        "address: " + response.businesses[0].location.display_address
-      );
-      console.log("latitude: " + response.businesses[0].coordinates.latitude);
-      console.log("longitude: " + response.businesses[0].coordinates.longitude);
-      console.log("Yelp url: " + response.businesses[0].url);
-      console.log(
-        "type of place: " + response.businesses[0].categories[0].alias
-      );
-      console.log(
-        "type of place: " + response.businesses[0].categories[0].title
-      );
+      // console.log("success: " + response);
+      // // console.log(JSON.stringify(response));
+      // console.log("name: " + response.businesses[0].name);
+      // console.log("phone: " + response.businesses[0].display_phone);
+      // console.log(
+      //   "address: " + response.businesses[0].location.display_address
+      // );
+      // console.log("latitude: " + response.businesses[0].coordinates.latitude);
+      // console.log("longitude: " + response.businesses[0].coordinates.longitude);
+      // console.log("Yelp url: " + response.businesses[0].url);
+      // console.log(
+      //   "type of place: " + response.businesses[0].categories[0].alias
+      // );
+      // console.log(
+      //   "type of place: " + response.businesses[0].categories[0].title
+      // );
 
       yelpObj = {
         bName: response.businesses[0].name,
@@ -352,6 +352,8 @@ if ($photo.attr("src") !== "//:0"){
     alert("Make suer you fill all values!")
   }
   console.log($photo);
+  
+  yelpApiSearch($placeNameVal);
 
   $exampleText.val("");
   $exampleDescription.val("");
