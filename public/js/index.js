@@ -12,7 +12,6 @@ var $price = $("#price");
 var $why = [];
 var $tellMore = $("#tell-more");
 //added
-const errorPop = $(".error");
 var input = document.querySelector('input[type=file]');
 const inputCheck = document.querySelector("input");
 const inputNumber = $('input[type=number]');
@@ -487,7 +486,6 @@ function titleCase(str) {
 // Add event listeners to the submit and delete buttons
 // $submitBtn.on("click", handleFormSubmit);
 // Hide ERROR POPUP
-errorPop.hide();
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
 window.addEventListener("load", cameraStart, false);
