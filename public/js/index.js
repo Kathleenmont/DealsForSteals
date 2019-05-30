@@ -9,7 +9,7 @@ var $exampleList = $("#example-list");
 var $typeOf;
 var $placeNameVal
 var $price = $("#price");
-var $why = [];
+// var $why = [];
 var $tellMore = $("#tell-more");
 //added
 var input = document.querySelector('input[type=file]');
@@ -319,9 +319,9 @@ var handleFormSubmitUploads = function (event) {
   let $itemNameVal = $itemName.val().trim();
   let $priceVal = $price.val().trim();
 
-  $.each($("input[name='why']:checked"), function () {
-    $why.push($(this).val());
-  });
+  // $.each($("input[name='why']:checked"), function () {
+  //   $why.push($(this).val());
+  // });
 
   // $tellMore = $tellMore.val().trim();
 
