@@ -88,7 +88,7 @@ function capturePhoto(event) {
   // hideBlackBox.hide();
   // }
   // hideIt();
-  $("#camera--view").hide();
+  // $("#camera--view").hide();
 }
 
 function dataURItoBlob(dataURI) {
