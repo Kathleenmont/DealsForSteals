@@ -11,7 +11,7 @@ module.exports = function (app) {
     // If the user has valid login credentials, send them to the members page.
     // Otherwise the user will be sent an error
     app.post("/api/login", passport.authenticate("local"), function(req, res) {
-      console.log("NOW IM IN LOGGOIINNNNNNN~")
+      // console.log("NOW IM IN LOGGOIINNNNNNN~");
       // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
       // So we're sending the user back the route to the members page because the redirect will happen on the front end
       // They won't get this or even be able to access this page if they aren't authed
@@ -72,7 +72,7 @@ module.exports = function (app) {
     const cloudStorage = cloudinaryStorage({
     cloudinary: cloudinary,
     folder: "deals",
-    allowedFormats: ["jpg", "png"],
+    allowedFormats: ["jpg", "png", "jpeg"],
     transformation: [{ width: 500, height: 500, crop: "limit" }]
     });
 
@@ -92,13 +92,14 @@ module.exports = function (app) {
       cb(null, true);
     } else {
       cb(null, false);
-    }
+       }
   }
 
   //Multer can take an object with a key that holds a directory stores some sort of hex or use the diskstorage method to 
   // const upl`oad = multer({dest: "uploads/"});
   const upload = multer({
-    storage: Storage,
+    // storage: Storage,
+    storage: cloudStorage,
     fileFilter
   });
 
@@ -111,30 +112,34 @@ module.exports = function (app) {
 
   // Create a new example
   app.post("/api/posts", upload.single("userPhoto"), function (req, res) {
-    console.log(req.file);
-    console.log(req.body);
-
+    console.log("API POSTS");
+//     console.log(req.body);
+// console.log(JSON.stringify(req.file));
     const cloudImage = {};
     cloudImage.url = req.file.url;
     cloudImage.id = req.file.public_id;
 
-    let whyString = req.body.why.toString()
-
-    console.log(whyString);
+    console.log(cloudImage.url);
+    //string conversion
+    // let whyString = req.body.why.toString();
+    let priceString = parseFloat(req.body.price.replace("$", "")).toFixed(2);
 
     var newPost = {
       category: req.body.typeOf,
       item: req.body.item,
-      price: req.body.price,
-      why: whyString,
+      price:  priceString,
+      // why: whyString,
       restaurant: req.body.restaurant,
+
       restAdd: req.body.restAdd,
       restLat: req.body.restLat,
       restLong: req.body.restLong,
       comments: req.body.comments,
       yelpUrl: req.body.yelpUrl,
       typeOfPlace: req.body.typeOfPlace,
-      photo: req.file.path
+      // photo: req.file.path,
+      photo: cloudImage.url,
+      photoID: cloudImage.id
     }
 
     console.log(newPost);
@@ -169,7 +174,7 @@ module.exports = function (app) {
       image: new Buffer(encode_image, 'base64')
     };
 
-    var post = {
+    var img64 = {
       id: "1",
       name: "Jorge",
       img: req.file.path,
@@ -177,13 +182,5 @@ module.exports = function (app) {
     }
 
     console.log("This is the response from the image");
-    // console.log(req.file);
-    // res.send("test");
-    // // console.log(req.file);
-    // console.log(req.body);
-    // // console.log(b64Image);
-
-    // res.json(post);
-    // res.render("index", post);
   });
 };

@@ -28,11 +28,11 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    why: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      len: [1]
-    },
+    // why: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: true,
+    //   len: [1]
+    // },
     restAdd: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -66,6 +66,11 @@ module.exports = function(sequelize, DataTypes) {
     photo: {
       type: DataTypes.BLOB("long"),
       allowNull: false,
+      len: [0]
+    },
+    photoID: {
+      type: DataTypes.STRING,
+      allowNull: true,
       len: [0]
     }
   });
