@@ -358,7 +358,7 @@ if ($photo.attr("src") !== "//:0"){
     swal("uh oh!", "Make sure you fill in all the values!", "error")
   }
   console.log($photo);
-  
+
   $exampleText.val("");
   $exampleDescription.val("");
 };
@@ -531,24 +531,3 @@ $("input").change(function(){
 
 })
 
-// inputCheck.addEventListener('input', evt => {
-//   console.log("triger listener")
-//   console.log(this)
-//   const value = inputCheck.value;
-
-//   console.log(value);
-//   const trimmed = value.trim()
-
-//   // if (!value) {
-//   //   inputCheck.dataset.state = ''
-//   //   return;
-//   // }
-
-
-//   if (trimmed) {
-//     inputCheck.dataset.state = 'valid';
-//   } else {
-//     inputCheck.dataset.state = 'invalid';
-//   }
-//   console.log(inpu.dataset.state)
-// })
