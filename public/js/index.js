@@ -488,9 +488,17 @@ function titleCase(str) {
 // Hide ERROR POPUP
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
-window.addEventListener("load", cameraStart, false);
+// window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
 inputNumber.on("keyup", currencyEval);
+
+//ask to take the picture when you land on the page
+$("#takeIMG").click(function(event) {
+  event.preventDefault();
+  cameraStart();
+  $("#imgChoice").css("display","none");
+  $("#camera").css("display","block");
+});
 
 //grab the input currency field
 $("input[data-type='currency']").on({
