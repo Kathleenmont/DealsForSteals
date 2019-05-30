@@ -28,11 +28,11 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    why: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      len: [1]
-    },
+    // why: {
+    //   type: DataTypes.TEXT,
+    //   allowNull: true,
+    //   len: [1]
+    // },
     restAdd: {
       type: DataTypes.TEXT,
       allowNull: true,

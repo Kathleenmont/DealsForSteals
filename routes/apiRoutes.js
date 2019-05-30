@@ -118,15 +118,15 @@ module.exports = function (app) {
     cloudImage.url = req.file.url;
     cloudImage.id = req.file.public_id;
 
-    let whyString = req.body.why.toString()
+    // let whyString = req.body.why.toString()
 
-    console.log(whyString);
+    // console.log(whyString);
 
     var newPost = {
       category: req.body.typeOf,
       item: req.body.item,
       price: req.body.price,
-      why: whyString,
+      // why: whyString,
       restaurant: req.body.restaurant,
       restAdd: req.body.restAdd,
       restLat: req.body.restLat,

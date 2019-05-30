@@ -1,9 +1,7 @@
 .list-group-item {
   line-height: 2.5;
 }
-body {
-  background-color: black
-}
+
 
 .card {
   border:3px solid black;
@@ -80,18 +78,23 @@ h1 ,h2, h3  {
   width: 1200px;
   height: 300px;
   margin: 240 px auto;
+  text-align: center;
   /* background: #ffffff; */
 }
 .container .box {
   position: relative;
   width: calc(300px - 30px);
   height: calc(300px - 30px);
-  background: slategray;
+  background: white;
   float: left;
   margin:130px;
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 10px;
+}
+
+.container .box h2 {
+  padding-top: 20px;
 }
 
 
@@ -101,16 +104,22 @@ h1 ,h2, h3  {
   left:0;
   width: 100%;
   height: 100%;
-  background: steelblue;
+  /* background: steelblue; */
+  background: whitesmoke;
   transition: 0.5s;
   z-index: 1;
+  /* text-align: center; */
+  /* border: 4px solid black; */
 }
 .container .box:hover .icon {
   top: 20px;
   right: calc(50% -40px);
   width: 80px;
   height: 80px;
-  border-radius:50%;
+  border-radius: 50%;
+  text-align: center;
+  background: white;
+  
 }
 .container .box .icon .fa {
   position: absolute;
@@ -119,7 +128,8 @@ h1 ,h2, h3  {
   transform: translate(-50%, -50%);
   font-size: 80px;
   transition: 0.5s;
-  color: whitesmoke;
+  color: black;
+ 
 }
 
 /* background animation*/
@@ -127,8 +137,8 @@ h1 ,h2, h3  {
 body {
 	width: 100wh;
 	height: 90vh;
-	/* color: #fff; */
-	/* background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB); */
+	color: #fff;
+	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 	background-size: 400% 400%;
 	-webkit-animation: Gradient 8s ease infinite;
 	-moz-animation: Gradient 8s ease infinite;
@@ -217,6 +227,9 @@ body {
   background-position:200% center;
  }
 }
+
+/* homepage search and upload */
+
 
 
 
