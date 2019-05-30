@@ -350,9 +350,6 @@ if ($photo.attr("src") !== "//:0"){
   } else {
     swal("uh oh!", "Make sure you fill in all the values!", "error")
   }
-  console.log($photo);
-
-  yelpApiSearch($placeNameVal);
 
   $exampleText.val("");
   $exampleDescription.val("");
