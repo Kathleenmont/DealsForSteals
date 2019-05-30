@@ -119,27 +119,16 @@ module.exports = function (app) {
     cloudImage.url = req.file.url;
     cloudImage.id = req.file.public_id;
 
-<<<<<<< HEAD
-    // let whyString = req.body.why.toString()
-
-    // console.log(whyString);
-=======
     console.log(cloudImage.url);
     //string conversion
     let whyString = req.body.why.toString();
     let priceString = parseFloat(req.body.price.replace("$", "")).toFixed(2);
->>>>>>> master
 
     var newPost = {
       category: req.body.typeOf,
       item: req.body.item,
-<<<<<<< HEAD
-      price: req.body.price,
-      // why: whyString,
-=======
       price:  priceString,
       why: whyString,
->>>>>>> master
       restaurant: req.body.restaurant,
       restAdd: req.body.restAdd,
       restLat: req.body.restLat,
