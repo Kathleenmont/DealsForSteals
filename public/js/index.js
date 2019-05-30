@@ -349,7 +349,7 @@ if ($photo.attr("src") !== "//:0"){
     //make yelp call
     yelpApiSearch($placeNameVal);
   } else {
-    alert("Make suer you fill all values!")
+    swal("uh oh!", "Make sure you fill in all the values!", "error")
   }
   console.log($photo);
 
@@ -541,5 +541,3 @@ $("input").change(function(){
 //   }
 //   console.log(inpu.dataset.state)
 // })
-
-
