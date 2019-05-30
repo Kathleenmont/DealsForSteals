@@ -54,8 +54,8 @@ module.exports = function(app) {
   // ______________________________________
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Post.findOne({ where: { id: req.params.id } }).then(function(dbPost) {
+  app.get("/example/:id", function (req, res) {
+    db.Post.findOne({ where: { id: req.params.id } }).then(function (dbPost) {
       res.render("example", {
         example: dbPost
       });
@@ -64,7 +64,61 @@ module.exports = function(app) {
   // test search page
   app.get("/search", function(req, res) {
     db.Post.findAll({}).then(function(dbPost) {
-      // console.log(dbPost);
+      console.log(dbPost);
+      res.render("all_deals", {
+        posts: dbPost
+      });
+      console.log(dbPost);
+    });
+  });
+  //filtered results
+  app.get("/search/meals", function (req, res) {
+    db.Post.findAll({
+      where: {
+        category: "meal"
+      }
+    }).then(function (dbPost) {
+      console.log(dbPost);
+      res.render("all_deals", {
+        posts: dbPost
+      });
+      console.log(dbPost);
+    });
+  });
+
+  app.get("/search/snacks", function (req, res) {
+    db.Post.findAll({
+      where: {
+        category: "snack"
+      }
+    }).then(function (dbPost) {
+      console.log(dbPost);
+      res.render("all_deals", {
+        posts: dbPost
+      });
+      console.log(dbPost);
+    });
+  });
+  app.get("/search/treats", function (req, res) {
+    db.Post.findAll({
+      where: {
+        category: "treat"
+      }
+    }).then(function (dbPost) {
+      console.log(dbPost);
+      res.render("all_deals", {
+        posts: dbPost
+      });
+      console.log(dbPost);
+    });
+  });
+  app.get("/search/drinks", function (req, res) {
+    db.Post.findAll({
+      where: {
+        category: "drink"
+      }
+    }).then(function (dbPost) {
+      console.log(dbPost);
       res.render("all_deals", {
         posts: dbPost
       });
@@ -73,7 +127,7 @@ module.exports = function(app) {
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.render("404");
   });
 };
