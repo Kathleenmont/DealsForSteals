@@ -71,9 +71,14 @@
             </label>
             <input type="text" class="form-control" id="tell-more" name="comments">
         </div>
-        <div class="form-group img">
-            <label for="input-img">
-                <h3>Upload Photo</h3>
+        <div id="imgChoice">
+            <div>Would you like to upload or take a picture?</div>
+            <button id="uploadIMG">Upload</button>
+            <button id="takeIMG">Take Picture</button>
+        </div>
+        <div class="form-group img" id="uploadDiv">
+            <label for="example-img">
+                <h3>Choose Photo</h3>
             </label><br>
             <input type="file" accept="image/*" id="input-img" name="userPhoto" capture="environment">
             <img id="uploadMyImg" src="//:0" alt="your image" width="300">
@@ -105,3 +110,36 @@
 </section>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+<script>
+    $("#uploadDiv").css("display","none");
+    $("#camera").css("display","none");
+    // Show/hide image section on uploads.handlebars based on whether user wants to upload or take a picture
+$("#uploadIMG").click(function(event) {
+  event.preventDefault();
+  $("#imgChoice").css("display","none");
+  $("#uploadDiv").css("display","block");
+});
+$("#takeIMG").click(function(event) {
+  event.preventDefault();
+  $("#imgChoice").css("display","none");
+  $("#camera").css("display","block");
+});
+cameraTrigger.click(function(event) {
+  event.preventDefault();
+  // if (cameraTrigger.attr("data-static") !== true) {
+  //   cameraTrigger.attr("data-static",true);
+    $("#camera--view").css("display","none");
+    $("#camera--sensor").css("display","block");
+    cameraTrigger.css("display","none");
+  //   cameraTrigger.text("Take Another Picture");
+  // } else if (cameraTrigger.attr("data-static") === true) {
+  //   console.log("retake image");
+    // cameraTrigger.attr("data-static",false);
+    // $("#camera--sensor").css("display","none");
+    // $("#camera--view").css("display","block");
+    // cameraTrigger.text("Take A Picture");
+    // cameraTrigger.click(capturePhoto);
+  // }
+});
+//^^^Need to implement reset fxn for above^^^
+</script>

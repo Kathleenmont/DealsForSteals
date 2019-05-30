@@ -352,7 +352,7 @@ if ($photo.attr("src") !== "//:0"){
     alert("Make suer you fill all values!")
   }
   console.log($photo);
-  
+
   yelpApiSearch($placeNameVal);
 
   $exampleText.val("");
@@ -494,7 +494,6 @@ window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
 inputNumber.on("keyup", currencyEval);
 
-
 //grab the input currency field
 $("input[data-type='currency']").on({
   keyup: function () {
@@ -542,3 +541,5 @@ $("input").change(function(){
 //   }
 //   console.log(inpu.dataset.state)
 // })
+
+
