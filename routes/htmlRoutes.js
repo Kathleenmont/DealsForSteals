@@ -1,8 +1,5 @@
 var db = require("../models");
 
-<<<<<<< HEAD
-module.exports = function (app) {
-=======
 // passport added _____________________________
 // Requiring path to so we can use relative routes to our HTML files
 // var path = require("path");
@@ -11,7 +8,6 @@ module.exports = function (app) {
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 module.exports = function(app) {
->>>>>>> 3939d207e0f493d8619f095b230401c298fdb5c7
   // Load index page
   // app.get("/", function(req, res) {
   //   db.Post.findAll({}).then(function(dbPost) {
@@ -68,7 +64,61 @@ module.exports = function(app) {
   // test search page
   app.get("/search", function(req, res) {
     db.Post.findAll({}).then(function(dbPost) {
-      // console.log(dbPost);
+      console.log(dbPost);
+      res.render("all_deals", {
+        posts: dbPost
+      });
+      console.log(dbPost);
+    });
+  });
+  //filtered results
+  app.get("/search/meals", function (req, res) {
+    db.Post.findAll({
+      where: {
+        category: "meal"
+      }
+    }).then(function (dbPost) {
+      console.log(dbPost);
+      res.render("all_deals", {
+        posts: dbPost
+      });
+      console.log(dbPost);
+    });
+  });
+
+  app.get("/search/snacks", function (req, res) {
+    db.Post.findAll({
+      where: {
+        category: "snack"
+      }
+    }).then(function (dbPost) {
+      console.log(dbPost);
+      res.render("all_deals", {
+        posts: dbPost
+      });
+      console.log(dbPost);
+    });
+  });
+  app.get("/search/treats", function (req, res) {
+    db.Post.findAll({
+      where: {
+        category: "treat"
+      }
+    }).then(function (dbPost) {
+      console.log(dbPost);
+      res.render("all_deals", {
+        posts: dbPost
+      });
+      console.log(dbPost);
+    });
+  });
+  app.get("/search/drinks", function (req, res) {
+    db.Post.findAll({
+      where: {
+        category: "drink"
+      }
+    }).then(function (dbPost) {
+      console.log(dbPost);
       res.render("all_deals", {
         posts: dbPost
       });

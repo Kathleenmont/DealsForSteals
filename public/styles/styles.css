@@ -1,9 +1,6 @@
 .list-group-item {
   line-height: 2.5;
 }
-body {
-  background-color: black
-}
 
 .card {
   border:3px solid black;
@@ -59,7 +56,7 @@ body{
 
 /* homepage background CSS */
 body {
-  /* background-color: #ffffff;  */
+  background-color: #ffffff; 
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -80,7 +77,7 @@ h1 ,h2, h3  {
   width: 1200px;
   height: 300px;
   margin: 240 px auto;
-  /* background: #ffffff; */
+  background: #ffffff;
 }
 .container .box {
   position: relative;
@@ -127,13 +124,13 @@ h1 ,h2, h3  {
 body {
 	width: 100wh;
 	height: 90vh;
-	/* color: #fff; */
-	/* background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB); */
+	color: #fff;
+	background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
 	background-size: 400% 400%;
 	-webkit-animation: Gradient 8s ease infinite;
 	-moz-animation: Gradient 8s ease infinite;
   animation: Gradient 8s ease infinite;
-  background-color: black;
+  background-color: white;
 }
 
 
