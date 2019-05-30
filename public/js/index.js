@@ -352,7 +352,7 @@ if ($photo.attr("src") !== "//:0"){
   }
   console.log($photo);
 
-  yelpApiSearch($placeNameVal);
+  // yelpApiSearch($placeNameVal);
 
   $exampleText.val("");
   $exampleDescription.val("");
