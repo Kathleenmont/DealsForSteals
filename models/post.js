@@ -67,6 +67,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BLOB("long"),
       allowNull: false,
       len: [0]
+    },
+    photoID: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      len: [0]
     }
   });
 

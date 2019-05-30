@@ -49,18 +49,14 @@ a:hover {
   margin-left: 30px;
 }
 
-body{
-  color: purple;
-  margin: 0;
-	padding: 0;
-}
-
 /* homepage background CSS */
 body {
   /* background-color: #ffffff;  */
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  color: purple;
+
 
 }
 h1 ,h2, h3  {
@@ -272,8 +268,43 @@ h2  {
  }
 }
 
+<<<<<<< HEAD
 /* homepage search and upload */
 
 
 
 
+=======
+/* //Jorge */
+section.error {
+  height: 350px;
+  background: #ffffff;
+  border-radius: 15px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ff4105;
+  position: absolute;
+  width: 70%;
+  left: 9vw;
+  bottom: -221px;
+  box-shadow: 0 0 10px 0px #3b3b3b;
+}
+
+/* Show red borders when filled, but invalid */
+input[data-state="invalid"] {
+  border-color: hsl(0, 76%, 50%);
+  border-width: 4px;
+}
+
+/* Show green borders when valid */
+input[data-state="valid"] {
+  border-color: hsl(120, 76%, 50%);
+  border-width: 4px;
+}
+/* upload/take pic visibility option */
+#uploadDiv, #camera {
+  display:none;
+}
+>>>>>>> master
