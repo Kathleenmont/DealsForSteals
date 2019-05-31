@@ -56,7 +56,7 @@
                     <label for="tell-more">
                         <h3>Tell us a little more about why this is good deal (optional):</h3>
                     </label>
-                    <input type="text" class="form-control" id="tell-more" name="comments">
+                    <input type="text" class="form-control" id="tell-more" name="comments" maxlength="200">
                 </div>
                 <div id="imgChoice">
                     <div>Would you like to upload or take a picture?</div><br>
@@ -97,6 +97,12 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/js/index.js"></script>
     <script>
+           {{!-- //===== this code will hide "generic picture of your image" unless pressed on choose File button
+    $("#uploadMyImg").hide();
+    $("#input-img").on("click", function(){
+        $("#uploadMyImg").show();
+    })
+    //============================================================ --}}
         $("#uploadDiv").css("display", "none");
         $("#camera").css("display", "none");
         // Show/hide image section on uploads.handlebars based on whether user wants to upload or take a picture
