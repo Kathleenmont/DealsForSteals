@@ -1,138 +1,127 @@
-<div class="container">
-    <div class="jumbotron d-flex justify-content-center">
-        <h2>Share Your Deal!</h2>
+<a href="/">
+    <div class="container header" id="login-header">
+        <div class="jumbotron">
+            <h1 class="textClipAnim" id="uploads-h1">Deals For Steals!</h1>
+            <h3> Share Your Deal</h3>
+            <div class="textAnimation"></div>
+        </div>
     </div>
-</div>
-<div class="container">
-    <form enctype="multipart/form-data" id="postForm" method="POST">
-        <label class="label" for="typeOf">
-            <h3>Type of Deal</h3>
-        </label>
-        <div class="form-group">
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input typeOf" id="meal" name="typeOf" value="meal">
-                <label class="custom-control-label" for="meal">Meal Under $10</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input typeOf" id="snack" name="typeOf" value="snack">
-                <label class="custom-control-label" for="snack">Snack under $5</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input typeOf" id="treat" name="typeOf" value="treat">
-                <label class="custom-control-label" for="treat">Treat Under $5</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input typeOf" id="drink" name="typeOf" value="drink">
-                <label class="custom-control-label" for="drink">Drink under $5</label>
-            </div><br><br>
-
-            <div class="form-group">
-                <label for="place-name">
-                    <h3>Name of Place:</h3>
+    </a>
+    <div class="row">
+        <div class="container col-md-10 col-md-offset-3" id="upload-container">
+            <form enctype="multipart/form-data" id="postForm" method="POST">
+                <label class="label" for="typeOf">
+                    <h3>Type of Deal</h3><br>
                 </label>
-                <input type="text" class="form-control" id="place" name="restaurant">
-            </div>
-            <div class="form-group">
-                <label for="item-name">
-                    <h3>Name of Deal Item:</h3>
-                </label>
-                <input type="text" class="form-control" id="item" name="item">
-            </div>
-            <div class="form-group">
-                <label for="price">
-                    <h3>Item Price:</h3>
-                </label>
-                <input type="text" class="form-control" id="price" name="price" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                    data-type="currency">
-            </div>
-            {{!-- <h3>Why Is This a Great Deal?</h3>
-        <div class="form-check-inline">
-            <label class="form-check-label">
-                <input type="checkbox" name="why" class="form-check-input why" value="delicious">So Delicious!
-            </label>
-        </div>
-        <div class="form-check-inline">
-            <label class="form-check-label">
-                <input type="checkbox" name="why" class="form-check-input why" value="so-much">So Much for the Price!
-            </label>
-        </div>
-        <div class="form-check-inline">
-            <label class="form-check-label">
-                <input type="checkbox" name="why" class="form-check-input why" value="healthy">Healthy Deal!
-            </label>
-        </div>
-        <div class="form-check-inline">
-            <label class="form-check-label">
-                <input type="checkbox" name="why" class="form-check-input why" value="cool">Cool Place!
-            </label> --}}
-        </div><br><br>
-        <div class="form-group">
-            <label for="tell-more">
-                <h3>Tell us a little more about why this is good deal (optional):</h3>
-            </label>
-            <input type="text" class="form-control" id="tell-more" name="comments">
-        </div>
-        <div id="imgChoice">
-            <div>Would you like to upload or take a picture?</div>
-            <button id="uploadIMG">Upload</button>
-            <button id="takeIMG">Take Picture</button>
-        </div>
-        <div class="form-group img" id="uploadDiv">
-            <label for="example-img">
-                <h3>Choose Photo</h3>
-            </label><br>
-            <input type="file" accept="image/*" id="input-img" name="userPhoto" capture="environment">
-            <img id="uploadMyImg" src="//:0" alt="your image" width="300">
-        </div>
+                <div class="form-group uploads-input">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input typeOf" id="meal" name="typeOf" value="meal">
+                        <label class="custom-control-label" for="meal">Meal Under $10</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input typeOf" id="snack" name="typeOf" value="snack">
+                        <label class="custom-control-label" for="snack">Snack under $5</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input typeOf" id="treat" name="typeOf" value="treat">
+                        <label class="custom-control-label" for="treat">Treat Under $5</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input typeOf" id="drink" name="typeOf" value="drink">
+                        <label class="custom-control-label" for="drink">Drink under $5</label>
+                    </div><br><br>
 
-        <section id="camera">
-            <!-- Camera sensor -->
-            <div class="container d-flex justify-content-center">
-                <h3>Capture image from Cam</h3>
-            </div>
-            <canvas id="camera--sensor"></canvas>
-            {{!-- <input type="file" accept="image/*" capture="environment" placeholder="Take a Photo"> --}}
-            <!-- Camera view -->
-            <video id="camera--view" width="500" height="400" autoplay playsinline></video>
-            <!-- Camera trigger -->
-            <br>
-            <div class="mx-auto" style="width: 150px;">
-                <button id="camera--trigger" class="btn btn-primary btn-lg">Take a picture</button>
-            </div>
-        </section><br>
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="uploads-submit">SUBMIT</button>
-</div>
-</form>
-</div>
+                    <div class="form-group">
+                        <label for="place-name">
+                            <h3>Name of Place:</h3>
+                        </label>
+                        <input type="text" class="form-control uploads-input" id="place" name="restaurant">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-name">
+                            <h3>Name of Deal Item:</h3>
+                        </label>
+                        <input type="text" class="form-control uploads-input" id="item" name="item">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">
+                            <h3>Item Price:</h3>
+                        </label>
+                        <input type="text" class="form-control uploads-input" id="price" name="price"
+                            pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" data-type="currency">
+                    </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
-<script>
-    $("#uploadDiv").css("display", "none");
-    $("#camera").css("display", "none");
-    // Show/hide image section on uploads.handlebars based on whether user wants to upload or take a picture
-    $("#uploadIMG").click(function (event) {
-        event.preventDefault();
-        $("#imgChoice").css("display", "none");
-        $("#uploadDiv").css("display", "block");
-    });
+                </div><br><br>
+                <div class="form-group">
+                    <label for="tell-more">
+                        <h3>Tell us a little more about why this is good deal (optional):</h3>
+                    </label>
+                    <input type="text" class="form-control" id="tell-more" name="comments">
+                </div>
+                <div id="imgChoice">
+                    <div>Would you like to upload or take a picture?</div><br>
+                    <button id="uploadIMG" class="btn uploads-btn">Upload</button>
+                    <button id="takeIMG" class="btn uploads-btn">Take Picture</button>
+                </div>
+                <div class="form-group img" id="uploadDiv">
+                    <label for="example-img">
+                        <h3>Choose Photo</h3>
+                    </label><br>
+                    <input type="file" accept="image/*" id="input-img" name="userPhoto" capture="environment">
+                    <img id="uploadMyImg" src="//:0" alt="your image" width="300">
+                </div>
 
-    cameraTrigger.click(function (event) {
-        event.preventDefault();
-        // if (cameraTrigger.attr("data-static") !== true) {
-        //   cameraTrigger.attr("data-static",true);
-        $("#camera--view").css("display", "none");
-        $("#camera--sensor").css("display", "block");
-        cameraTrigger.css("display", "none");
-        //   cameraTrigger.text("Take Another Picture");
-        // } else if (cameraTrigger.attr("data-static") === true) {
-        //   console.log("retake image");
-        // cameraTrigger.attr("data-static",false);
-        // $("#camera--sensor").css("display","none");
-        // $("#camera--view").css("display","block");
-        // cameraTrigger.text("Take A Picture");
-        // cameraTrigger.click(capturePhoto);
-        // }
-    });
+                <section id="camera">
+                    <!-- Camera sensor -->
+                    <div class="container d-flex">
+                        <h3 id="camera-heading">Capture image from Cam</h3>
+                    </div>
+                    <canvas id="camera--sensor"></canvas>
+                    {{!-- <input type="file" accept="image/*" capture="environment" placeholder="Take a Photo"> --}}
+                    <!-- Camera view -->
+                    <video id="camera--view" class="justify-content-center" "width=" 500" height="400" autoplay
+                        playsinline></video>
+                    <!-- Camera trigger -->
+                    <br>
+                    <div class="mx-auto" style="width: 150px;">
+                        <button id="camera--trigger" class="btn btn-lg uploads-btn">Take a picture</button>
+                    </div>
+
+                </section><br>
+                <button type="submit" class="btn btn-lg uploads-submit" id="uploads-submit">SUBMIT</button>
+        </div>
+    </div>
+    </form>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/index.js"></script>
+    <script>
+        $("#uploadDiv").css("display", "none");
+        $("#camera").css("display", "none");
+        // Show/hide image section on uploads.handlebars based on whether user wants to upload or take a picture
+        $("#uploadIMG").click(function (event) {
+            event.preventDefault();
+            $("#imgChoice").css("display", "none");
+            $("#uploadDiv").css("display", "block");
+        });
+
+        cameraTrigger.click(function (event) {
+            event.preventDefault();
+            // if (cameraTrigger.attr("data-static") !== true) {
+            //   cameraTrigger.attr("data-static",true);
+            $("#camera--view").css("display", "none");
+            $("#camera--sensor").css("display", "block");
+            cameraTrigger.css("display", "none");
+            //   cameraTrigger.text("Take Another Picture");
+            // } else if (cameraTrigger.attr("data-static") === true) {
+            //   console.log("retake image");
+            // cameraTrigger.attr("data-static",false);
+            // $("#camera--sensor").css("display","none");
+            // $("#camera--view").css("display","block");
+            // cameraTrigger.text("Take A Picture");
+            // cameraTrigger.click(capturePhoto);
+            // }
+        });
 //^^^Need to implement reset fxn for above^^^
-</script>
+    </script>

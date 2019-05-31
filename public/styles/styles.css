@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: purple;
+  /* color: purple; */
   width: 100vw;
   height: 90vh;
   color: #fff;
@@ -110,18 +110,23 @@ body {
   text-align: center;
   background: whitesmoke;
 
+
 }
 .container .box h4 {
 
   display: none;
 }
 
+/* homepage search and upload box hover */
 .container .box:hover h4 {
   position: relative;
   top: 50%;
   display: inline;
+  /* color: black; */
+  color: #3AA7A0;
 }
 
+/* icons on homepage */
 .container .box .icon .fa {
   position: absolute;
   top: 50%;
@@ -137,36 +142,6 @@ body {
   line-height: 2.5;
 }
 
-.card {
-  border: 3px solid black;
-  width: 350px;
-  padding: 4px;
-  margin: 10px;
-  height: 500px;
-  /* background: #f3dec6; */
-  background-color: whitesmoke;
-  overflow: hidden;
-  position: relative;
-  float: left;
-  line-height: 1;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 20vw;
-  /* height: 60% */
-  object-fit: cover;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  text-decoration: none;
-  opacity: .7;
-}
 
 /* #camera--sensor{ */
 /* visibility: hidden; */
@@ -335,8 +310,101 @@ h2 {
     display: inline-block;
   } */
 
+  /* search page____________________ */
+/* search cards */
+.card {
+  border: 3px solid black;
+  width: 350px;
+  padding: 4px;
+  margin: 10px;
+  height: 500px;
+  /* background: #f3dec6; */
+  background-color: whitesmoke;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  line-height: 1;
+}
 
-/* //Jorge */
+.card-img-top {
+  width: 100%;
+  height: 20vw;
+  /* height: 60% */
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  opacity: .7;
+  color: black;
+}
+
+/* login  and signin page__________________________ */
+#login-header {
+  height: 200px;
+}
+
+#login-container {
+ text-align: justify;
+ margin-top: 30px;
+ margin-left: 200px;
+}
+
+/* New posts form page __________________________ */
+
+#upload-container {
+  text-align: justify;
+  padding-top: 25px;
+}
+#camera--view {
+  margin-top: -250px;
+  padding-top: 0px;
+  position: relative;
+  right: 100px;
+}
+#camera-heading {
+  margin-left: 300px;
+}
+#uploads-submit {
+  width: 300px;
+  background-color: black;
+  color: whitesmoke;
+}
+#uploads-submit:hover {
+  background-color: whitesmoke;
+  color: black;
+  border: 3px solid black;
+}
+.uploads-btn {
+  background-color: whitesmoke;
+  color: #3AA7A0;
+  /* color: black; */
+  border: 3px solid black;
+}
+.uploads-btn:hover {
+  background-color: #3AA7A0;
+  color: whitesmoke;
+  border: 3px solid whitesmoke;
+}
+
+/* thank you page_--------------------------- */
+.go-to-page {
+  margin-top:20px;
+}
+.thank-you-text {
+  font-size: 17px;
+  padding: 20px;
+  padding-top: 15px;
+  border-bottom: 2px solid black;
+}
+
+
+/* //Jorge ______________________*/
 section.error {
   height: 350px;
   background: #ffffff;
@@ -370,6 +438,16 @@ input[data-state="valid"] {
 #camera {
   display: none;
 }
+@media only screen and (max-width: 1011px) {
+  /* camera */
+  #camera--view {
+    margin-top: -400px;
+    left: 150px;
+  }
+  #camera-heading {
+    margin-left: 215px;
+  }
+}
 
 @media only screen and (max-width: 768px) {
 
@@ -388,8 +466,31 @@ input[data-state="valid"] {
     margin: 0 auto;
   }
 
-}
+  /* login form */
+  #login-container {
+    margin-left: 25px;
+  }
+  #upload-container {
+    text-align: left;
+    padding-top: 25px;
+    margin-left: 15px;
 
+  }
+  /* uploads form */
+  #uploads-h1 {
+    font-size: 50px;
+  }
+
+   /* camera */
+   #camera--view {
+    margin-top: -400px;
+    left: 0px;
+  }
+  #camera-heading {
+    margin-left: -13px;
+    margin-top: 15px;
+  }
+}
 
 @media only screen and (max-width: 571px) {
   .jumbotron {
@@ -411,4 +512,36 @@ input[data-state="valid"] {
     justify-content: space-around;
     flex-flow: column;
   }
+
+  /* login-page */
+  .login-field {
+    width: 80vw;
+  }
+
+/* uploads page */
+  .uploads-input {
+    width: 80vw;
+  }
+  #uploads-h1 {
+    font-size: 35px;
+  }
+
+ /* camera */
+ #camera--view {
+    margin-top: -400px;
+    position: relative;
+    margin-left: -300px;
+  }
+  #camera-heading {
+    margin-left: 0px;
+  }
+  #camera--trigger {
+    margin-left: -300px;
+  }
+  /* #uploads-submit {
+    margin-top: -300px;
+  } */
+
+  
+  
 }
