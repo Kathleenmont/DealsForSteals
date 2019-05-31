@@ -119,18 +119,18 @@ module.exports = function (app) {
 // console.log(JSON.stringify(req.file));
     const result2 = await cloudinary.uploader.upload(req.file.secure_url, function (result) {
       console.log(result.secure_url)
-      cloudImage.url = result.secure_url;
-      cloudImage.id = result.public_id;
+      return result;
     }).catch(error => console.log(error));
 
-    console.log("RESULT___________-------------------" + JSON.stringify(result));
+    console.log("RESULT___________-------------------" + JSON.stringify(result2));
     
     // cloudImage.url = req.file.secure_url;
     // cloudImage.id = req.file.public_id;
+    console.log("This is result AWAIT - - - -");
+    cloudImage.url = result2.secure_url;
+    cloudImage.id = result2.public_id;
 
-    console.log(cloudImage.url);
-    console.log("REQ>FILE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(req.file));
-    console.log("REQ>FILE.secure url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(req.file.secure_url));
+    // console.log(cloudImage.url);
     //string conversion
     // let whyString = req.body.why.toString();
     let priceString = parseFloat(req.body.price.replace("$", "")).toFixed(2);
