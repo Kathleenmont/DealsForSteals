@@ -359,8 +359,6 @@ if ($photo.attr("src") !== "//:0"){
   }
   console.log($photo);
 
-  // yelpApiSearch($placeNameVal);
-
   $exampleText.val("");
   $exampleDescription.val("");
 };
@@ -495,9 +493,17 @@ function titleCase(str) {
 // Hide ERROR POPUP
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
-window.addEventListener("load", cameraStart, false);
+// window.addEventListener("load", cameraStart, false);
 cameraTrigger.on("click", capturePhoto);
 inputNumber.on("keyup", currencyEval);
+
+//ask to take the picture when you land on the page
+$("#takeIMG").click(function(event) {
+  event.preventDefault();
+  cameraStart();
+  $("#imgChoice").css("display","none");
+  $("#camera").css("display","block");
+});
 
 //grab the input currency field
 $("input[data-type='currency']").on({
@@ -525,24 +531,3 @@ $("input").change(function(){
 
 })
 
-// inputCheck.addEventListener('input', evt => {
-//   console.log("triger listener")
-//   console.log(this)
-//   const value = inputCheck.value;
-
-//   console.log(value);
-//   const trimmed = value.trim()
-
-//   // if (!value) {
-//   //   inputCheck.dataset.state = ''
-//   //   return;
-//   // }
-
-
-//   if (trimmed) {
-//     inputCheck.dataset.state = 'valid';
-//   } else {
-//     inputCheck.dataset.state = 'invalid';
-//   }
-//   console.log(inpu.dataset.state)
-// })
