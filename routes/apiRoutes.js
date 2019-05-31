@@ -4,6 +4,7 @@ module.exports = function (app) {
   const fs = require("fs");
   const cloudinary = require("cloudinary");
   const cloudinaryStorage = require("multer-storage-cloudinary");
+  const cloudImage = {};
   // passsport ADDED ________________
   var passport = require("../config/passport");
 
@@ -37,7 +38,7 @@ module.exports = function (app) {
         res.json(err);
         // res.status(422).json(err.errors[0].message);
       });
-    });
+    })
   
     // Route for logging user out
     app.get("/logout", function(req, res) {
@@ -111,15 +112,25 @@ module.exports = function (app) {
   });
 
   // Create a new example
-  app.post("/api/posts", upload.single("userPhoto"), function (req, res) {
+  app.post("/api/posts", upload.single("userPhoto"), async function (req, res) {
+
     console.log("API POSTS");
 //     console.log(req.body);
 // console.log(JSON.stringify(req.file));
-    const cloudImage = {};
-    cloudImage.url = req.file.url;
-    cloudImage.id = req.file.public_id;
+    const result2 = await cloudinary.uploader.upload(req.file.secure_url, function (result) {
+      console.log(result.secure_url)
+      cloudImage.url = result.secure_url;
+      cloudImage.id = result.public_id;
+    }).catch(error => console.log(error));
+
+    console.log("RESULT___________-------------------" + JSON.stringify(result));
+    
+    // cloudImage.url = req.file.secure_url;
+    // cloudImage.id = req.file.public_id;
 
     console.log(cloudImage.url);
+    console.log("REQ>FILE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(req.file));
+    console.log("REQ>FILE.secure url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(req.file.secure_url));
     //string conversion
     // let whyString = req.body.why.toString();
     let priceString = parseFloat(req.body.price.replace("$", "")).toFixed(2);
