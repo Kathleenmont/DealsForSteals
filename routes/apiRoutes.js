@@ -123,7 +123,7 @@ module.exports = function (app) {
       cloudImage.id = result.public_id;
     }).catch(error => console.log(error));
 
-    console.log("RESULT___________-------------------" + JSON.stringify(result));
+    console.log("RESULT___________-------------------" + JSON.stringify(result2));
     
     // cloudImage.url = req.file.secure_url;
     // cloudImage.id = req.file.public_id;

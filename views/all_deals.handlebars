@@ -1,22 +1,48 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link" href="/">HOMEPAGE</a>
+    <a class="nav-link" href="/"><i class="fa fa-home"></i> HOMEPAGE</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/newpost">UPLOAD</a>
+    <a class="nav-link" href="/newpost"><i class="fa fa-folder"></i> UPLOAD</a>
   </li>
-  {{!-- <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
-  </li> --}}
-  <button class="bg-dark text-white" id="filterBtn">Filter Results</button>
-<div class="mt-2 ml-3" id="filterOptions">
-  <input type="radio" id="mealRadio" name="filter" onClick="getMeals()">Meal
-  <input type="radio" id="snackRadio" name="filter" onClick="getSnacks()">Snack
-  <input type="radio" id="treatRadio" name="filter" onClick="getTreats()">Treat
-  <input type="radio" id="drinkRadio" name="filter" onClick="getDrinks()">Drink
-    <input type="radio" id="allRadio" name="filter" onClick="getAll()">All
-</div>
+
+  {{!-- ========================================================================== --}}
+  {{!-- <div class="dropdown">
+  <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button">Action</button>
+    <button class="dropdown-item" type="button">Another action</button>
+    <button class="dropdown-item" type="button">Something else here</button>
+  </div>
+</div> --}}
+  {{!-- ============================== --}}
+  <li class="nav-item">
+    <div class="dropdown">
+      <a class="btn dropdown-toggle text-dark" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        Filter Results
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button  class="dropdown-item" type="button" onClick="getMeals()">Meal</button>
+        <button class="dropdown-item" type="button" onClick="getSnacks()">Snack</button>
+        <button class="dropdown-item" type="button" onClick="getTreats()">Treat</button>
+        <button class="dropdown-item" type="button" onClick="getDrinks()">Drink</button>
+        <button class="dropdown-item" type="button" onClick="getAll()">All</button>
+        {{!-- <input class="dropdown-item" type="radio" id="mealRadio" name="filter" onClick="getMeals()">Meal
+        <input class="dropdown-item" type="radio" id="snackRadio" name="filter" onClick="getSnacks()">Snack
+        <input class="dropdown-item" type="radio" id="treatRadio" name="filter" onClick="getTreats()">Treat
+        <input class="dropdown-item" type="radio" id="drinkRadio" name="filter" onClick="getDrinks()">Drink
+        <input class="dropdown-item" type="radio" id="allRadio" name="filter" onClick="getAll()">All --}}
+        {{!-- <button class="dropdown-item" type="button">Action</button>
+    <button class="dropdown-item" type="button">Another action</button>
+    <button class="dropdown-item" type="button">Something else here</button> --}}
+      </div>
+    </div>
+  </li>
 </ul>
+
 
 {{!-- <h1>Test page</h1> --}}
 {{!-- <h1>Test page</h1> --}}
@@ -27,10 +53,10 @@
   <input type="radio" id="snackRadio" name="filter" onClick="getSnacks()">Snack
   <input type="radio" id="treatRadio" name="filter" onClick="getTreats()">Treat
   <input type="radio" id="drinkRadio" name="filter" onClick="getDrinks()">Drink
-    <input type="radio" id="allRadio" name="filter" onClick="getAll()">All
+  <input type="radio" id="allRadio" name="filter" onClick="getAll()">All
 </div> --}}
 <div id="container-cards">
-  
+
   {{#each posts}}
   {{!-- <li> --}}
   <a href="{{this.yelpUrl}}" target="_blank">
@@ -64,25 +90,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <script>
+
   //display/hide filter buttons
   $("#filterOptions").css("display", "none");
   $("#filterBtn").click(function () {
     $("#filterBtn").css("display", "none");
     $("#filterOptions").css("display", "inline-block");
   });
-function getMeals() {
-  location.assign("/search/meals");
-}
-function getSnacks() {
-  location.assign("/search/snacks");
-}
-function getTreats() {
-  location.assign("/search/treats");
-}
-function getDrinks() {
-  location.assign("/search/drinks");
-}
-function getAll() {
-  location.assign("/search");
-}
+  function getMeals() {
+    location.assign("/search/meals");
+  }
+  function getSnacks() {
+    location.assign("/search/snacks");
+  }
+  function getTreats() {
+    location.assign("/search/treats");
+  }
+  function getDrinks() {
+    location.assign("/search/drinks");
+  }
+  function getAll() {
+    location.assign("/search");
+  }
 </script>
