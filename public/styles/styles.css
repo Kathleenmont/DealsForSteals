@@ -112,12 +112,13 @@ body {
 
 }
 .container .box h4 {
-
+ 
   display: none;
 }
 
 .container .box:hover h4 {
   position: relative;
+  color: #434343;
   top: 50%;
   display: inline;
 }
