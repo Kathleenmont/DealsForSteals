@@ -268,13 +268,11 @@ h2  {
  }
 }
 
-<<<<<<< HEAD
 /* homepage search and upload */
 
 
 
 
-=======
 /* //Jorge */
 section.error {
   height: 350px;
@@ -307,4 +305,3 @@ input[data-state="valid"] {
 #uploadDiv, #camera {
   display:none;
 }
->>>>>>> master
