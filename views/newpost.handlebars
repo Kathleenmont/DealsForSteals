@@ -82,6 +82,7 @@
             </label><br>
             <input type="file" accept="image/*" id="input-img" name="userPhoto" capture="environment">
             <img id="uploadMyImg" src="//:0" alt="your image" width="300">
+            
         </div>
         
         <section  id="camera">
@@ -107,6 +108,16 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
 <script>
+
+    //===== this code will hide "generic picture of your image" unless pressed on choose File button
+    $("#uploadMyImg").hide();
+
+    $("#input-img").on("click", function(){
+        $("#uploadMyImg").show();
+    })
+
+    //============================================================
+
     $("#uploadDiv").css("display","none");
     $("#camera").css("display","none");
     // Show/hide image section on uploads.handlebars based on whether user wants to upload or take a picture
@@ -139,3 +150,5 @@ cameraTrigger.click(function(event) {
 });
 //^^^Need to implement reset fxn for above^^^
 </script>
+
+ 
