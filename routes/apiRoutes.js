@@ -115,6 +115,7 @@ module.exports = function (app) {
     console.log("API POSTS");
 //     console.log(req.body);
 // console.log(JSON.stringify(req.file));
+    
     const cloudImage = {};
     cloudImage.url = req.file.url;
     cloudImage.id = req.file.public_id;
