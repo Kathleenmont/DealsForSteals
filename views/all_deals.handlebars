@@ -1,4 +1,5 @@
 
+{{!-- header --}}
 <a href="/">
     <div class="container header" id="login-header">
         <div class="jumbotron">
@@ -7,7 +8,7 @@
         </div>
     </div>
     </a>
-
+{{!-- nav tabs --}}
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link" href="/"><i class="fa fa-home"></i> HOMEPAGE</a>
@@ -16,18 +17,8 @@
     <a class="nav-link" href="/newpost"><i class="fa fa-folder"></i> UPLOAD</a>
   </li>
 
-  {{!-- ========================================================================== --}}
-  {{!-- <div class="dropdown">
-  <button class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button">Action</button>
-    <button class="dropdown-item" type="button">Another action</button>
-    <button class="dropdown-item" type="button">Something else here</button>
-  </div>
-</div> --}}
-  {{!-- ============================== --}}
+  
+ {{!-- dropdown filter search --}}
   <li class="nav-item">
     <div class="dropdown">
       <a class="btn dropdown-toggle text-dark" type="button" id="dropdownMenu2" data-toggle="dropdown"
@@ -40,57 +31,43 @@
         <button class="dropdown-item" type="button" onClick="getTreats()">Treat</button>
         <button class="dropdown-item" type="button" onClick="getDrinks()">Drink</button>
         <button class="dropdown-item" type="button" onClick="getAll()">All</button>
-        {{!-- <input class="dropdown-item" type="radio" id="mealRadio" name="filter" onClick="getMeals()">Meal
-        <input class="dropdown-item" type="radio" id="snackRadio" name="filter" onClick="getSnacks()">Snack
-        <input class="dropdown-item" type="radio" id="treatRadio" name="filter" onClick="getTreats()">Treat
-        <input class="dropdown-item" type="radio" id="drinkRadio" name="filter" onClick="getDrinks()">Drink
-        <input class="dropdown-item" type="radio" id="allRadio" name="filter" onClick="getAll()">All --}}
-        {{!-- <button class="dropdown-item" type="button">Action</button>
-    <button class="dropdown-item" type="button">Another action</button>
-    <button class="dropdown-item" type="button">Something else here</button> --}}
       </div>
     </div>
   </li>
 </ul>
 
-
+{{!-- card container for posted deals --}}
 <div id="container-cards">
 
   {{#each posts}}
-  {{!-- <li> --}}
   <a href="{{this.yelpUrl}}" target="_blank">
     <div class="card">
       <img class="card-img-top" src="{{this.photo}}" alt="" height="200">
-      {{!-- <a href="{{this.yelpUrl}}" target="_blank"> --}}
       <div class="card-body">
-        {{!-- <p><span class="label">ID:</span> {{this.id}}</p> --}}
-        {{!-- <p><span class="label">author:</span> {{this.Author}}</p> --}}
         <p><span class="label card-text"><b>Item:</b></span> {{this.item}}</p>
         <p><span class="label card-text"><b>Price: $</b></span> {{this.price}}</p>
         <p><span class="label card-text"><b>Restaurant:</b></span> {{this.restaurant}}</p>
         <p><span class="label card-text"><b>Address:</b></span> {{this.restAdd}}</p>
         <p><span class="label card-text"><b></b></span> {{this.comments}}</p>
-        {{!-- </a> --}}
       </div>
   </a>
 </div>
 {{/each}}
 </div>
 
-{{!-- staticcards----------------------------------------- --}}
-
-
-{{!--     -------------------------------------------------------------- --}}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <script>
+
   //display/hide filter buttons
   $("#filterOptions").css("display", "none");
   $("#filterBtn").click(function () {
     $("#filterBtn").css("display", "none");
     $("#filterOptions").css("display", "inline-block");
   });
+  
+  //functions to filter search results
   function getMeals() {
     location.assign("/search/meals");
   }
