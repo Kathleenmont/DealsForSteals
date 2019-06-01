@@ -384,7 +384,7 @@ a:hover {
 #login-container {
  text-align: justify;
  margin-top: 30px;
- margin-left: 200px;
+ /* margin-left: 200px; */
 }
 
 /* New posts form page __________________________ */
@@ -455,13 +455,16 @@ label {
   padding: 20px;
   padding-top: 2%;
   border-top: 1px solid black;
-  margin-top: -2%;
+  margin-top: 2%;
 }
 .thank-you-text a {
   padding: 2%;
 }
 .thank-you-text a:hover {
   border: 2px dashed white;
+}
+.textClipAnim {
+  margin-bottom: 8%;
 }
 
 /* //Jorge ______________________*/
@@ -499,6 +502,14 @@ input[data-state="valid"] {
   display: none;
   text-align: center;
 }
+@media only screen and (max-width: 1350px) {
+  /* .jumbotron h3 {
+    margin-top: 10%;
+  } */
+  .textClipAnim {
+    margin-bottom: 10%;
+  }
+}
 @media only screen and (max-width: 1011px) {
   /* camera */
   #camera--view {
@@ -507,6 +518,15 @@ input[data-state="valid"] {
   }
   #camera-heading {
     margin-left: 215px;
+  }
+  .jumbotron h3 {
+    font-size: 2rem;
+  }
+  .textClipAnim {
+    margin-bottom: 13%;
+  }
+  .thank-you-text {
+    margin-top: 2%;
   }
 }
 
@@ -603,6 +623,16 @@ input[data-state="valid"] {
     margin-top: -300px;
   } */
 
-  
-  
+  /* .jumbotron h3 {
+    margin-top: 13%;
+  } */
+  .textClipAnim {
+    margin-bottom: 13%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .thank-you-text {
+    margin-top: 0;
+  }
 }
