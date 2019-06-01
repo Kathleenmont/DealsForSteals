@@ -343,13 +343,20 @@ h2 {
   } */
 
   /* search page____________________ */
+  #container-cards {
+    margin-left: 140px;
+    /* display: flex;  
+    justify-content: space-between;
+    flex: 1;
+    flex-flow: wrap; */
+  }
 /* search cards */
 .card {
   border: 3px solid black;
   width: 350px;
   padding: 4px;
   margin: 10px;
-  height: 500px;
+  height: 515px;
   /* background: #f3dec6; */
   background-color: whitesmoke;
   overflow: hidden;
