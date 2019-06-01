@@ -4,7 +4,7 @@ $(document).ready(function() {
   var emailInput = $("input#email-input");
   var passwordInput = $("input#password-input");
 
-  // When the signup button is clicked, we validate the email and password are not blank
+  // When the signup button is clicked,  validate that the email and password are not blank
   signUpForm.on("submit", function(event) {
     event.preventDefault();
     var userData = {
@@ -21,7 +21,7 @@ $(document).ready(function() {
     passwordInput.val("");
   });
 
-  // Does a post to the signup route. If succesful, we are redirected to the members page
+  // Does a post to the signup route. If succesful, we are redirected to the uploads page
   // Otherwise we log any errors
   function signUpUser(email, password) {
     $.post("/api/signup", {
@@ -35,9 +35,10 @@ $(document).ready(function() {
         // If there's an error, handle it by throwing up a boostrap alert
       })
       .catch(handleLoginErr);
-      return;
+    return;
   }
 
+  // error handling function
   function handleLoginErr(err) {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);

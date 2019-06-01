@@ -284,6 +284,7 @@ body {
   position: relative;
   float: left;
   line-height: 1;
+  box-sizing: content-box;
 }
 
 .card-img-top {
@@ -327,7 +328,20 @@ a:hover {
   text-shadow: 0 0 5px white;
   color: #5D5050;
 }
+<<<<<<< HEAD
+#share-deal-text {
+  position: relative;
+  bottom: 55px;
+}
+/* #camera--view {
+  margin-top: -250px;
+  padding-top: 0px;
+  position: relative;
+  right: 100px;
+} */
+=======
 
+>>>>>>> 694e2a2f601a6d056368be4be1c4a33a0d97d58b
 #camera-heading {
   margin: 2% auto;
 }

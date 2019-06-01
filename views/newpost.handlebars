@@ -1,12 +1,14 @@
+{{!-- header --}}
 <a href="/">
     <div class="container header" id="login-header">
         <div class="jumbotron">
             <h1 class="textClipAnim" id="uploads-h1">Deals For Steals!</h1>
-            <h3> Share Your Deal</h3>
+            <h3 id="share-deal-text"> Share Your Deal</h3>
             <div class="textAnimation"></div>
         </div>
     </div>
     </a>
+    {{!-- upload form  --}}
     <div class="row">
         <div class="container col-md-10 col-md-offset-3" id="upload-container">
             <form enctype="multipart/form-data" id="postForm" method="POST">
@@ -77,7 +79,7 @@
                         <h3 id="camera-heading">Capture image from Cam</h3>
                     </div>
                     <canvas id="camera--sensor"></canvas>
-                    {{!-- <input type="file" accept="image/*" capture="environment" placeholder="Take a Photo"> --}}
+                    
                     <!-- Camera view -->
                     <video id="camera--view" class="justify-content-center" "width=" 500" height="400" autoplay
                         playsinline></video>
@@ -96,13 +98,9 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/js/index.js"></script>
+    {{!-- jQuery DOM with CSS styles --}}
     <script>
-           {{!-- //===== this code will hide "generic picture of your image" unless pressed on choose File button
-    $("#uploadMyImg").hide();
-    $("#input-img").on("click", function(){
-        $("#uploadMyImg").show();
-    })
-    //============================================================ --}}
+           
         $("#uploadDiv").css("display", "none");
         $("#camera").css("display", "none");
         // Show/hide image section on uploads.handlebars based on whether user wants to upload or take a picture

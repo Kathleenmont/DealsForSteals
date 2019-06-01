@@ -1,20 +1,5 @@
-// module.exports = function(sequelize, DataTypes) {
-//   var Author = sequelize.define("Author", {
-//     name: DataTypes.STRING
-//   });
 
-//   Author.associate = function(models) {
-//     Author.hasMany(models.Post, {
-//       onDelete: "cascade"
-//     });
-//   };
-//   return Author;
-// };
-
-// PASSPORT CODE ___________
-
-// Requiring bcrypt for password hashing. Using the bcrypt-nodejs version as the regular bcrypt module
-// sometimes causes errors on Windows machines
+// Requiring bcrypt for password hashing
 var bcrypt = require("bcrypt-nodejs");
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {
@@ -34,6 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     }
   });
+  // connect to Posts table
   User.associate = function(models) {
     User.hasMany(models.Post, {
       onDelete: "cascade"
