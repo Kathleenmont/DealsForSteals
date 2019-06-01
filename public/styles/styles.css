@@ -407,6 +407,10 @@ a:hover {
   text-shadow: 0 0 5px white;
   color: #5D5050;
 }
+#share-deal-text {
+  position: relative;
+  bottom: 55px;
+}
 /* #camera--view {
   margin-top: -250px;
   padding-top: 0px;
