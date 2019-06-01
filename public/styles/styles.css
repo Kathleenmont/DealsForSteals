@@ -67,8 +67,19 @@ body {
 .mid-flex {
   display: flex;
   justify-content: space-around;
+  margin-top: 35%;
 }
-
+.mid-flex a {
+  width: 270px;
+  height: 270px;
+}
+.nav-tabs {
+  display: table;
+  margin: 0 auto;
+}
+.nav-item {
+  display: inline-block;
+}
 .container .box {
   position: relative;
   width: calc(300px - 30px);
@@ -80,7 +91,7 @@ body {
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 10px;
-  margin-top: 28rem;
+  /* margin-top: 28rem; */
 }
 .header {
   height: 200px;
@@ -93,6 +104,9 @@ body {
 }
 #login-container .col-md-6 {
   margin: 0 auto;
+}
+#login-container a {
+  color: red;
 }
 .signup .form-group, .login .form-group {
   text-align: left;
