@@ -1,3 +1,13 @@
+
+<a href="/">
+    <div class="container header" id="login-header">
+        <div class="jumbotron">
+            <h1 class="textClipAnim" id="uploads-h1">Search Deals</h1>
+            <div class="textAnimation"></div>
+        </div>
+    </div>
+    </a>
+
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link" href="/"><i class="fa fa-home"></i> HOMEPAGE</a>
@@ -20,12 +30,12 @@
   {{!-- ============================== --}}
   <li class="nav-item">
     <div class="dropdown">
-      <a class="btn dropdown-toggle text-dark" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
+      <a class="btn dropdown-toggle text-dark" type="button" id="dropdownMenu2" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         Filter Results
       </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button  class="dropdown-item" type="button" onClick="getMeals()">Meal</button>
+        <button class="dropdown-item" type="button" onClick="getMeals()">Meal</button>
         <button class="dropdown-item" type="button" onClick="getSnacks()">Snack</button>
         <button class="dropdown-item" type="button" onClick="getTreats()">Treat</button>
         <button class="dropdown-item" type="button" onClick="getDrinks()">Drink</button>
@@ -44,17 +54,6 @@
 </ul>
 
 
-{{!-- <h1>Test page</h1> --}}
-{{!-- <h1>Test page</h1> --}}
-
-{{!-- <button id="filterBtn">Filter Results</button>
-<div id="filterOptions">
-  <input type="radio" id="mealRadio" name="filter" onClick="getMeals()">Meal
-  <input type="radio" id="snackRadio" name="filter" onClick="getSnacks()">Snack
-  <input type="radio" id="treatRadio" name="filter" onClick="getTreats()">Treat
-  <input type="radio" id="drinkRadio" name="filter" onClick="getDrinks()">Drink
-  <input type="radio" id="allRadio" name="filter" onClick="getAll()">All
-</div> --}}
 <div id="container-cards">
 
   {{#each posts}}
@@ -75,22 +74,17 @@
       </div>
   </a>
 </div>
-{{!-- <p><span class="label">Location:</span> {{this.restLocation}}</p> --}}
-
-{{!-- (author, item, price, restaurant, restAdd, restLocation) --}}
-
-
-{{!-- <button data-id="{{this.id}}" class="delquote">Delete</button> --}}
-
-{{!-- <a href="/{{this.id}}">Update this quote</a> --}}
-{{!-- </li> --}}
 {{/each}}
 </div>
+
+{{!-- staticcards----------------------------------------- --}}
+
+
+{{!--     -------------------------------------------------------------- --}}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <script>
-
   //display/hide filter buttons
   $("#filterOptions").css("display", "none");
   $("#filterBtn").click(function () {
