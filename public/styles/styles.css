@@ -363,6 +363,7 @@ h2 {
   position: relative;
   float: left;
   line-height: 1;
+  box-sizing: content-box;
 }
 
 .card-img-top {
