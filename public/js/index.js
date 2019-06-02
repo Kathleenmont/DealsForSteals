@@ -1,4 +1,4 @@
-// Get references to page elements
+// These are the Global variables.
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $exampleImage = $("#input-img");
@@ -9,12 +9,7 @@ var $exampleList = $("#example-list");
 var $typeOf;
 var $placeNameVal
 var $price = $("#price");
-// var $why = [];
 var $tellMore = $("#tell-more");
-//added
-var input = document.querySelector('input[type=file]');
-const inputCheck = document.querySelector("input");
-const inputNumber = $('input[type=number]');
 let tookPicture = false;
 let blob;
 let webBlobString = [];
@@ -22,6 +17,9 @@ const $photo = $("#uploadMyImg");
 let yelpObj;
 
 // input variables
+var input = document.querySelector('input[type=file]');
+const inputCheck = document.querySelector("input");
+const inputNumber = $('input[type=number]');
 let photoStatus = false;
 var postForm = $("#postForm");
 var $placeName = $("#place");
@@ -36,7 +34,7 @@ const cameraView = document.querySelector("#camera--view"),
   cameraTrigger = $("#camera--trigger"),
   camera = $("#camera")
 
-//video constraints
+//video constraints is the parameters you need to give the User Media.  Ours doesn't get audio
 var constraints = {
   video: {
     facingMode: "environment"
@@ -49,8 +47,10 @@ function cameraStart() {
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then(function (stream) {
+      //create a canvas that will hold the video data with the contraints
       camera.append(`<canvas id="camera--sensor"></canvas>`);
 
+      //This streams the video
       track = stream.getTracks()[0];
       cameraView.srcObject = stream;
     })
@@ -64,31 +64,22 @@ function capturePhoto(event) {
   tookPicture = true;
   var capPhoto = input.files[0];
 
+  // take the canvas element and make it as big as image element
   cameraSensor.width = cameraView.videoWidth;
   cameraSensor.height = cameraView.videoHeight;
   cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
 
+  //assing the src of the image the data canvas
   $photo.attr("src", cameraSensor.toDataURL("image/png"));
   let dataURI = cameraSensor.toDataURL("image/png");
 
-  // let file = new File (cameraSensor.toDataURL("image/png"), "tempImage", "image/png");
-
+//This sections turns the image abouve and converts it into a blob so that it is passed to the server.
   blob = dataURItoBlob(dataURI);
   webBlobString.pop();
   webBlobString.push(blob);
 
-
   // Stop all video streams.
   cameraView.srcObject.getVideoTracks().forEach(track => track.stop());
-
-  console.log(webBlobString);
-
-  // function hideIt(){
-  // var hideBlackBox = document.getElementById("camera--view");
-  // hideBlackBox.hide();
-  // }
-  // hideIt();
-  // $("#camera--view").hide();
 }
 
 function dataURItoBlob(dataURI) {
@@ -122,7 +113,6 @@ window.addEventListener("load", function () {
         var img = document.querySelector("#uploadMyImg "); // $('img')[0]
         img.src = URL.createObjectURL(this.files[0]); // set src to file url
 
-        console.log(img.src);
         img.onload = imageIsLoaded(event); // optional onload event listener
       }
     });
@@ -137,13 +127,6 @@ $(document).on("change", $photo, function (event) {
   console.log(event);
   console.log(event.target.files);
 });
-
-// eslint-disable-next-line no-unused-vars
-function sendPhoto(photo) {
-  $.post("api/users", photo, function (result) {
-    console.log(result);
-  });
-}
 
 // GETTING DATA FROM THE UPLOADS FORM----------------------------------
 // ----------------------------------------------
@@ -163,23 +146,6 @@ function yelpApiSearch(placeName) {
     method: "GET",
     dataType: "json",
     success: function (response) {
-      // console.log("success: " + response);
-      // // console.log(JSON.stringify(response));
-      // console.log("name: " + response.businesses[0].name);
-      // console.log("phone: " + response.businesses[0].display_phone);
-      // console.log(
-      //   "address: " + response.businesses[0].location.display_address
-      // );
-      // console.log("latitude: " + response.businesses[0].coordinates.latitude);
-      // console.log("longitude: " + response.businesses[0].coordinates.longitude);
-      // console.log("Yelp url: " + response.businesses[0].url);
-      // console.log(
-      //   "type of place: " + response.businesses[0].categories[0].alias
-      // );
-      // console.log(
-      //   "type of place: " + response.businesses[0].categories[0].title
-      // );
-
       yelpObj = {
         bName: response.businesses[0].name,
         restAdd: response.businesses[0].location.display_address,
@@ -189,7 +155,7 @@ function yelpApiSearch(placeName) {
         typeOfPlace: response.businesses[0].categories[0].title
       };
 
-      //saveUser photo
+      //The Save Example Method is what takes all the data from FORM and YELP and sends it to the server to be saved in sequelize
       API.saveExample().then(function () {
         refreshExamples();
       });
@@ -199,41 +165,27 @@ function yelpApiSearch(placeName) {
 // ______________________________________________
 // The API object contains methods for each kind of request we'll make
 var API = {
-  // eslint-disable-next-line no-unused-vars
+// saveExample Method is what takes care of all the logic for uploading to server
   saveExample: function () {
     var formData = new FormData(postForm[0]);
-
-    // console.log(postForm[0]);
-    console.log(formData);
     if (tookPicture) {
       //iterate through the object and create a key/value pair to append to formData
       for (const key in yelpObj) {
-        // console.log(yelpObj[key]);
         formData.append(key, yelpObj[key]);
       }
       //get image from canvas
       formData.append("userPhoto", blob);
-
       tookPicture = false;
     } else {
 
       //iterate through the objectand create a key/value pair to append to formData
       for (const key in yelpObj) {
-        // console.log(yelpObj[key]);
         formData.append(key, yelpObj[key]);
       }
-     
+
       formData.append("photoBlob", $photo.attr("src"));
-      // formData.append("yelp", JSON.stringify(yelpObj));
     }
-
-    // console.log("This is  form data:  " + JSON.stringify(postForm[0]));
-    console.log(formData);
-
     return $.ajax({
-      // headers: {
-      //   "Content-Type": "application/json"
-      // },
       type: "POST",
       enctype: "multipart/form-data",
       url: "/api/posts",
@@ -248,7 +200,7 @@ var API = {
       },
       error: function (err) {
         console.log("error", err);
-        
+
       }
     }).then(
       function () {
@@ -298,12 +250,6 @@ var refreshExamples = function () {
 
       return $li;
     });
-
-    console.log($examples);
-    $exampleList.empty();
-    $exampleList.append($examples);
-
-    // to call, use:
   });
 
   //Reset form
@@ -315,40 +261,14 @@ var refreshExamples = function () {
 var handleFormSubmitUploads = function (event) {
   event.preventDefault();
 
-  // var newPost = {
-  //   text: $exampleText.val().trim(),
-  //   description: $exampleDescription.val().trim(),
-  //   img: $exampleImage.val()
-  // };
-
   let $typeOf = $('input[name="typeOf"]:checked').val();
   let $placeNameVal = $placeName.val().trim();
   let $itemNameVal = $itemName.val().trim();
   let $priceVal = $price.val().trim();
 
-  // $.each($("input[name='why']:checked"), function () {
-  //   $why.push($(this).val());
-  // });
-
-  // $tellMore = $tellMore.val().trim();
-
-  // console.log("catagory: " + $typeOf);
-  // console.log("place name: " + $placeNameVal);
-  // console.log("name of item: " + $itemName);
-  // console.log("price: " + $price);
-  // console.log("why its a good deal: " + $why);
-  // console.log("additiona comments: " + $tellMore);
-
-  // console.log("Submitted" + example);
-  // if (!(example.text && example.description)) {
-  //   alert("You must enter an example text and description!");
-  //   return;
-  // }
-
-console.log("src: ", $photo.attr("src") )
-if ($photo.attr("src") !== "//:0"){
-  photoStatus = true;
-}
+  if ($photo.attr("src") !== "//:0") {
+    photoStatus = true;
+  }
 
   if ($typeOf && $placeNameVal && $itemNameVal && $priceVal && photoStatus) {
 
@@ -357,7 +277,6 @@ if ($photo.attr("src") !== "//:0"){
   } else {
     swal("uh oh!", "Make sure you fill in all the values!", "error")
   }
-  console.log($photo);
 
   $exampleText.val("");
   $exampleDescription.val("");
@@ -385,10 +304,8 @@ function currencyEval() {
   })
 
   //still workout how to dynamically stick currency
-  console.log($(this).val());
   let evaluated = formatter.format(value);
   value = evaluated;
-  console.log(value);
 }
 
 function formatNumber(n) {
@@ -498,11 +415,11 @@ cameraTrigger.on("click", capturePhoto);
 inputNumber.on("keyup", currencyEval);
 
 //ask to take the picture when you land on the page
-$("#takeIMG").click(function(event) {
+$("#takeIMG").click(function (event) {
   event.preventDefault();
   cameraStart();
-  $("#imgChoice").css("display","none");
-  $("#camera").css("display","block");
+  $("#imgChoice").css("display", "none");
+  $("#camera").css("display", "block");
 });
 
 //grab the input currency field
@@ -515,19 +432,12 @@ $("input[data-type='currency']").on({
   }
 });
 
-
-$("input").change(function(){
-  console.log("input change")
-  console.log(this)
-
+$("input").change(function () {
   const trimmed = $(this).val().trim()
 
   if (trimmed) {
-        $(this).attr("data-state", "valid") 
-      } else {
-        $(this).attr("data-state", "invalid") 
-      }
-      console.log(this)
-
+    $(this).attr("data-state", "valid")
+  } else {
+    $(this).attr("data-state", "invalid")
+  }
 })
-

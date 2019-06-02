@@ -1,5 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Post = sequelize.define("Post", {
+    // post table sequalize model
     category: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,11 +29,6 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    // why: {
-    //   type: DataTypes.TEXT,
-    //   allowNull: true,
-    //   len: [1]
-    // },
     restAdd: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -75,14 +71,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  // Post.associate = function(models) {
-  //   Post.belongsTo(models.Author, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
-
+  // connects to User table
   Post.associate = function(models) {
     Post.belongsTo(models.User, {
       foreignKey: {

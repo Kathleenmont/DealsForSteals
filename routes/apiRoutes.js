@@ -5,29 +5,23 @@ module.exports = function (app) {
   const cloudinary = require("cloudinary");
   const cloudinaryStorage = require("multer-storage-cloudinary");
   const cloudImage = {};
-  // passsport ADDED ________________
   var passport = require("../config/passport");
 
-    // Using the passport.authenticate middleware with our local strategy.
-    // If the user has valid login credentials, send them to the members page.
+    // PASSPORT----------------------------
+    // If the user has valid login credentials, send them to the upload page.
     // Otherwise the user will be sent an error
     app.post("/api/login", passport.authenticate("local"), function(req, res) {
-      // console.log("NOW IM IN LOGGOIINNNNNNN~");
-      // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-      // So we're sending the user back the route to the members page because the redirect will happen on the front end
       // They won't get this or even be able to access this page if they aren't authed
       res.json("/newpost");
-      // res.render("newpost");
-      // res.send("hello");
+    
     });
   
-    // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-    // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
+    // Route for signing up a user. 
+    // If the user is created successfully, proceed to log the user in,
     // otherwise send back an error
     app.post("/api/signup", function(req, res) 
     {
-      console.log("IM IN SIGN UP!")
-      console.log(req.body);
+     
       db.User.create({
         email: req.body.email,
         password: req.body.password
@@ -54,16 +48,15 @@ module.exports = function (app) {
       }
       else {
         // Otherwise send back the user's email and id
-        // Sending back a password, even a hashed password, isn't a good idea
         res.json({
           email: req.user.email,
           id: req.user.id
         });
       }
     });
-  // _______________________________________________________
+    // ---------------------------------------------------
 
-
+// cloudinary config
   cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
@@ -87,7 +80,7 @@ module.exports = function (app) {
       cb(null, writeFile);
     }
   });
-
+// makes it only acept photo files
   const fileFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "image/jpg") {
       cb(null, true);
@@ -97,7 +90,8 @@ module.exports = function (app) {
   }
 
   //Multer can take an object with a key that holds a directory stores some sort of hex or use the diskstorage method to 
-  // const upl`oad = multer({dest: "uploads/"});
+ 
+  // mmulter disk storage
   const upload = multer({
     // storage: Storage,
     storage: cloudStorage,
@@ -114,32 +108,21 @@ module.exports = function (app) {
   // Create a new example
   app.post("/api/posts", upload.single("userPhoto"), async function (req, res) {
 
-    console.log("API POSTS");
-//     console.log(req.body);
-// console.log(JSON.stringify(req.file));
     const result2 = await cloudinary.uploader.upload(req.file.secure_url, function (result) {
-      console.log(result.secure_url)
       cloudImage.url = result.secure_url;
       cloudImage.id = result.public_id;
     }).catch(error => console.log(error));
-
-    console.log("RESULT___________-------------------" + JSON.stringify(result2));
-    
     // cloudImage.url = req.file.secure_url;
     // cloudImage.id = req.file.public_id;
 
-    console.log(cloudImage.url);
-    console.log("REQ>FILE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(req.file));
-    console.log("REQ>FILE.secure url!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + JSON.stringify(req.file.secure_url));
+
     //string conversion
-    // let whyString = req.body.why.toString();
     let priceString = parseFloat(req.body.price.replace("$", "")).toFixed(2);
 
     var newPost = {
       category: req.body.typeOf,
       item: req.body.item,
       price:  priceString,
-      // why: whyString,
       restaurant: req.body.restaurant,
 
       restAdd: req.body.restAdd,
@@ -148,31 +131,16 @@ module.exports = function (app) {
       comments: req.body.comments,
       yelpUrl: req.body.yelpUrl,
       typeOfPlace: req.body.typeOfPlace,
-      // photo: req.file.path,
       photo: cloudImage.url,
       photoID: cloudImage.id
     }
-
-    console.log(newPost);
 
     db.Post.create(newPost).then(function (dbPost) {
       res.json(dbPost);
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/posts/:id", function (req, res) {
-    db.Post.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function (
-      dbPost
-    ) {
-      res.json(dbPost);
-    });
-
-  });
+  
 
   //show image
   app.post("/api/users", upload.single("userPhoto"), function (req, res) {
@@ -192,6 +160,5 @@ module.exports = function (app) {
       b64: b64Image
     }
 
-    console.log("This is the response from the image");
   });
 };
