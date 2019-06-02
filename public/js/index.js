@@ -405,9 +405,6 @@ function titleCase(str) {
   return str.join(' ');
 }
 
-// Add event listeners to the submit and delete buttons
-// $submitBtn.on("click", handleFormSubmit);
-// Hide ERROR POPUP
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
 // window.addEventListener("load", cameraStart, false);
@@ -432,6 +429,7 @@ $("input[data-type='currency']").on({
   }
 });
 
+// 
 $("input").change(function () {
   const trimmed = $(this).val().trim()
 
