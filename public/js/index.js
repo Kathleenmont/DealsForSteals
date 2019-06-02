@@ -64,9 +64,10 @@ function capturePhoto(event) {
   tookPicture = true;
   var capPhoto = input.files[0];
 
-  // take the canvas element and make it as big as image element
+  // take the current video stream and make the image as big as the stream
   cameraSensor.width = cameraView.videoWidth;
   cameraSensor.height = cameraView.videoHeight;
+  //this method is part of the webAPI
   cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
 
   //assing the src of the image the data canvas
@@ -104,7 +105,7 @@ function dataURItoBlob(dataURI) {
   });
 }
 
-// CODE ADDED/MODIFIED FOR UPLOADING PHOTO FROM UPLOADS.HANDLEBARS
+//This code looks at what is loaded into the input with the attribute type file and then applies the url link as SRC to the image
 window.addEventListener("load", function () {
   document
     .querySelector('input[type="file"]')
@@ -118,18 +119,18 @@ window.addEventListener("load", function () {
     });
 });
 
+//This is never used but its is after the image is loaded you can do something.
 function imageIsLoaded(e) {
 
 }
 
 $(document).on("change", $photo, function (event) {
 
-  console.log(event);
-  console.log(event.target.files);
+  // console.log(event);
+  // console.log(event.target.files);
 });
 
 // GETTING DATA FROM THE UPLOADS FORM----------------------------------
-// ----------------------------------------------
 function yelpApiSearch(placeName) {
   var buisnessName = placeName;
 
@@ -224,7 +225,7 @@ var API = {
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
+// refreshExamples gets new examples from the db and repopulates the list -- we never use this, but it is good to keep just in case we want to do some sort of refresh
 var refreshExamples = function () {
   API.getExamples().then(function (data) {
     var $examples = data.map(function (example) {
@@ -252,8 +253,6 @@ var refreshExamples = function () {
     });
   });
 
-  //Reset form
-  resetForm($('#postForm'));
 };
 
 // handleFormSubmit is called whenever we submit a new example
@@ -382,6 +381,7 @@ function formatCurrency(input, blur) {
   input[0].setSelectionRange(caret_pos, caret_pos);
 }
 
+//THIS WAS initially used to reset the form, but we leave the page once submitted.  We could use this to retake a photo.
 function resetForm($form) {
   $form.find('input:text, input:password, input:file, select, textarea').val('');
 
@@ -405,9 +405,6 @@ function titleCase(str) {
   return str.join(' ');
 }
 
-// Add event listeners to the submit and delete buttons
-// $submitBtn.on("click", handleFormSubmit);
-// Hide ERROR POPUP
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 $submitBtnUploads.on("click", handleFormSubmitUploads);
 // window.addEventListener("load", cameraStart, false);
@@ -432,6 +429,7 @@ $("input[data-type='currency']").on({
   }
 });
 
+// 
 $("input").change(function () {
   const trimmed = $(this).val().trim()
 
