@@ -1,4 +1,4 @@
-/* homepage background CSS----------------------------------------------------------------------------------- */
+/* background animation */
 body {
   margin: 0;
   padding: 0;
@@ -6,37 +6,81 @@ body {
   width: 100vw;
   height: 90vh;
   color: #fff;
-  background: linear-gradient(-45deg, #3AA7A0, #9FD9D0, #F7C9C0, #F34C50);
+  background: linear-gradient(-45deg, #3aa7a0, #9fd9d0, #f7c9c0, #f34c50);
   background-size: 400% 400%;
   -webkit-animation: Gradient 12s ease infinite;
   -moz-animation: Gradient 12s ease infinite;
   animation: Gradient 12s ease infinite;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
+}
+body {
+  width: 100wh;
+  height: 100%;
+  color: #fff;
+  background: linear-gradient(-45deg, #3aa7a0, #9fd9d0, #f7c9c0, #f34c50);
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 12s ease infinite;
+  -moz-animation: Gradient 12s ease infinite;
+  animation: Gradient 12s ease infinite;
 }
 
-/* search and upload animation--------------------------------------------------------------------------- */
-.container {
-  position: relative;
-  width: 1200px;
-  text-align: center;
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-.header h1 {
-  font-size: 8vw;
-  margin-top: 5vh;
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-.header h3 {
-  font-size: 1.5em;
-  font-weight: 300;
-  color: #434343;
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-/* Text Animation for Jumbotron text for all pages------------------------------------------------------------ */
+/* header for all pages --------------------------------------------------------- */
+/* Text Animation for Jumbotron text for all pages */
 .textClipAnim {
   color: #fff;
   font-weight: 300;
-  background: linear-gradient(to right, #3AA7A0, #9FD9D0, #F7C9C0, #F34C50 50%, #F7C9C0, #9FD9D0, #3AA7A0);
+  background: linear-gradient(
+    to right,
+    #3aa7a0,
+    #9fd9d0,
+    #f7c9c0,
+    #f34c50 50%,
+    #f7c9c0,
+    #9fd9d0,
+    #3aa7a0
+  );
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
@@ -51,7 +95,56 @@ body {
     background-position: 200% center;
   }
 }
+.jumbotron {
+  background: whitesmoke;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 0px;
+  padding-top: 0px;
+}
 
+.textAnimation {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  margin: 0px 64px;
+  background: #f34c50;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* homepage------------------------------------------------------------------------------------ */
+
+/* search and upload animation for homepage icons*/
+.container {
+  position: relative;
+  width: 1200px;
+  text-align: center;
+}
+
+/* header text */
+.header h1 {
+  font-size: 8vw;
+  margin-top: 5vh;
+}
+
+.header h3 {
+  font-size: 1.5em;
+  font-weight: 300;
+  color: #434343;
+}
+.header {
+  height: 200px;
+}
+
+/* icon nav boxes */
 .mid-flex {
   display: flex;
   justify-content: space-around;
@@ -60,6 +153,7 @@ body {
 .mid-flex a {
   width: 270px;
   height: 270px;
+  margin-top: -18%;
 }
 .nav-tabs {
   display: table;
@@ -81,31 +175,7 @@ body {
   border-radius: 10px;
 }
 
-/* upload CSS page----------------------------------------------------------------------------------------- */
-.header {
-  height: 200px;
-}
-.mid-flex a {
-  margin-top: -18%;
-}
-#login-container div h2, .signup, .login {
-  text-align: center;
-}
-#login-container .col-md-6 {
-  margin: 0 auto;
-}
-#login-container a {
-  color: red;
-}
-.signup .form-group, .login .form-group {
-  text-align: left;
-}
-
-.container .box h2 {
-  padding-top: 20px;
-}
-
-/* search and upload icons on homepage---------------------------------------------------------------------- */
+/* search and upload icon boxes */
 .container .box .icon {
   position: absolute;
   top: 0;
@@ -117,7 +187,7 @@ body {
   z-index: 1;
 }
 
-/* icon hover feature in homepage---------------------------------------------------------------------------- */
+/* icon hover feature in homepage */
 .container .box:hover .icon {
   top: 20px;
   right: calc(50% -40px);
@@ -126,22 +196,20 @@ body {
   border-radius: 50%;
   text-align: center;
   background: whitesmoke;
-
 }
 .container .box h4 {
-
   display: none;
 }
 
-/* homepage search and upload box hover---------------------------------------------------------------------- */
+/* homepage search and upload box hover*/
 .container .box:hover h4 {
   position: relative;
   top: 50%;
   display: inline;
-  color: #3AA7A0;
+  color: #3aa7a0;
 }
 
-/* icons on homepage-------------------------------------------------------------------------------- */
+/* icons on homepage- */
 .container .box .icon .fa {
   position: absolute;
   top: 50%;
@@ -150,129 +218,19 @@ body {
   font-size: 80px;
   transition: 0.5s;
   color: black;
-
 }
-/* camera features in the uploads page----------------------------------------------------------------------- */
-
-.list-group-item {
-  line-height: 2.5;
-}
-
-
-#camera--sensor {
-  display:none;
-  margin: 0 auto;
-  border-radius: 30px;
-}
-
-#camera--view {
-  border-radius: 30px;
-}
-
-.form-check-input {
-  width: 23px;
-  height: 23px;
-}
-
-#container-cards {
-  margin-left: 30px;
-}
-
 
 .jumbotron {
   background-color: whitesmoke;
 }
 
+/* search page-------------------------------------------------------------------------------------------- */
 
-/* background animation---------------------------------------------------------------------------------------*/
-
-body {
-  width: 100wh;
-  height: 100%;
-  color: #fff;
-  background: linear-gradient(-45deg, #3AA7A0, #9FD9D0, #F7C9C0, #F34C50);
-  background-size: 400% 400%;
-  -webkit-animation: Gradient 12s ease infinite;
-  -moz-animation: Gradient 12s ease infinite;
-  animation: Gradient 12s ease infinite;
+#container-cards {
+  margin-left: 140px;
 }
 
-@-webkit-keyframes Gradient {
-  0% {
-    background-position: 0% 50%
-  }
-
-  50% {
-    background-position: 100% 50%
-  }
-
-  100% {
-    background-position: 0% 50%
-  }
-}
-
-@-moz-keyframes Gradient {
-  0% {
-    background-position: 0% 50%
-  }
-
-  50% {
-    background-position: 100% 50%
-  }
-
-  100% {
-    background-position: 0% 50%
-  }
-}
-
-@keyframes Gradient {
-  0% {
-    background-position: 0% 50%
-  }
-
-  50% {
-    background-position: 100% 50%
-  }
-
-  100% {
-    background-position: 0% 50%
-  }
-}
-
-.jumbotron {
-  background: whitesmoke;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding: 0px;
-  padding-top: 0px;
-} 
-
-.textAnimation {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textclip 5.0s linear infinite;
-  margin: 0px 64px;
-  background: #F34C50;
-
-}
-
-@keyframes textclip {
-  to {
-    background-position: 200% center;
-  }
-
-}
-
-  /* search page-------------------------------------------------------------------------------------------- */
-
-  #container-cards {
-    margin-left: 140px;
-  }
-
-/* search cards---------------------------------------------------------------------------------------------- */
+/* search cards */
 .card {
   border: 3px solid black;
   width: 350px;
@@ -300,7 +258,7 @@ a {
 
 a:hover {
   text-decoration: none;
-  opacity: .7;
+  opacity: 0.7;
   color: black;
 }
 
@@ -311,27 +269,44 @@ a:hover {
 }
 
 #login-container {
- text-align: justify;
- margin-top: 30px;
+  text-align: justify;
+  margin-top: 30px;
+}
+
+#login-container div h2,
+.signup,
+.login {
+  text-align: center;
+}
+#login-container .col-md-6 {
+  margin: 0 auto;
+}
+#login-container a {
+  color: red;
+}
+.signup .form-group,
+.login .form-group {
+  text-align: left;
 }
 
 /* New posts form page----------------------------------------------------------------------------------- */
-
-#upload-container {
-  text-align: justify;
-  padding-top: 8%;
-}
 .jumbotron h3 {
   font-size: 3rem;
   margin: 5%;
   font-weight: bolder;
   text-shadow: 0 0 5px white;
-  color: #5D5050;
-}
-#camera-heading {
-  margin: 2% auto;
+  color: #5d5050;
 }
 
+#upload-container {
+  text-align: justify;
+  padding-top: 8%;
+}
+
+#share-deal-text {
+  position: relative;
+  bottom: 55px;
+}
 #uploads-submit {
   width: 300px;
   background-color: black;
@@ -347,11 +322,11 @@ a:hover {
 }
 .uploads-btn {
   background-color: whitesmoke;
-  color: #3AA7A0;
+  color: #3aa7a0;
   border: 3px solid black;
 }
 .uploads-btn:hover {
-  background-color: #3AA7A0;
+  background-color: #3aa7a0;
   color: whitesmoke;
   border: 3px solid whitesmoke;
 }
@@ -367,9 +342,48 @@ label {
   margin-bottom: 0;
 }
 
+#camera-heading {
+  margin: 2% auto;
+}
+
+/* Show red borders when filled, but invalid- */
+input[data-state="invalid"] {
+  border-color: hsl(0, 76%, 50%);
+  border-width: 4px;
+}
+
+/* Show green borders when valid-*/
+input[data-state="valid"] {
+  border-color: hsl(120, 76%, 50%);
+  border-width: 4px;
+}
+
+/* camera area */
+
+#camera--sensor {
+  display: none;
+  margin: 0 auto;
+  border-radius: 30px;
+}
+#camera--view {
+  border-radius: 30px;
+}
+
+.form-check-input {
+  width: 23px;
+  height: 23px;
+}
+.list-group-item {
+  line-height: 2.5;
+}
+/* upload/take pic visibility option */
+#uploadDiv,
+#camera {
+  display: none;
+  text-align: center;
+}
 
 /* thank you page------------------------------------------------------------------------------------------ */
-
 .go-to-page {
   margin-top: 10%;
 }
@@ -390,32 +404,29 @@ label {
   margin-bottom: 6%;
 }
 
-
-/* Show red borders when filled, but invalid---------------------------------------------------------------- */
-input[data-state="invalid"] {
-  border-color: hsl(0, 100%, 63%);
-  border-width: 4px;
-}
-
-/* Show green borders when valid----------------------------------------------------------------------------*/
-input[data-state="valid"] {
-  border-color: hsl(120, 76%, 82%);
-  border-width: 4px;
-}
-
-/* upload/take pic visibility option and media queires------------------------------------------------------ */
-
-#uploadDiv,
-#camera {
-  display: none;
-  text-align: center;
-}
+/* media queries---------------------------------------------------------------------------- */
 @media only screen and (max-width: 1350px) {
-  
   .textClipAnim {
     margin-bottom: 10%;
   }
+  #container-cards {
+    margin-left: 75px;
+  }
 }
+@media only screen and (max-width: 1250px) {
+  #container-cards {
+    margin-left: 20px;
+  }
+}
+@media only screen and (max-width: 1150px) {
+  #container-cards {
+    margin-left: 150px;
+  }
+  .card-img-top {
+    height: 25vw;
+  }
+}
+
 @media only screen and (max-width: 1011px) {
   /* camera */
   #camera--view {
@@ -425,19 +436,55 @@ input[data-state="valid"] {
   #camera-heading {
     margin-left: 215px;
   }
+  /* header */
   .jumbotron h3 {
     font-size: 2rem;
   }
   .textClipAnim {
     margin-bottom: 13%;
   }
+  /* thank you page */
   .thank-you-text {
     margin-top: 2%;
   }
+  /* search page */
+  .card-img-top {
+    height: 28vw;
+  }
+  #container-cards {
+    margin-left: 120px;
+  }
 }
-
+@media only screen and (max-width: 975px) {
+  #container-cards {
+    margin-left: 100px;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .card-img-top {
+    height: 30vw;
+  }
+  #container-cards {
+    margin-left: 70px;
+  }
+}
+@media only screen and (max-width: 837px) {
+  .card-img-top {
+    height: 33vw;
+  }
+  #container-cards {
+    margin-left: 15px;
+  }
+}
+@media only screen and (max-width: 783px) {
+  .card-img-top {
+    height: 36vw;
+  }
+  #container-cards {
+    margin-left: 170px;
+  }
+}
 @media only screen and (max-width: 768px) {
-
   /* jumbotron  */
   .header h1 {
     font-size: 5em;
@@ -461,21 +508,28 @@ input[data-state="valid"] {
     text-align: left;
     padding-top: 25px;
     margin-left: 15px;
-
   }
   /* uploads form */
   #uploads-h1 {
     font-size: 50px;
   }
 
-   /* camera */
-   #camera--view {
+  /* camera */
+  #camera--view {
     margin-top: -400px;
     left: 0px;
   }
   #camera-heading {
     margin-left: -13px;
     margin-top: 15px;
+  }
+
+  /* search page */
+  .card-img-top {
+    height: 38vw;
+  }
+  #container-cards {
+    margin-left: 150px;
   }
 }
 
@@ -505,7 +559,7 @@ input[data-state="valid"] {
     width: 80vw;
   }
 
-/* uploads page */
+  /* uploads page */
   .uploads-input {
     width: 80vw;
   }
@@ -513,8 +567,8 @@ input[data-state="valid"] {
     font-size: 35px;
   }
 
- /* camera */
- #camera--view {
+  /* camera */
+  #camera--view {
     margin-top: -400px;
     position: relative;
     margin-left: -300px;
@@ -525,14 +579,28 @@ input[data-state="valid"] {
   #camera--trigger {
     margin-left: -300px;
   }
-  
+
   .textClipAnim {
     margin-bottom: 13%;
+  }
+  /* search page */
+  .card-img-top {
+    height: 48vw;
+  }
+  #container-cards {
+    margin-left: 50px;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .thank-you-text {
     margin-top: 0;
+  }
+   /* search page */
+   .card-img-top {
+    height: 54vw;
+  }
+  #container-cards {
+    margin-left: 20px;
   }
 }
