@@ -23,4 +23,4 @@ If the user clicks on the "Upload Deal" button, they are brought to a page that 
 Once the user clicks the submit button, their information is sent to the server and stored in relational mySQL databases. This information is then rendered onto the search page as a deal whenever any user visits that page. Upon submission, user is then brought to a "Thank You" page where they are given the option to search for deals or upload another deal.
 
 
-## Link to Deployed Site: https://stark-ravine-73218.herokuapp.com/newpost
+## Link to Deployed Site: https://stark-ravine-73218.herokuapp.com/
