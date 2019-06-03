@@ -269,10 +269,10 @@ body {
   /* search page-------------------------------------------------------------------------------------------- */
 
   #container-cards {
-    margin-left: 140px;
+    margin-left: 75px;
   }
 
-/* search cards---------------------------------------------------------------------------------------------- */
+/* search cards */
 .card {
   border: 3px solid black;
   width: 350px;
@@ -316,11 +316,6 @@ a:hover {
 }
 
 /* New posts form page----------------------------------------------------------------------------------- */
-
-#upload-container {
-  text-align: justify;
-  padding-top: 8%;
-}
 .jumbotron h3 {
   font-size: 3rem;
   margin: 5%;
@@ -328,10 +323,16 @@ a:hover {
   text-shadow: 0 0 5px white;
   color: #5D5050;
 }
-#camera-heading {
-  margin: 2% auto;
+
+#upload-container {
+  text-align: justify;
+  padding-top: 8%;
 }
 
+#share-deal-text {
+  position: relative;
+  bottom: 55px;
+}
 #uploads-submit {
   width: 300px;
   background-color: black;
@@ -366,6 +367,30 @@ a:hover {
 label {
   margin-bottom: 0;
 }
+#camera-heading {
+  margin: 2% auto;
+}
+
+/* Show red borders when filled, but invalid- */
+input[data-state="invalid"] {
+  border-color: hsl(0, 76%, 50%);
+  border-width: 4px;
+}
+
+/* Show green borders when valid-*/
+input[data-state="valid"] {
+  border-color: hsl(120, 76%, 50%);
+  border-width: 4px;
+}
+
+/* upload/take pic visibility option */
+
+#uploadDiv,
+#camera {
+  display: none;
+  text-align: center;
+}
+
 
 
 /* thank you page------------------------------------------------------------------------------------------ */
@@ -391,25 +416,9 @@ label {
 }
 
 
-/* Show red borders when filled, but invalid---------------------------------------------------------------- */
-input[data-state="invalid"] {
-  border-color: hsl(0, 100%, 63%);
-  border-width: 4px;
-}
 
-/* Show green borders when valid----------------------------------------------------------------------------*/
-input[data-state="valid"] {
-  border-color: hsl(120, 76%, 82%);
-  border-width: 4px;
-}
 
-/* upload/take pic visibility option and media queires------------------------------------------------------ */
-
-#uploadDiv,
-#camera {
-  display: none;
-  text-align: center;
-}
+/* media queries---------------------------------------------------------------------------- */
 @media only screen and (max-width: 1350px) {
   
   .textClipAnim {
