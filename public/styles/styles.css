@@ -1,4 +1,5 @@
-/* homepage background CSS----------------------------------------------------------------------------------- */
+
+/* background animation */
 body {
   margin: 0;
   padding: 0;
@@ -13,179 +14,6 @@ body {
   animation: Gradient 12s ease infinite;
   font-family: 'Open Sans', sans-serif;
 }
-
-/* search and upload animation--------------------------------------------------------------------------- */
-.container {
-  position: relative;
-  width: 1200px;
-  text-align: center;
-}
-
-.header h1 {
-  font-size: 8vw;
-  margin-top: 5vh;
-}
-
-.header h3 {
-  font-size: 1.5em;
-  font-weight: 300;
-  color: #434343;
-}
-
-/* Text Animation for Jumbotron text for all pages------------------------------------------------------------ */
-.textClipAnim {
-  color: #fff;
-  font-weight: 300;
-  background: linear-gradient(to right, #3AA7A0, #9FD9D0, #F7C9C0, #F34C50 50%, #F7C9C0, #9FD9D0, #3AA7A0);
-  background-size: auto auto;
-  background-clip: border-box;
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textclip 12s linear infinite;
-}
-
-@keyframes textclip {
-  to {
-    background-position: 200% center;
-  }
-}
-
-.mid-flex {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 35%;
-}
-.mid-flex a {
-  width: 270px;
-  height: 270px;
-}
-.nav-tabs {
-  display: table;
-  margin: 0 auto;
-}
-.nav-item {
-  display: inline-block;
-}
-
-.container .box {
-  position: relative;
-  width: calc(300px - 30px);
-  height: calc(300px - 30px);
-  background: whitesmoke;
-  float: left;
-  margin: 30px;
-  box-sizing: border-box;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-/* upload CSS page----------------------------------------------------------------------------------------- */
-.header {
-  height: 200px;
-}
-.mid-flex a {
-  margin-top: -18%;
-}
-#login-container div h2, .signup, .login {
-  text-align: center;
-}
-#login-container .col-md-6 {
-  margin: 0 auto;
-}
-#login-container a {
-  color: red;
-}
-.signup .form-group, .login .form-group {
-  text-align: left;
-}
-
-.container .box h2 {
-  padding-top: 20px;
-}
-
-/* search and upload icons on homepage---------------------------------------------------------------------- */
-.container .box .icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: whitesmoke;
-  transition: 0.5s;
-  z-index: 1;
-}
-
-/* icon hover feature in homepage---------------------------------------------------------------------------- */
-.container .box:hover .icon {
-  top: 20px;
-  right: calc(50% -40px);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  text-align: center;
-  background: whitesmoke;
-
-}
-.container .box h4 {
-
-  display: none;
-}
-
-/* homepage search and upload box hover---------------------------------------------------------------------- */
-.container .box:hover h4 {
-  position: relative;
-  top: 50%;
-  display: inline;
-  color: #3AA7A0;
-}
-
-/* icons on homepage-------------------------------------------------------------------------------- */
-.container .box .icon .fa {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 80px;
-  transition: 0.5s;
-  color: black;
-
-}
-/* camera features in the uploads page----------------------------------------------------------------------- */
-
-.list-group-item {
-  line-height: 2.5;
-}
-
-
-#camera--sensor {
-  display:none;
-  margin: 0 auto;
-  border-radius: 30px;
-}
-
-#camera--view {
-  border-radius: 30px;
-}
-
-.form-check-input {
-  width: 23px;
-  height: 23px;
-}
-
-#container-cards {
-  margin-left: 30px;
-}
-
-
-.jumbotron {
-  background-color: whitesmoke;
-}
-
-
-/* background animation---------------------------------------------------------------------------------------*/
-
 body {
   width: 100wh;
   height: 100%;
@@ -239,6 +67,28 @@ body {
   }
 }
 
+
+
+/* header for all pages --------------------------------------------------------- */
+/* Text Animation for Jumbotron text for all pages */
+.textClipAnim {
+  color: #fff;
+  font-weight: 300;
+  background: linear-gradient(to right, #3AA7A0, #9FD9D0, #F7C9C0, #F34C50 50%, #F7C9C0, #9FD9D0, #3AA7A0);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 12s linear infinite;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
 .jumbotron {
   background: whitesmoke;
   position: absolute;
@@ -266,12 +116,125 @@ body {
 
 }
 
+/* homepage------------------------------------------------------------------------------------ */
+
+/* search and upload animation for homepage icons*/
+.container {
+  position: relative;
+  width: 1200px;
+  text-align: center;
+}
+
+/* header text */
+.header h1 {
+  font-size: 8vw;
+  margin-top: 5vh;
+}
+
+.header h3 {
+  font-size: 1.5em;
+  font-weight: 300;
+  color: #434343;
+}
+.header {
+  height: 200px;
+}
+
+
+/* icon nav boxes */
+.mid-flex {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 35%;
+}
+.mid-flex a {
+  width: 270px;
+  height: 270px;
+  margin-top: -18%;
+}
+.nav-tabs {
+  display: table;
+  margin: 0 auto;
+}
+.nav-item {
+  display: inline-block;
+}
+
+.container .box {
+  position: relative;
+  width: calc(300px - 30px);
+  height: calc(300px - 30px);
+  background: whitesmoke;
+  float: left;
+  margin: 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+
+/* search and upload icon boxes */
+.container .box .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: whitesmoke;
+  transition: 0.5s;
+  z-index: 1;
+}
+
+/* icon hover feature in homepage---------------------------------------------------------------------------- */
+.container .box:hover .icon {
+  top: 20px;
+  right: calc(50% -40px);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  background: whitesmoke;
+
+}
+.container .box h4 {
+  display: none;
+}
+
+/* homepage search and upload box hover*/
+.container .box:hover h4 {
+  position: relative;
+  top: 50%;
+  display: inline;
+  color: #3AA7A0;
+}
+
+/* icons on homepage- */
+.container .box .icon .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  transition: 0.5s;
+  color: black;
+
+}
+
+.jumbotron {
+  background-color: whitesmoke;
+}
+
+
+/* background animation---------------------------------------------------------------------------------------*/
+
+
+
   /* search page-------------------------------------------------------------------------------------------- */
 
   #container-cards {
-    margin-left: 75px;
+    margin-left: 140px;
   }
-
+ 
 /* search cards */
 .card {
   border: 3px solid black;
@@ -313,6 +276,19 @@ a:hover {
 #login-container {
  text-align: justify;
  margin-top: 30px;
+}
+
+#login-container div h2, .signup, .login {
+  text-align: center;
+}
+#login-container .col-md-6 {
+  margin: 0 auto;
+}
+#login-container a {
+  color: red;
+}
+.signup .form-group, .login .form-group {
+  text-align: left;
 }
 
 /* New posts form page----------------------------------------------------------------------------------- */
@@ -367,6 +343,7 @@ a:hover {
 label {
   margin-bottom: 0;
 }
+
 #camera-heading {
   margin: 2% auto;
 }
@@ -383,6 +360,24 @@ input[data-state="valid"] {
   border-width: 4px;
 }
 
+/* camera area */
+
+#camera--sensor {
+  display:none;
+  margin: 0 auto;
+  border-radius: 30px;
+}
+#camera--view {
+  border-radius: 30px;
+}
+
+.form-check-input {
+  width: 23px;
+  height: 23px;
+}
+.list-group-item {
+  line-height: 2.5;
+}
 /* upload/take pic visibility option */
 
 #uploadDiv,
