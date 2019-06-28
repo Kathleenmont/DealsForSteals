@@ -1,4 +1,4 @@
-# Steals for Deals
+# Deals for Steals
 
 ## Overview
 In this user-generated application, a user creates a login to the site where they are able to search and post restaurant deals under $10. 
